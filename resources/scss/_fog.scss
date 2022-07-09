@@ -1,0 +1,50 @@
+@keyframes fog_one {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 400px;
+    }
+}
+
+@keyframes fog_two {
+  0% {
+      background-position-x: 0;
+  }
+  100% {
+      background-position-x: -400px;
+  }
+}
+
+.fog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-65%);
+    background-repeat: repeat-x;
+    width: 100vw;
+    height: 1500px;
+    transition: top 1.5s ease-in;
+
+    &.fog--one {
+        background-image: url('../img/fog-one.png');
+        opacity: 0.15;
+    }
+
+    &.fog--two {
+        background-image: url('../img/fog-two.png');
+        opacity: .20;
+    }
+}
+
+body.with-animation {
+    .fog {
+        &.fog--one {
+            animation: fog_one 20s linear infinite alternate;
+        }
+
+        &.fog--two {
+            animation: fog_two 20s linear infinite alternate;
+        }
+    }
+}

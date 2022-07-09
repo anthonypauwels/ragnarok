@@ -1,0 +1,417 @@
+<template>
+    <div class="page-resume">
+        <h2 class="title">{{ character.name }}</h2>
+
+        <h3 class="page-resume__meta" >
+            <span>{{ races[ character.race ].name }}</span>
+            <span>{{ inclinations[ character.inclination ].name_abr }}</span>
+            <span>{{ character.xpSpend }} XP</span>
+        </h3>
+
+        <ul class="page-resume__character">
+            <li v-for="item in table">
+                <h4 v-if="item.title">{{ item.title }}</h4>
+
+                <div class="skill" v-else @click="e => showSkillDescription( item.skill, e.target )">
+                    <span class="skill__name" :class="{'is-active': showedSkill !== false && showedSkill.name === item.skill.name}">{{ item.label }}</span>
+                    <span class="skill__xp" v-if="item.xp">{{ item.xp }} XP</span> <span v-if="item.rank" class="skill__count">({{ item.rank }} * {{ item.count }})</span>
+                </div>
+            </li>
+        </ul>
+
+        <div class="button-container">
+            <r-button @click="$router.push( { name: 'edit', params: { token } } )">
+                <span>{{ 'resume.edit' | __ }}</span>
+            </r-button>
+
+            <div class="button-container__link">
+                {{ 'resume.or' | __ }} <a :href="''">{{ 'resume.export' | __ }}</a>
+            </div>
+        </div>
+
+        <transition name="fade-fast">
+            <div class="modal" v-if="showedSkill !== false" @click.self="closeModal">
+                <div class="modal__description">
+                    <div class="modal__description__content" v-if="!showedSkill.rank">
+                        <button class="modal__close" @click="closeModal">&times;</button>
+
+                        <h3>{{ showedSkill.name }}</h3>
+
+                        <span class="skill__xp" v-if="showedSkill.xp !== undefined">
+                            <span v-for="(level, index) in showedSkill.xp" :key="index">{{ level }}</span> XP
+                        </span>
+
+                        <div v-html="showedSkill.description"></div>
+                    </div>
+
+                    <div class="modal__description__content" v-else>
+                        <button class="modal__close" @click="closeModal">&times;</button>
+
+                        <h3>{{ showedSkill.name }}</h3>
+
+                        <span class="skill__xp">
+                            {{ 'character.panels.skills.rank' | __ }} {{ showedSkill.rank }}
+                        </span>
+
+                        <dl>
+                            <dt v-if="showedSkill.description">{{ 'character.panels.skills.description' | __ }} :</dt>
+                            <dd v-if="showedSkill.description" v-html="showedSkill.description"></dd>
+
+                            <dt v-if="showedSkill.target">{{ 'character.panels.skills.target' | __ }} :</dt>
+                            <dd v-if="showedSkill.target" v-html="showedSkill.target"></dd>
+
+                            <dt v-if="showedSkill.duration">{{ 'character.panels.skills.duration' | __ }} :</dt>
+                            <dd v-if="showedSkill.duration" v-html="showedSkill.duration"></dd>
+
+                            <dt v-if="showedSkill.injunction">{{ 'character.panels.skills.injunction' | __ }} :</dt>
+                            <dd v-if="showedSkill.injunction" v-html="showedSkill.injunction"></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+</template>
+
+<script>
+
+import {decodeBase64, encodeBase64} from "../lib/helpers/base64";
+import RButton from "../components/RButton";
+
+export default {
+    name: "page-resume",
+    components: {
+        RButton
+    },
+    data()
+    {
+        return {
+            token: '',
+
+            showedSkill: false,
+
+            races: {},
+            inclinations: {},
+            spells: {},
+
+            character: {
+                name: '',
+                race: '',
+                inclination: '',
+                skills: {},
+                spells: {},
+                xpSpend: 0,
+            },
+
+            table: [],
+        }
+    },
+    methods: {
+        encode() {
+            return encodeBase64( this.character );
+        },
+
+        decode(hash) {
+            return decodeBase64(hash);
+        },
+
+        closeModal()
+        {
+            this.showedSkill = false;
+        },
+
+        showSkillDescription(skill)
+        {
+            this.showedSkill = skill;
+        },
+    },
+    created()
+    {
+        this.token = this.$route.params.token;
+        this.character = this.decode( this.token );
+
+        this.races = window.__app.races;
+        this.inclinations = window.__app.inclinations;
+        this.spells = window.__app.spells;
+
+        const skills_by_inclinations = {};
+        const skills_map = {};
+
+        for ( let [ key, xp_index ] of Object.entries( this.character.skills ) ) {
+            const [ inclination, skill_name ] = key.split('_');
+
+            if ( skills_by_inclinations[ inclination ] === undefined  ) {
+                skills_by_inclinations[ inclination ] = [];
+            }
+
+            skills_by_inclinations[ inclination ].push( skill_name );
+            skills_map[ skill_name ] = xp_index;
+        }
+
+        const skillsNameByRace = Object.keys( this.races[ this.character.race ].can );
+
+        if ( skillsNameByRace.length > 0 ) {
+            skillsNameByRace.forEach( skill_name => {
+                loop: for ( let [ inclination_name, inclination ] of Object.entries( this.inclinations ) ) {
+                    for ( let [ key, skill ] of Object.entries( inclination.skills ) ) {
+                        if ( key === skill_name && skills_map[ skill_name ] === undefined ) {
+                            if ( skills_by_inclinations[ inclination_name ] === undefined  ) {
+                                skills_by_inclinations[ inclination_name ] = [];
+                            }
+
+                            skills_by_inclinations[ inclination_name ].push( skill_name );
+                            skills_map[ skill_name ] = -1;
+
+                            continue loop;
+                        }
+                    }
+                }
+            } );
+        }
+
+        const table = [];
+
+        Object.entries( skills_by_inclinations ).forEach( ( [ inclination_name, skills ] ) => {
+            table.push( {
+                title: this.inclinations[ inclination_name ].name_long,
+            } );
+
+            skills.forEach( skill_name => {
+                const xp_index = skills_map[ skill_name ];
+                const xp = xp_index === -1 ? 0 : this.inclinations[ inclination_name ].skills[ skill_name ].xp[ xp_index ]
+
+                const skill = this.inclinations[ inclination_name ].skills[ skill_name ];
+
+                table.push( {
+                    skill,
+                    name: skill_name,
+                    label: skill.name,
+                    xp,
+                } );
+            } );
+        } );
+
+        if ( Object.keys( this.character.spells ).length > 0 ) {
+            let spells = {};
+
+            Object.values( this.spells ).forEach( rank_spells => {
+                rank_spells.forEach( spell => {
+                    spells[ spell.id ] = spell;
+                } );
+            } );
+
+            table.push( {
+                title: 'Sorts',
+            } );
+
+            Object.entries( this.character.spells ).forEach( ( [ spell_name, count ] ) => {
+                const spell = spells[ spell_name ];
+                const xp = count * spell.rank;
+
+                if ( xp ) {
+                    table.push( {
+                        skill: spell,
+                        name: spell_name,
+                        label: spell.name,
+                        xp,
+                        rank: spell.rank,
+                        count,
+                    } );
+                }
+            } );
+        }
+
+        this.table = table;
+    }
+}
+</script>
+
+<style lang="scss">
+    .page-resume {
+        overflow: hidden;
+
+        &__meta {
+            color: white;
+            text-align: center;
+            font-size: 0;
+            margin-bottom: 20px;
+
+            span {
+                font-size: 22px;
+
+                & + span {
+                    /*padding-left: 5px;*/
+
+                    &:before {
+                        content: '-';
+                        display: inline-block;
+                        padding-right: 10px;
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+
+        &__character {
+            height: 32rem;
+            max-width: 940px;
+            width: 100%;
+            margin: auto;
+            max-height: 32rem;
+            display: flex;
+            flex-flow: column wrap;
+
+            h4 {
+                color: #ffd073;
+                text-align: left;
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+
+            .skill {
+                cursor: help;
+                font-size: 20px;
+                margin-bottom: 15px;
+
+                &__name {
+                    color: white;
+                    transition: all .2s ease-in-out;
+
+                    &.is-active {
+                        color: #ffd073;
+                    }
+                }
+
+                &__xp {
+                    color: #808080;
+
+                    &:before {
+                        content: '-';
+                        display: inline-block;
+                        padding-right: 2px;
+                    }
+                }
+
+                &__count {
+                    font-size: 16px;
+                    color: #808080;
+                    top: -2px;
+                }
+            }
+        }
+
+        .resume {
+            color: white;
+            line-height: 36px;
+            font-size: 18px;
+            margin: auto;
+            height: calc(100vh - 400px);
+            overflow: auto;
+            padding: 0 40px;
+            max-width: 940px;
+            width: 100%;
+        }
+
+        .button-container {
+            &__link {
+                margin-top: 20px;
+                color: white;
+                font-size: 18px;
+
+                a {
+                    color: #808080;
+                    text-decoration: none;
+                    transition: color .3s ease-in-out;
+
+                    &:hover {
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        .modal {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            &__close {
+                position: absolute;
+                top: 12px;
+                left: 10px;
+                color: #808080;
+                font-size: 26px;
+                background-color: transparent;
+                border: 0;
+                cursor: pointer;
+                z-index: 10;
+            }
+
+            &__description {
+                background-color: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 20px;
+                position: absolute;
+                width: 55%;
+                top: 60%;
+                left: 50%;
+                transform: translate(-50%, -65%);
+
+                &__content {
+                    padding: 10px;
+                    line-height: 35px;
+                    font-size: 20px;
+
+                    h3 {
+                        font-weight: bold;
+                        font-size: 26px;
+                        color: #ffd073;
+                        text-align: center;
+                        font-family: 'Della Respira', serif;
+                    }
+
+                    .skill__xp {
+                        position: absolute;
+                        right: 10px;
+                        top: 5px;
+                        color: #808080;
+
+                        span + span {
+                            &:before {
+                                content: '/';
+                                color: #808080;
+                            }
+                        }
+                    }
+
+                    &:before {
+                        content: '';
+                        position: fixed;
+                        top: 10px;
+                        left: 10px;
+                        right: 10px;
+                        bottom: 10px;
+                        pointer-events: none;
+                        border: 1px solid #66583c;
+                    }
+
+                    dl {
+                        dt {
+                            color: #ffd073;
+                            float: left;
+                            width: 120px;
+                        }
+
+                        dd {
+                            margin-left: 130px;
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+</style>

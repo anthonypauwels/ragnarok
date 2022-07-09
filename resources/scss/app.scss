@@ -1,0 +1,333 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Della+Respira|Oswald:400,700&display=swap');
+
+@import 'reset';
+@import 'normalize';
+@import 'fog';
+
+*::selection {
+    background: rgba(102, 88, 60, 0.3); }
+
+*::-moz-selection {
+    background: rgba(102, 88, 60, 0.3); }
+
+body {
+    font-family: 'Oswald', sans-serif;
+    overflow: hidden;
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    &.loading {
+        opacity: 0.2;
+        pointer-events: none;
+    }
+
+    &:before {
+        content: '';
+        position: fixed;
+        z-index: 100;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        pointer-events: none;
+        border: 1px solid;
+        border-image: linear-gradient(to top, #66583c, #ffd073) 1 100%;
+    }
+
+    &:after {
+        content: '';
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        pointer-events: none;
+        border-bottom: 1px solid #66583c;
+        border-top: 1px solid #ffd073;
+    }
+}
+
+.wrapper {
+    min-width: 100vw;
+    min-height: 100vh;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+
+    &.show {
+        opacity: 1;
+    }
+}
+
+.body {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    margin: auto;
+
+    &:before, &:after {
+        content: '';
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        right: 0;
+    }
+
+    &:before {
+        top: 0;
+        height: 80px;
+        background-image: linear-gradient(to bottom, #000000, rgba(0,0,0,0));
+    }
+
+    &:after {
+        bottom: 0;
+        height: 80px;
+        background-image: linear-gradient(to top, #000000, rgba(0,0,0,0));
+    }
+}
+
+.input-wrapper {
+    margin-bottom: 20px;
+}
+
+.button-container {
+    text-align: center;
+    width: 100%;
+
+    .button--block {
+        margin: auto;
+    }
+}
+
+.title {
+    margin: 60px 0 40px 0;
+    font-family: 'Della Respira', serif;
+    font-weight: normal;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+
+    &:after {
+        content: url('/img/underline.png');
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-track:active {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #66583c;
+    transition: background-color .3s ease-out;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #ffd073;
+}
+
+.fade-enter-active {
+    transition: all .4s ease-in .4s;
+}
+
+.fade-leave-active {
+    transition: all .4s ease-out;
+}
+
+.fade-leave, .fade-enter-to {
+    opacity: 1;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.fade-fast-enter-active {
+    transition: all .2s ease-in .2s;
+}
+
+.fade-fast-leave-active {
+    transition: all .2s ease-out;
+}
+
+.fade-fast-leave, .fade-fast-enter-to {
+    opacity: 1;
+}
+
+.fade-fast-enter, .fade-fast-leave-to {
+    opacity: 0;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
+    .header__logo {
+        position: absolute;
+        left: 40px;
+        top: 40px;
+        text-align: center;
+        color: white;
+        z-index: 10;
+
+        .header__logo__official, .header__logo__official img {
+            display: block;
+        }
+
+        .header__logo__patch-note {
+            font-size: 14px;
+            color: #808080;
+            text-decoration: none;
+            transition: color .3s ease-in-out;
+
+            &:hover, &.active {
+                color: white;
+            }
+        }
+    }
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    width: 120px;
+
+    ul {
+        position: absolute;
+        right: 40px;
+        top: 30px;
+        float: left;
+        list-style: none;
+        text-align: right;
+
+        li {
+            display: inline-block;
+            font-size: 14px;
+            text-transform: uppercase;
+            line-height: 1;
+
+            a {
+                color: #808080;
+                text-decoration: none;
+                transition: color .3s ease-in-out;
+
+                &:hover, &.active {
+                    color: white;
+                }
+
+                &.is-disabled {
+                    color: #666666;
+                    pointer-events: none;
+                    cursor: default;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 2px;
+                        background-color: #ffd073;
+                        top: 50%;
+                        left: 0;
+                        right: 0;
+                        transition: width .3s ease-in-out, background-color .3s ease-in-out;
+                    }
+                }
+            }
+
+            span {
+                color: #ffd073;
+            }
+
+            & + li {
+                &:before {
+                    content: '-';
+                    color: #808080;
+                    margin: 0 7px 0 5px;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .footer__left {
+        position: absolute;
+        left: 40px;
+        bottom: 40px;
+        line-height: 1;
+
+        .footer__animation-link, .footer__music-player {
+            display: inline-block;
+        }
+    }
+
+    .footer__right {
+        position: absolute;
+        right: 40px;
+        bottom: 30px;
+
+        a {
+            color: #808080;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color .3s ease-in-out;
+
+            &:hover {
+                color: white;
+            }
+        }
+
+        > span {
+            color: #808080;
+        }
+
+        .footer__copyright {
+            &:hover {
+                span {
+                    &:before {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            span {
+                display: block;
+                font-size: 0;
+                float: right;
+                margin-left: 10px;
+                line-height: 0;
+
+                &:before {
+                    content: url('/img/copyright.svg');
+                    display: block;
+                    width: 24px;
+                    top: -2px;
+                    opacity: .4;
+                    transition: opacity .3s ease-in-out;
+                    will-change: opacity;
+                }
+            }
+        }
+    }
+}
