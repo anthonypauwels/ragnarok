@@ -56,6 +56,8 @@ export default {
 
 <style lang="scss">
     .panel-inclination {
+        padding: 0 20px;
+
         .container {
             max-width: 940px;
             width: 100%;
@@ -64,10 +66,10 @@ export default {
             .list {
                 display: flex;
                 justify-content: space-between;
+                flex-flow: row wrap;
 
                 .item {
-                    width: calc(25% - 10px);
-                    height: 140px;
+                    width: calc(50% - 10px);
                     border: 1px solid #808080;
                     color: white;
                     text-align: center;
@@ -75,12 +77,23 @@ export default {
                     text-decoration: none;
                     font-size: 20px;
                     padding: 4px;
-                    transition: all .3s ease-out;
+                    transition: border .3s ease-out, color .3s ease-out;
+                    margin-bottom: 20px;
+
+                    @include min-md {
+                        width: calc(25% - 10px);
+                        margin-bottom: 0;
+                    }
 
                     > div {
                         background-color: rgba(0, 0, 0, 0.5);
-                        line-height: 130px;
-                        height: 130px;
+                        line-height: 100px;
+                        height: 100px;
+
+                        @include min-md {
+                            line-height: 130px;
+                            height: 130px;
+                        }
                     }
 
                     &:hover {
@@ -95,12 +108,17 @@ export default {
             }
 
             .description {
-                font-size: 20px;
                 color: white;
-                line-height: 35px;
+                font-size: 16px;
+                line-height: 36px;
                 max-width: 470px;
                 width: 100%;
-                margin: 40px auto 20px auto;
+                margin: 0 auto;
+
+                @include min-md {
+                    font-size: 20px;
+                    margin: 40px auto 20px auto;
+                }
             }
         }
     }

@@ -1,8 +1,8 @@
 <template>
     <div class="r-music-player" :class="{'is-mute': isMute}">
-        <span class="music-player__mute" @click.prevent="toggleMute"><slot></slot></span>
+        <span class="r-music-player__mute" @click.prevent="toggleMute"><slot></slot></span>
         <transition name="fade">
-            <span class="music-player__title" v-if="!isMute">{{ musics[ currentSound ].name }}</span>
+            <span class="r-music-player__title" v-if="!isMute">{{ musics[ currentSound ].name }}</span>
         </transition>
     </div>
 </template>
@@ -16,7 +16,7 @@ const localStorage = useLocalStorage();
 export default {
     name: "r-music-player",
 
-    data: () => {
+    data() {
         return {
             isMute: false,
             musics: [
@@ -116,7 +116,7 @@ export default {
     .r-music-player {
         font-size: 14px;
 
-        .music-player__mute {
+        &__mute {
             color: #808080;
             display: inline-block;
             margin-right: 20px;
@@ -147,12 +147,17 @@ export default {
             }
         }
 
-        .music-player__title {
+        &__title {
             color: #ffd073;
+            display: none;
+
+            @include min-xs {
+                display: inline;
+            }
         }
 
         &.is-mute {
-            .music-player__mute:after {
+            .r-music-player__mute:after {
                 width: 100%;
             }
         }

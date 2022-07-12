@@ -28,16 +28,28 @@ export default {
 <style lang="scss">
     .page-home {
         overflow: hidden;
+        padding-top: 120px;
+        padding-bottom: 100px;
+
+        @include min-md {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
 
         .intro {
-            width: 520px;
+            max-width: 520px;
+            width: 100%;
             color: white;
             line-height: 36px;
-            font-size: 18px;
+            font-size: 16px;
             margin: auto;
-            height: calc(100vh - 200px);
             overflow: auto;
             padding: 0 40px;
+
+            @include min-md {
+                font-size: 18px;
+                height: calc(100vh - 200px);
+            }
         }
 
         .button-container {

@@ -1,12 +1,12 @@
 <template>
     <div class="r-input">
-        <label :for="id">
+        <label :for="id" v-if="this.$slots.default">
             <slot></slot>
         </label>
 
         <div class="r-input-border" ref="border">
-            <input :type="type" :id="id" :name="name" autocomplete="off"
-                   @focus="onFocusIn" @blur="onFocusOut" ref="input"
+            <input :type="type" :id="id" :name="name" autocomplete="off" @click="$event => $emit( 'click', $event )"
+                   @focus="onFocusIn" @blur="onFocusOut" ref="input" :readonly="readonly"
                    v-model="dataValue" @input="event => $emit('input', event.target.value)">
         </div>
     </div>
@@ -30,6 +30,12 @@
                 type: String|Number,
                 required: true,
             },
+
+            readonly: {
+                type: Boolean,
+                required: false,
+                default: false,
+            }
         },
         data() {
             return {

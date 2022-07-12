@@ -1,1 +1,1 @@
-## Ragnarok Larp character calculator
+## Ragnarok Larp (be) character calculator

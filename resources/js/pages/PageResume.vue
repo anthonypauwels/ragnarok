@@ -25,13 +25,13 @@
             </r-button>
 
             <div class="button-container__link">
-                {{ 'resume.or' | __ }} <a :href="''">{{ 'resume.export' | __ }}</a>
+                {{ 'resume.or' | __ }} <a href="" @click.prevent="showExportModal">{{ 'resume.export' | __ }}</a>
             </div>
         </div>
 
         <transition name="fade-fast">
-            <div class="modal" v-if="showedSkill !== false" @click.self="closeModal">
-                <div class="modal__description">
+            <div class="modal" v-if="showedSkill !== false || exportModal" @click.self="closeModal">
+                <div class="modal__description" v-if="showedSkill !== false">
                     <div class="modal__description__content" v-if="!showedSkill.rank">
                         <button class="modal__close" @click="closeModal">&times;</button>
 
@@ -68,27 +68,54 @@
                         </dl>
                     </div>
                 </div>
+
+                <div class="modal__description" v-if="exportModal">
+                    <div class="modal__description__content">
+                        <button class="modal__close" @click="closeModal">&times;</button>
+
+                        <h3>{{ 'resume.export-title' | __ }}</h3>
+
+                        <r-input :value="computeTokenUrl" type="text" name="token" readonly @click="copyToClipboard">{{ 'resume.url' | __ }}</r-input>
+
+                        <div class="clipped" :class="{'show': clipped }" v-html="$options.filters.__( 'resume.clipped' )"></div>
+
+                        <div class="advice">{{ 'resume.advice' | __ }}</div>
+                    </div>
+                </div>
             </div>
         </transition>
     </div>
 </template>
 
 <script>
-
 import {decodeBase64, encodeBase64} from "../lib/helpers/base64";
 import RButton from "../components/RButton";
+import RInput from "../components/RInput";
 
 export default {
     name: "page-resume",
+
     components: {
-        RButton
+        RButton,
+        RInput
     },
+
+    computed: {
+        computeTokenUrl()
+        {
+            return window.__app.baseUrl + '#/character/' + this.token;
+        }
+    },
+
     data()
     {
         return {
             token: '',
 
+            clipped: false,
+
             showedSkill: false,
+            exportModal: false,
 
             races: {},
             inclinations: {},
@@ -118,12 +145,31 @@ export default {
         closeModal()
         {
             this.showedSkill = false;
+            this.exportModal = false;
         },
 
         showSkillDescription(skill)
         {
             this.showedSkill = skill;
         },
+
+        showExportModal()
+        {
+            this.exportModal = true;
+        },
+
+        copyToClipboard(event)
+        {
+            const input = event.target;
+
+            input.select();
+            input.setSelectionRange(0, input.value.length);
+            this.clipped = true;
+
+            setTimeout( () => this.clipped = false, 5000 );
+
+            document.execCommand('copy')
+        }
     },
     created()
     {
@@ -229,6 +275,13 @@ export default {
 <style lang="scss">
     .page-resume {
         overflow: hidden;
+        margin: auto;
+        padding: 120px 20px 100px;
+
+        @include min-md {
+            padding: 0;
+            margin: 0;
+        }
 
         &__meta {
             color: white;
@@ -240,7 +293,7 @@ export default {
                 font-size: 22px;
 
                 & + span {
-                    /*padding-left: 5px;*/
+                    padding-left: 5px;
 
                     &:before {
                         content: '-';
@@ -253,13 +306,16 @@ export default {
         }
 
         &__character {
-            height: 32rem;
             max-width: 940px;
             width: 100%;
             margin: auto;
-            max-height: 32rem;
             display: flex;
             flex-flow: column wrap;
+
+            @include min-md {
+                height: 32rem;
+                max-height: 32rem;
+            }
 
             h4 {
                 color: #ffd073;
@@ -331,7 +387,7 @@ export default {
         }
 
         .modal {
-            position: absolute;
+            position: fixed;
             width: 100%;
             top: 0;
             left: 0;
@@ -354,16 +410,28 @@ export default {
                 background-color: rgba(0, 0, 0, 0.9);
                 color: white;
                 padding: 20px;
-                position: absolute;
-                width: 55%;
+                position: fixed;
+                width: 90%;
                 top: 60%;
                 left: 50%;
                 transform: translate(-50%, -65%);
 
+                @include min-md {
+                    width: 100%;
+                    max-width: 760px;
+                    top: 60%;
+                    left: 50%;
+                    transform: translate(-50%, -65%);
+                }
+
                 &__content {
                     padding: 10px;
-                    line-height: 35px;
+                    line-height: 36px;
                     font-size: 20px;
+
+                    @include min-md {
+                        font-size: 18px;
+                    }
 
                     h3 {
                         font-weight: bold;
@@ -371,6 +439,10 @@ export default {
                         color: #ffd073;
                         text-align: center;
                         font-family: 'Della Respira', serif;
+
+                        @include min-md {
+                            font-size: 20px;
+                        }
                     }
 
                     .skill__xp {
@@ -409,6 +481,25 @@ export default {
                             margin-left: 130px;
                             margin-bottom: 10px;
                         }
+                    }
+
+                    .clipped {
+                        font-size: 14px;
+                        color: #A6A6A6;
+                        text-align: right;
+                        opacity: 0;
+                        transition: opacity .3s ease-in;
+                        pointer-events: none;
+
+                        &.show {
+                            pointer-events: auto;
+                            opacity: 1;
+                        }
+                    }
+
+                    .advice {
+                        font-size: 18px;
+                        color: white;
                     }
                 }
             }

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -31,9 +32,9 @@
     <main class="wrapper" id="app">
         <header class="header">
             <div class="header__logo">
-                <a href="https://www.ragnaroklarp.be/" target="_blank" rel="noreferrer nofollow" class="header__logo__official">
+                <router-link to="/" class="header__logo__official">
                     <img src="/img/logo.png" alt="Ragnarok" title="Ragnarok">
-                </a>
+                </router-link>
 
                 <router-link to="/patch-note" class="header__logo__patch-note"  active-class="active" exact>{{ __('common.app.version', [ 'version' => '0.2', 'rules' => '3.0' ] ) }}</router-link>
             </div>
@@ -66,7 +67,7 @@
 
 
             <div class="footer__right">
-                <a href="https://github.com/anthonypauwels/ragnarok">Github</a>
+                <a href="https://github.com/anthonypauwels/ragnarok" target="_blank" rel="noreferrer nofollow">Github</a>
 
                 <span>-</span>
 
@@ -74,9 +75,9 @@
                     {{ __('common.app.copyright') }} <span>Anthony Pauwels</span>
                 </a>
             </div>
-
-            <r-cookie-bar></r-cookie-bar>
         </footer>
+
+        <r-cookie-bar></r-cookie-bar>
     </main>
 
     <script>

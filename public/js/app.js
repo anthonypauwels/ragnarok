@@ -2203,16 +2203,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 var localStorage = (0,_lib_core__WEBPACK_IMPORTED_MODULE_0__.useLocalStorage)();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "r-cookie-bar",
+  data: function data() {
+    return {
+      show: false
+    };
+  },
   methods: {
     onClick: function onClick() {
       var _this = this;
 
       localStorage.set('cookie-bar-is-gone', true);
-      this.$el.classList.remove('show');
+      this.show = false;
       setTimeout(function () {
         _this.$el.remove();
       }, 300);
@@ -2220,7 +2228,7 @@ var localStorage = (0,_lib_core__WEBPACK_IMPORTED_MODULE_0__.useLocalStorage)();
   },
   mounted: function mounted() {
     if (localStorage.get('cookie-bar-is-gone') !== true) {
-      this.$el.classList.add('show');
+      this.show = true;
     }
   }
 });
@@ -2266,6 +2274,11 @@ __webpack_require__.r(__webpack_exports__);
     value: {
       type: String | Number,
       required: true
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      "default": false
     }
   },
   data: function data() {
@@ -2568,6 +2581,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     onChangeTab: function onChangeTab(tab) {
       this.tab = tab;
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
     },
     onClickButton: function onClickButton() {
       switch (this.tab) {
@@ -2615,6 +2633,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             character.spells[k] = v;
           });
           var token = this.encode(character);
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          });
           this.$router.push({
             name: 'resume',
             params: {
@@ -2772,6 +2795,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _lib_helpers_base64__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/helpers/base64 */ "./resources/js/lib/helpers/base64.js");
 /* harmony import */ var _components_RButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/RButton */ "./resources/js/components/RButton.vue");
+/* harmony import */ var _components_RInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/RInput */ "./resources/js/components/RInput.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2859,17 +2883,40 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "page-resume",
   components: {
-    RButton: _components_RButton__WEBPACK_IMPORTED_MODULE_1__["default"]
+    RButton: _components_RButton__WEBPACK_IMPORTED_MODULE_1__["default"],
+    RInput: _components_RInput__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  computed: {
+    computeTokenUrl: function computeTokenUrl() {
+      return window.__app.baseUrl + '#/character/' + this.token;
+    }
   },
   data: function data() {
     return {
       token: '',
+      clipped: false,
       showedSkill: false,
+      exportModal: false,
       races: {},
       inclinations: {},
       spells: {},
@@ -2893,13 +2940,29 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     closeModal: function closeModal() {
       this.showedSkill = false;
+      this.exportModal = false;
     },
     showSkillDescription: function showSkillDescription(skill) {
       this.showedSkill = skill;
+    },
+    showExportModal: function showExportModal() {
+      this.exportModal = true;
+    },
+    copyToClipboard: function copyToClipboard(event) {
+      var _this = this;
+
+      var input = event.target;
+      input.select();
+      input.setSelectionRange(0, input.value.length);
+      this.clipped = true;
+      setTimeout(function () {
+        return _this.clipped = false;
+      }, 5000);
+      document.execCommand('copy');
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     this.token = this.$route.params.token;
     this.character = this.decode(this.token);
@@ -2931,7 +2994,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
     if (skillsNameByRace.length > 0) {
       skillsNameByRace.forEach(function (skill_name) {
-        loop: for (var _i2 = 0, _Object$entries2 = Object.entries(_this.inclinations); _i2 < _Object$entries2.length; _i2++) {
+        loop: for (var _i2 = 0, _Object$entries2 = Object.entries(_this2.inclinations); _i2 < _Object$entries2.length; _i2++) {
           var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
               inclination_name = _Object$entries2$_i[0],
               _inclination = _Object$entries2$_i[1];
@@ -2962,12 +3025,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           skills = _ref2[1];
 
       table.push({
-        title: _this.inclinations[inclination_name].name_long
+        title: _this2.inclinations[inclination_name].name_long
       });
       skills.forEach(function (skill_name) {
         var xp_index = skills_map[skill_name];
-        var xp = xp_index === -1 ? 0 : _this.inclinations[inclination_name].skills[skill_name].xp[xp_index];
-        var skill = _this.inclinations[inclination_name].skills[skill_name];
+        var xp = xp_index === -1 ? 0 : _this2.inclinations[inclination_name].skills[skill_name].xp[xp_index];
+        var skill = _this2.inclinations[inclination_name].skills[skill_name];
         table.push({
           skill: skill,
           name: skill_name,
@@ -3134,6 +3197,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -3360,6 +3425,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "panel-skills",
   props: {
@@ -3410,7 +3484,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       return this.showUnavailableSkills || this.raceCanLearnIt(skill) || !this.raceCannotLearnIt(skill) && !skill.specialized || this.character.skills[skill.inclination + '_' + skill.id] !== undefined || !this.raceCannotLearnIt(skill) && skill.specialized && this.character.inclination === skill.inclination;
     },
     learnSkill: function learnSkill(skill, level) {
-      if (level === -1 || skill.xp.length <= level) {
+      if (level === -1 || skill.xp.length <= level || level >= 2 && this.hasMaxSkillsForOthersInclinations()) {
         this.$delete(this.character.skills, skill.inclination + '_' + skill.id);
 
         if (skill.inclination + '_' + skill.id === 'occult_weaver' || skill.inclination + '_' + skill.id === 'occult_invocator') {
@@ -12729,20 +12803,25 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "r-cookie-bar" }, [
-    _vm._v("\n    Ce site utilise des cookies pour son fonctionnement "),
-    _c(
-      "button",
-      {
-        on: {
-          click: function ($event) {
-            $event.preventDefault()
-            return _vm.onClick.apply(null, arguments)
+  return _c("div", { staticClass: "r-cookie-bar", class: { show: _vm.show } }, [
+    _c("div", { staticClass: "r-cookie-bar__text" }, [
+      _vm._v("Ce site utilise des cookies pour son fonctionnement"),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "r-cookie-bar__btn" }, [
+      _c(
+        "button",
+        {
+          on: {
+            click: function ($event) {
+              $event.preventDefault()
+              return _vm.onClick.apply(null, arguments)
+            },
           },
         },
-      },
-      [_vm._v("OK")]
-    ),
+        [_vm._v("OK")]
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -12769,7 +12848,9 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "r-input" }, [
-    _c("label", { attrs: { for: _vm.id } }, [_vm._t("default")], 2),
+    this.$slots.default
+      ? _c("label", { attrs: { for: _vm.id } }, [_vm._t("default")], 2)
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { ref: "border", staticClass: "r-input-border" }, [
       _vm.type === "checkbox"
@@ -12787,6 +12868,7 @@ var render = function () {
               id: _vm.id,
               name: _vm.name,
               autocomplete: "off",
+              readonly: _vm.readonly,
               type: "checkbox",
             },
             domProps: {
@@ -12795,6 +12877,9 @@ var render = function () {
                 : _vm.dataValue,
             },
             on: {
+              click: function ($event) {
+                return _vm.$emit("click", $event)
+              },
               focus: _vm.onFocusIn,
               blur: _vm.onFocusOut,
               input: function (event) {
@@ -12836,10 +12921,14 @@ var render = function () {
               id: _vm.id,
               name: _vm.name,
               autocomplete: "off",
+              readonly: _vm.readonly,
               type: "radio",
             },
             domProps: { checked: _vm._q(_vm.dataValue, null) },
             on: {
+              click: function ($event) {
+                return _vm.$emit("click", $event)
+              },
               focus: _vm.onFocusIn,
               blur: _vm.onFocusOut,
               input: function (event) {
@@ -12864,10 +12953,14 @@ var render = function () {
               id: _vm.id,
               name: _vm.name,
               autocomplete: "off",
+              readonly: _vm.readonly,
               type: _vm.type,
             },
             domProps: { value: _vm.dataValue },
             on: {
+              click: function ($event) {
+                return _vm.$emit("click", $event)
+              },
               focus: _vm.onFocusIn,
               blur: _vm.onFocusOut,
               input: [
@@ -12916,7 +13009,7 @@ var render = function () {
       _c(
         "span",
         {
-          staticClass: "music-player__mute",
+          staticClass: "r-music-player__mute",
           on: {
             click: function ($event) {
               $event.preventDefault()
@@ -12930,7 +13023,7 @@ var render = function () {
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade" } }, [
         !_vm.isMute
-          ? _c("span", { staticClass: "music-player__title" }, [
+          ? _c("span", { staticClass: "r-music-player__title" }, [
               _vm._v(_vm._s(_vm.musics[_vm.currentSound].name)),
             ])
           : _vm._e(),
@@ -13233,16 +13326,26 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "button-container__link" }, [
             _vm._v("\n            " + _vm._s(_vm._f("__")("resume.or")) + " "),
-            _c("a", { attrs: { href: "" } }, [
-              _vm._v(_vm._s(_vm._f("__")("resume.export"))),
-            ]),
+            _c(
+              "a",
+              {
+                attrs: { href: "" },
+                on: {
+                  click: function ($event) {
+                    $event.preventDefault()
+                    return _vm.showExportModal.apply(null, arguments)
+                  },
+                },
+              },
+              [_vm._v(_vm._s(_vm._f("__")("resume.export")))]
+            ),
           ]),
         ],
         1
       ),
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade-fast" } }, [
-        _vm.showedSkill !== false
+        _vm.showedSkill !== false || _vm.exportModal
           ? _c(
               "div",
               {
@@ -13257,9 +13360,178 @@ var render = function () {
                 },
               },
               [
-                _c("div", { staticClass: "modal__description" }, [
-                  !_vm.showedSkill.rank
-                    ? _c(
+                _vm.showedSkill !== false
+                  ? _c("div", { staticClass: "modal__description" }, [
+                      !_vm.showedSkill.rank
+                        ? _c(
+                            "div",
+                            { staticClass: "modal__description__content" },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "modal__close",
+                                  on: { click: _vm.closeModal },
+                                },
+                                [_vm._v("×")]
+                              ),
+                              _vm._v(" "),
+                              _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
+                              _vm._v(" "),
+                              _vm.showedSkill.xp !== undefined
+                                ? _c(
+                                    "span",
+                                    { staticClass: "skill__xp" },
+                                    [
+                                      _vm._l(
+                                        _vm.showedSkill.xp,
+                                        function (level, index) {
+                                          return _c("span", { key: index }, [
+                                            _vm._v(_vm._s(level)),
+                                          ])
+                                        }
+                                      ),
+                                      _vm._v(" XP\n                    "),
+                                    ],
+                                    2
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("div", {
+                                domProps: {
+                                  innerHTML: _vm._s(
+                                    _vm.showedSkill.description
+                                  ),
+                                },
+                              }),
+                            ]
+                          )
+                        : _c(
+                            "div",
+                            { staticClass: "modal__description__content" },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "modal__close",
+                                  on: { click: _vm.closeModal },
+                                },
+                                [_vm._v("×")]
+                              ),
+                              _vm._v(" "),
+                              _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "skill__xp" }, [
+                                _vm._v(
+                                  "\n                        " +
+                                    _vm._s(
+                                      _vm._f("__")(
+                                        "character.panels.skills.rank"
+                                      )
+                                    ) +
+                                    " " +
+                                    _vm._s(_vm.showedSkill.rank) +
+                                    "\n                    "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("dl", [
+                                _vm.showedSkill.description
+                                  ? _c("dt", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("__")(
+                                            "character.panels.skills.description"
+                                          )
+                                        ) + " :"
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.showedSkill.description
+                                  ? _c("dd", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.showedSkill.description
+                                        ),
+                                      },
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.showedSkill.target
+                                  ? _c("dt", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("__")(
+                                            "character.panels.skills.target"
+                                          )
+                                        ) + " :"
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.showedSkill.target
+                                  ? _c("dd", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.showedSkill.target
+                                        ),
+                                      },
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.showedSkill.duration
+                                  ? _c("dt", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("__")(
+                                            "character.panels.skills.duration"
+                                          )
+                                        ) + " :"
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.showedSkill.duration
+                                  ? _c("dd", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.showedSkill.duration
+                                        ),
+                                      },
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.showedSkill.injunction
+                                  ? _c("dt", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("__")(
+                                            "character.panels.skills.injunction"
+                                          )
+                                        ) + " :"
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.showedSkill.injunction
+                                  ? _c("dd", {
+                                      domProps: {
+                                        innerHTML: _vm._s(
+                                          _vm.showedSkill.injunction
+                                        ),
+                                      },
+                                    })
+                                  : _vm._e(),
+                              ]),
+                            ]
+                          ),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.exportModal
+                  ? _c("div", { staticClass: "modal__description" }, [
+                      _c(
                         "div",
                         { staticClass: "modal__description__content" },
                         [
@@ -13272,149 +13544,42 @@ var render = function () {
                             [_vm._v("×")]
                           ),
                           _vm._v(" "),
-                          _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
+                          _c("h3", [
+                            _vm._v(_vm._s(_vm._f("__")("resume.export-title"))),
+                          ]),
                           _vm._v(" "),
-                          _vm.showedSkill.xp !== undefined
-                            ? _c(
-                                "span",
-                                { staticClass: "skill__xp" },
-                                [
-                                  _vm._l(
-                                    _vm.showedSkill.xp,
-                                    function (level, index) {
-                                      return _c("span", { key: index }, [
-                                        _vm._v(_vm._s(level)),
-                                      ])
-                                    }
-                                  ),
-                                  _vm._v(" XP\n                    "),
-                                ],
-                                2
-                              )
-                            : _vm._e(),
+                          _c(
+                            "r-input",
+                            {
+                              attrs: {
+                                value: _vm.computeTokenUrl,
+                                type: "text",
+                                name: "token",
+                                readonly: "",
+                              },
+                              on: { click: _vm.copyToClipboard },
+                            },
+                            [_vm._v(_vm._s(_vm._f("__")("resume.url")))]
+                          ),
                           _vm._v(" "),
                           _c("div", {
+                            staticClass: "clipped",
+                            class: { show: _vm.clipped },
                             domProps: {
-                              innerHTML: _vm._s(_vm.showedSkill.description),
+                              innerHTML: _vm._s(
+                                _vm.$options.filters.__("resume.clipped")
+                              ),
                             },
                           }),
-                        ]
-                      )
-                    : _c(
-                        "div",
-                        { staticClass: "modal__description__content" },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "modal__close",
-                              on: { click: _vm.closeModal },
-                            },
-                            [_vm._v("×")]
-                          ),
                           _vm._v(" "),
-                          _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "skill__xp" }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(
-                                  _vm._f("__")("character.panels.skills.rank")
-                                ) +
-                                " " +
-                                _vm._s(_vm.showedSkill.rank) +
-                                "\n                    "
-                            ),
+                          _c("div", { staticClass: "advice" }, [
+                            _vm._v(_vm._s(_vm._f("__")("resume.advice"))),
                           ]),
-                          _vm._v(" "),
-                          _c("dl", [
-                            _vm.showedSkill.description
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.description"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.description
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      _vm.showedSkill.description
-                                    ),
-                                  },
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.target
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.target"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.target
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(_vm.showedSkill.target),
-                                  },
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.duration
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.duration"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.duration
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(_vm.showedSkill.duration),
-                                  },
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.injunction
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.injunction"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.injunction
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      _vm.showedSkill.injunction
-                                    ),
-                                  },
-                                })
-                              : _vm._e(),
-                          ]),
-                        ]
+                        ],
+                        1
                       ),
-                ]),
+                    ])
+                  : _vm._e(),
               ]
             )
           : _vm._e(),
@@ -13525,7 +13690,7 @@ var render = function () {
               },
             },
           },
-          [_vm._v("Choisissez un nom")]
+          [_vm._v(_vm._s(_vm._f("__")("character.panels.name.input")))]
         ),
       ],
       1
@@ -13557,29 +13722,31 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "panel panel-race" }, [
     _c("div", { staticClass: "container" }, [
-      _c(
-        "div",
-        { staticClass: "list" },
-        _vm._l(_vm.races, function (race, key) {
-          return _c(
-            "a",
-            {
-              key: key,
-              staticClass: "item",
-              class: { "is-active": _vm.currentRace === key },
-              attrs: { href: "#" },
-              on: {
-                click: function ($event) {
-                  $event.preventDefault()
-                  return _vm.selectRace(key)
+      _c("div", { staticClass: "list-wrapper" }, [
+        _c(
+          "div",
+          { staticClass: "list" },
+          _vm._l(_vm.races, function (race, key) {
+            return _c(
+              "a",
+              {
+                key: key,
+                staticClass: "item",
+                class: { "is-active": _vm.currentRace === key },
+                attrs: { href: "#" },
+                on: {
+                  click: function ($event) {
+                    $event.preventDefault()
+                    return _vm.selectRace(key)
+                  },
                 },
               },
-            },
-            [_c("div", [_c("span", [_vm._v(_vm._s(race.name))])])]
-          )
-        }),
-        0
-      ),
+              [_c("div", [_c("span", [_vm._v(_vm._s(race.name))])])]
+            )
+          }),
+          0
+        ),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "description" }, [
         _vm.races[_vm.currentRace] !== undefined
@@ -13693,6 +13860,18 @@ var render = function () {
         "div",
         { staticClass: "container" },
         [
+          _c("div", { staticClass: "character-metas" }, [
+            _vm.races[_vm.character.race] !== undefined
+              ? _c("span", { staticClass: "character-race" }, [
+                  _vm._v(_vm._s(_vm.races[_vm.character.race].name)),
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("span", { staticClass: "character-xp" }, [
+              _vm._v(_vm._s(_vm.character.xpSpend) + " XP"),
+            ]),
+          ]),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "inclinations-list" },
@@ -13758,370 +13937,354 @@ var render = function () {
             2
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.currentInclination !== "spells",
-                  expression: "currentInclination !== 'spells'",
-                },
-              ],
-              staticClass: "skills",
-            },
-            [
-              _c(
-                "TransitionGroup",
-                { attrs: { name: "fade-fast" } },
-                _vm._l(_vm.inclinations, function (name, key) {
-                  return key === _vm.currentInclination
-                    ? _c(
-                        "ul",
-                        { key: key },
-                        _vm._l(
-                          _vm.inclinations[key].skills,
-                          function (skill, name) {
-                            return _vm.canSeeSkill(skill)
-                              ? _c("li", { key: name }, [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "skill__name",
-                                      class: {
-                                        "is-active":
-                                          _vm.showedSkill !== false &&
-                                          _vm.showedSkill.name === skill.name,
-                                      },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.showSkillDescription(skill)
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                            " +
-                                          _vm._s(skill.name) +
-                                          "\n\n                            "
-                                      ),
-                                      _c(
-                                        "span",
-                                        { staticClass: "skill__xp" },
-                                        [
-                                          _vm._l(
-                                            skill.xp,
-                                            function (level, index) {
-                                              return _c(
-                                                "span",
-                                                {
-                                                  key: index,
-                                                  class: {
-                                                    "has-learned-it":
-                                                      (_vm.character.skills[
-                                                        skill.inclination +
-                                                          "_" +
-                                                          name
-                                                      ] !== undefined &&
+          _c("transition", { attrs: { name: "fade-fast" } }, [
+            _vm.currentInclination !== "spells"
+              ? _c(
+                  "div",
+                  { staticClass: "skills" },
+                  [
+                    _c(
+                      "TransitionGroup",
+                      { attrs: { name: "fade-fast" } },
+                      _vm._l(_vm.inclinations, function (name, key) {
+                        return key === _vm.currentInclination
+                          ? _c(
+                              "ul",
+                              { key: key },
+                              _vm._l(
+                                _vm.inclinations[key].skills,
+                                function (skill, name) {
+                                  return _vm.canSeeSkill(skill)
+                                    ? _c("li", { key: name }, [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "skill__name",
+                                            class: {
+                                              "is-active":
+                                                _vm.showedSkill !== false &&
+                                                _vm.showedSkill.name ===
+                                                  skill.name,
+                                            },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.showSkillDescription(
+                                                  skill
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(skill.name) +
+                                                "\n\n                                "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "skill__xp" },
+                                              [
+                                                _vm._l(
+                                                  skill.xp,
+                                                  function (level, index) {
+                                                    return _c(
+                                                      "span",
+                                                      {
+                                                        key: index,
+                                                        class: {
+                                                          "has-learned-it":
+                                                            (_vm.character
+                                                              .skills[
+                                                              skill.inclination +
+                                                                "_" +
+                                                                name
+                                                            ] !== undefined &&
+                                                              _vm.character
+                                                                .skills[
+                                                                skill.inclination +
+                                                                  "_" +
+                                                                  name
+                                                              ] === index) ||
+                                                            _vm.raceCanLearnIt(
+                                                              skill
+                                                            ),
+                                                        },
+                                                      },
+                                                      [_vm._v(_vm._s(level))]
+                                                    )
+                                                  }
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "strong",
+                                                  {
+                                                    class: {
+                                                      "has-learned-it":
                                                         _vm.character.skills[
                                                           skill.inclination +
                                                             "_" +
                                                             name
-                                                        ] === index) ||
-                                                      _vm.raceCanLearnIt(skill),
+                                                        ] !== undefined ||
+                                                        _vm.raceCanLearnIt(
+                                                          skill
+                                                        ),
+                                                    },
                                                   },
-                                                },
-                                                [_vm._v(_vm._s(level))]
-                                              )
-                                            }
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "strong",
-                                            {
-                                              class: {
-                                                "has-learned-it":
-                                                  _vm.character.skills[
-                                                    skill.inclination +
-                                                      "_" +
-                                                      name
-                                                  ] !== undefined ||
-                                                  _vm.raceCanLearnIt(skill),
-                                              },
-                                            },
-                                            [_vm._v("XP")]
-                                          ),
-                                        ],
-                                        2
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "skill__checkbox" },
-                                    [
-                                      _vm.raceCanLearnIt(skill)
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass: "checkbox race-can",
-                                            },
-                                            [
-                                              _c("span", {
-                                                attrs: {
-                                                  "data-c": "race can learn it",
-                                                },
-                                              }),
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.raceCannotLearnIt(skill) ||
-                                      (skill.specialized &&
-                                        key !== _vm.character.inclination &&
-                                        !_vm.raceCanLearnIt(skill))
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "checkbox race-cannot",
-                                            },
-                                            [
-                                              _c("span", {
-                                                attrs: {
-                                                  "data-c":
-                                                    "race can not learn it",
-                                                },
-                                              }),
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _vm.character.skills[
-                                        skill.inclination + "_" + name
-                                      ] !== undefined
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass: "checkbox",
-                                              class: {
-                                                "is-checked":
-                                                  _vm.character.skills[
-                                                    skill.inclination +
-                                                      "_" +
-                                                      name
-                                                  ] ===
-                                                  skill.xp.length - 1,
-                                              },
-                                              on: {
-                                                click: function ($event) {
-                                                  return _vm.learnSkill(
-                                                    skill,
-                                                    _vm.character.skills[
-                                                      skill.inclination +
-                                                        "_" +
-                                                        name
-                                                    ] + 1
-                                                  )
-                                                },
-                                                contextmenu: function ($event) {
-                                                  $event.preventDefault()
-                                                  return _vm.learnSkill(
-                                                    skill,
-                                                    _vm.character.skills[
-                                                      skill.inclination +
-                                                        "_" +
-                                                        name
-                                                    ] - 1
-                                                  )
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _c(
-                                                "span",
-                                                {
-                                                  attrs: {
-                                                    "data-c": "already learned",
+                                                  [_vm._v("XP")]
+                                                ),
+                                              ],
+                                              2
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "skill__checkbox" },
+                                          [
+                                            _vm.raceCanLearnIt(skill)
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "checkbox race-can",
                                                   },
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm.character.skills[
-                                                        skill.inclination +
-                                                          "_" +
-                                                          name
-                                                      ] + 1
-                                                    )
-                                                  ),
-                                                ]
-                                              ),
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      !(
-                                        _vm.raceCannotLearnIt(skill) ||
-                                        (skill.specialized &&
-                                          key !== _vm.character.inclination &&
-                                          !_vm.raceCanLearnIt(skill))
-                                      ) &&
-                                      _vm.character.skills[
-                                        skill.inclination + "_" + name
-                                      ] === undefined &&
-                                      !(
-                                        _vm.raceCanLearnIt(skill) ||
-                                        _vm.raceCannotLearnIt(skill)
-                                      )
-                                        ? _c(
-                                            "div",
-                                            {
-                                              staticClass: "checkbox",
-                                              on: {
-                                                click: function ($event) {
-                                                  return _vm.learnSkill(
-                                                    skill,
-                                                    0
-                                                  )
-                                                },
-                                                contextmenu: function ($event) {
-                                                  $event.preventDefault()
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _c("span", {
-                                                attrs: {
-                                                  "data-c":
-                                                    "not already learned",
-                                                },
-                                              }),
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                    ]
-                                  ),
-                                ])
-                              : _vm._e()
-                          }
-                        ),
-                        0
-                      )
-                    : _vm._e()
-                }),
-                0
-              ),
-            ],
-            1
-          ),
+                                                  [_c("span")]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.raceCannotLearnIt(skill) ||
+                                            (skill.specialized &&
+                                              key !==
+                                                _vm.character.inclination &&
+                                              !_vm.raceCanLearnIt(skill))
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "checkbox race-cannot",
+                                                  },
+                                                  [_c("span")]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.character.skills[
+                                              skill.inclination + "_" + name
+                                            ] !== undefined
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "checkbox",
+                                                    class: {
+                                                      "is-checked":
+                                                        _vm.character.skills[
+                                                          skill.inclination +
+                                                            "_" +
+                                                            name
+                                                        ] ===
+                                                        skill.xp.length - 1,
+                                                    },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        return _vm.learnSkill(
+                                                          skill,
+                                                          _vm.character.skills[
+                                                            skill.inclination +
+                                                              "_" +
+                                                              name
+                                                          ] + 1
+                                                        )
+                                                      },
+                                                      contextmenu: function (
+                                                        $event
+                                                      ) {
+                                                        $event.preventDefault()
+                                                        return _vm.learnSkill(
+                                                          skill,
+                                                          _vm.character.skills[
+                                                            skill.inclination +
+                                                              "_" +
+                                                              name
+                                                          ] - 1
+                                                        )
+                                                      },
+                                                    },
+                                                  },
+                                                  [
+                                                    _c("span", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.character.skills[
+                                                            skill.inclination +
+                                                              "_" +
+                                                              name
+                                                          ] + 1
+                                                        )
+                                                      ),
+                                                    ]),
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            !(
+                                              _vm.raceCannotLearnIt(skill) ||
+                                              (skill.specialized &&
+                                                key !==
+                                                  _vm.character.inclination &&
+                                                !_vm.raceCanLearnIt(skill))
+                                            ) &&
+                                            _vm.character.skills[
+                                              skill.inclination + "_" + name
+                                            ] === undefined &&
+                                            !(
+                                              _vm.raceCanLearnIt(skill) ||
+                                              _vm.raceCannotLearnIt(skill)
+                                            )
+                                              ? _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "checkbox",
+                                                    on: {
+                                                      click: function ($event) {
+                                                        return _vm.learnSkill(
+                                                          skill,
+                                                          0
+                                                        )
+                                                      },
+                                                      contextmenu: function (
+                                                        $event
+                                                      ) {
+                                                        $event.preventDefault()
+                                                      },
+                                                    },
+                                                  },
+                                                  [_c("span")]
+                                                )
+                                              : _vm._e(),
+                                          ]
+                                        ),
+                                      ])
+                                    : _vm._e()
+                                }
+                              ),
+                              0
+                            )
+                          : _vm._e()
+                      }),
+                      0
+                    ),
+                  ],
+                  1
+                )
+              : _vm._e(),
+          ]),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.currentInclination === "spells",
-                  expression: "currentInclination === 'spells'",
-                },
-              ],
-              staticClass: "spells",
-            },
-            _vm._l(_vm.spells, function (spells, rank) {
-              return _c("div", { key: rank, staticClass: "spells__rank" }, [
-                _c("h3", { staticClass: "spells__rank__title" }, [
-                  _vm._v(
-                    _vm._s(_vm._f("__")("character.panels.skills.rank")) +
-                      " " +
-                      _vm._s(rank)
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(spells, function (spell) {
-                    return _c("li", [
-                      _c(
-                        "span",
-                        {
-                          staticClass: "spell__name",
-                          class: {
-                            "is-active":
-                              _vm.showedSkill !== false &&
-                              _vm.showedSkill.name === spell.name,
-                          },
-                          on: {
-                            click: function ($event) {
-                              return _vm.showSkillDescription(spell)
-                            },
-                          },
-                        },
-                        [_vm._v(_vm._s(spell.name))]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "counter" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "counter__minus",
-                            on: {
-                              click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.decrementSpell(spell)
-                              },
-                            },
-                          },
-                          [_c("span", [_vm._v("<")])]
-                        ),
+          _c("transition", { attrs: { name: "fade-fast" } }, [
+            _vm.currentInclination === "spells"
+              ? _c(
+                  "div",
+                  { staticClass: "spells" },
+                  _vm._l(_vm.spells, function (spells, rank) {
+                    return _c(
+                      "div",
+                      { key: rank, staticClass: "spells__rank" },
+                      [
+                        _c("h3", { staticClass: "spells__rank__title" }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm._f("__")("character.panels.skills.rank")
+                            ) +
+                              " " +
+                              _vm._s(rank)
+                          ),
+                        ]),
                         _vm._v(" "),
                         _c(
-                          "div",
-                          {
-                            staticClass: "counter__number",
-                            class: {
-                              "is-active":
-                                _vm.character.spells[spell.id] !== undefined &&
-                                _vm.character.spells[spell.id] > 0,
-                            },
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.character.spells[spell.id] === undefined ||
-                                  _vm.character.spells[spell.id] === 0
-                                  ? 0
-                                  : _vm.character.spells[spell.id]
-                              )
-                            ),
-                          ]
+                          "ul",
+                          _vm._l(spells, function (spell) {
+                            return _c("li", [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "spell__name",
+                                  class: {
+                                    "is-active":
+                                      _vm.showedSkill !== false &&
+                                      _vm.showedSkill.name === spell.name,
+                                  },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.showSkillDescription(spell)
+                                    },
+                                  },
+                                },
+                                [_vm._v(_vm._s(spell.name))]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "counter" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "counter__minus",
+                                    on: {
+                                      click: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.decrementSpell(spell)
+                                      },
+                                    },
+                                  },
+                                  [_c("span", [_vm._v("<")])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "counter__number",
+                                    class: {
+                                      "is-active":
+                                        _vm.character.spells[spell.id] !==
+                                          undefined &&
+                                        _vm.character.spells[spell.id] > 0,
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.character.spells[spell.id] ===
+                                          undefined ||
+                                          _vm.character.spells[spell.id] === 0
+                                          ? 0
+                                          : _vm.character.spells[spell.id]
+                                      )
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "counter__plus",
+                                    on: {
+                                      click: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.incrementSpell(spell)
+                                      },
+                                    },
+                                  },
+                                  [_c("span", [_vm._v(">")])]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
                         ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "counter__plus",
-                            on: {
-                              click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.incrementSpell(spell)
-                              },
-                            },
-                          },
-                          [_c("span", [_vm._v(">")])]
-                        ),
-                      ]),
-                    ])
+                      ]
+                    )
                   }),
                   0
-                ),
-              ])
-            }),
-            0
-          ),
+                )
+              : _vm._e(),
+          ]),
           _vm._v(" "),
           _c(
             "div",

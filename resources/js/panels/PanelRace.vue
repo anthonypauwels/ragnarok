@@ -1,14 +1,16 @@
 <template>
     <div class="panel panel-race">
         <div class="container">
-            <div class="list">
-                <a href="#" v-for="( race, key ) in races" :key="key"
-                   class="item" :class="{ 'is-active': currentRace === key }"
-                   @click.prevent="selectRace( key )">
-                    <div>
-                        <span>{{ race.name }}</span>
-                    </div>
-                </a>
+            <div class="list-wrapper">
+                <div class="list">
+                    <a href="#" v-for="( race, key ) in races" :key="key"
+                       class="item" :class="{ 'is-active': currentRace === key }"
+                       @click.prevent="selectRace( key )">
+                        <div>
+                            <span>{{ race.name }}</span>
+                        </div>
+                    </a>
+                </div>
             </div>
 
             <div class="description">
@@ -78,22 +80,42 @@ export default {
 
 <style lang="scss">
     .panel-race {
+        padding: 0 20px;
+
         .container {
-            max-width: 940px;
-            width: 100%;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
+            @include min-md {
+                max-width: 940px;
+                width: 100%;
+                margin: auto;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .list-wrapper {
+                overflow: scroll;
+                margin-bottom: 20px;
+
+                @include min-md {
+                    overflow: auto;
+                    height: 30rem;
+                    width: calc(50% - 10px);
+                    margin-bottom: 0;
+                }
+            }
 
             .list {
-                height: 30rem;
-                width: calc(50% - 10px);
                 display: flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
+                flex-flow: row nowrap;
+                width: 1420px;
+
+                @include min-md {
+                    flex-flow: row wrap;
+                    justify-content: space-between;
+                    width: auto;
+                }
 
                 .item {
-                    width: calc(33% - 11.79px);
+                    width: 140px;
                     height: 140px;
                     border: 1px solid #808080;
                     color: white;
@@ -103,10 +125,24 @@ export default {
                     font-size: 20px;
                     padding: 4px;
                     transition: all .3s ease-out;
-                    margin-top: 20px;
+
+                    @include min-md {
+                        width: calc(33% - 11.79px);
+                        margin-top: 20px;
+                    }
+
+                    & + .item {
+                        margin-left: 20px;
+
+                        @include min-md {
+                            margin-left: 0;
+                        }
+                    }
 
                     &:nth-child(1), &:nth-child(2), &:nth-child(3) {
-                        margin-top: 0;
+                        @include min-md {
+                            margin-top: 0;
+                        }
                     }
 
                     &:hover {
@@ -131,13 +167,22 @@ export default {
             }
 
             .description {
-                height: 30rem;
-                width: calc(50% - 10px);
                 color: white;
-                padding: 0 20px;
-                line-height: 35px;
-                font-size: 20px;
+                line-height: 36px;
+                font-size: 16px;
                 overflow: auto;
+                max-width: 470px;
+                width: 100%;
+                margin: 0 auto;
+
+                @include min-md {
+                    padding: 0 20px;
+                    font-size: 20px;
+                    height: 30rem;
+                    width: calc(50% - 10px);
+                    max-width: 100%;
+                    margin: 0;
+                }
 
                 dl {
                     margin-top: 1rem;

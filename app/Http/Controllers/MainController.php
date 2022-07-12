@@ -5,6 +5,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 
 class MainController extends Controller
 {
@@ -30,6 +31,7 @@ class MainController extends Controller
         javascript('races', $this->getRaces() );
         javascript('inclinations', $this->getInclinations() );
         javascript('spells', $this->getSpells() );
+        javascript('baseUrl', Str::finish( config('app.url'), '/' ) );
 
         return view('app' );
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-name">
         <div class="container">
-            <r-input type="text" name="name" :value="character.name" @input="value => $emit('change', value )">Choisissez un nom</r-input>
+            <r-input type="text" name="name" :value="character.name" @input="value => $emit('change', value )">{{ 'character.panels.name.input' | __ }}</r-input>
         </div>
     </div>
 </template>
@@ -36,10 +36,9 @@ export default {
 
 <style lang="scss">
     .panel-name {
-        .container {
-            max-width: 300px;
-            width: 100%;
-            margin: auto;
-        }
+        max-width: 340px;
+        width: 100%;
+        margin: auto;
+        padding: 0 20px;
     }
 </style>

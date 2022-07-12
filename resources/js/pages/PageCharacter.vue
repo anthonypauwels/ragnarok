@@ -137,6 +137,11 @@ export default {
         onChangeTab(tab)
         {
             this.tab = tab;
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+            } );
         },
 
         onClickButton()
@@ -182,6 +187,12 @@ export default {
                     } );
 
                     const token = this.encode( character );
+
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                    } );
 
                     this.$router.push( { name: 'resume', params: { token } } );
                     break;
@@ -245,20 +256,33 @@ export default {
 <style lang="scss">
     .page-character {
         overflow: hidden;
+        padding-top: 120px;
+        padding-bottom: 100px;
+
+        @include min-md {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
 
         .panel-wrapper {
-            height: 32rem;
-
-            .panel {
+            @include min-md {
                 height: 32rem;
+
+                .panel {
+                    height: 32rem;
+                }
             }
         }
 
         .btn-wrapper {
             max-width: 300px;
             width: 100%;
-            margin: 20px auto 4rem;
+            margin: 20px auto 0 auto;
             text-align: center;
+
+            @include min-md {
+                margin: 20px auto 4rem;
+            }
         }
     }
 </style>

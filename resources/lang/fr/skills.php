@@ -93,19 +93,18 @@ son score de bagarre).'
         'lumberjack' => [
             'name' => 'Bucheron',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières “bois” et des matières 
-précieuses “bois précieux” (cf. chapitre 5.1 Récolte des matières premières et précieuses).'
+précieuses “bois précieux”.'
         ],
 
         'ship-captain' => [
             'name' => 'Capitaine de navire',
-            'description' => 'Un capitaine de navire peut participer à la manoeuvre d’un navire et le diriger (cf. chapitre 4) 
-Batailles navales). Lorsqu’il participe à la manoeuvre, il ne peut pas utiliser de bouclier.'
+            'description' => 'Un capitaine de navire peut participer à la manoeuvre d’un navire et le diriger. Lorsqu’il participe à la manoeuvre, il ne peut pas utiliser de bouclier.'
         ],
 
         'carrier' => [
             'name' => 'Carrier',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières “roche” et des
-matières précieuses “gemme” (cf. chapitre 5.1 Récolte des matières premières et précieuses).'
+matières précieuses “gemme”.'
         ],
 
         'stamina' => [
@@ -116,14 +115,12 @@ supplémentaire à chaque localisation (jusqu\'à un maximum de 3PV par localisa
 
         'gallant' => [
             'name' => 'Galant',
-            'description' => 'Les personnages dotés de ce talent savent utiliser leurs charmes et attributs lors des galanteries (cf.
-chapitre 2.9 Les galanteries).'
+            'description' => 'Les personnages dotés de ce talent savent utiliser leurs charmes et attributs lors des galanteries.'
         ],
 
         'sailor' => [
             'name' => 'Marin',
-            'description' => 'Les personnages dotés de cette compétence peuvent participer à la manoeuvre d’un navire (cf. 4
-Combat naval). Lorsqu’il participe à la manoeuvre, il ne peut pas être équipé d’un bouclier. '
+            'description' => 'Les personnages dotés de cette compétence peuvent participer à la manoeuvre d’un navire. Lorsqu’il participe à la manoeuvre, il ne peut pas être équipé d’un bouclier. '
         ],
 
         'swimming' => [
@@ -141,19 +138,19 @@ instantanément.'
         'farmer' => [
             'name' => 'Agriculteur',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières
-“céréale” et des matières précieuses “orge brassicole” (cf. chapitre 5.1 Récolte des matières premières et précieuses).'
+“céréale” et des matières précieuses “orge brassicole”.'
         ],
 
         'gunner' => [
             'name' => 'Artilleur',
             'description' => 'Les personnages dotés de cette compétence ont été formés au maniement des engins de
-siège et des machines de guerre les plus divers (cf. chapitre 3 Combat). Ils savent comment utiliser ces engins.'
+siège et des machines de guerre les plus divers. Ils savent comment utiliser ces engins.'
         ],
 
         'artisan' => [
             'name' => 'Artisan',
             'description' => 'Les personnages dotés de cette compétence peuvent produire des chefs d’oeuvre (sculpture,
-peinture, couture, joaillerie, etc.) (cf. 8 Tableaux des fabrications).'
+peinture, couture, joaillerie, etc.).'
         ],
 
         'bard' => [
@@ -169,12 +166,10 @@ l’auditoire au terme de celle-ci.'
 
         'brewer' => [
             'name' => 'Brasseur',
-            'description' => 'Les personnages dotés de cette connaissance savent comment fabriquer des breuvages alcoolisés
-(cf. 8 Tableaux des fabrications). Ces boissons n’ont pas l’obligation d’être réellement
-alcoolisées. On peut ainsi créer un chocolat chaud qui aura les effets time-in d’une boisson
-alcoolisée. Lorsqu’un joueur boit une de ces boissons, il reçoit un certain nombre de points
-d’éthylisme en fonction du type de breuvage qu’il ingurgite (cf. chapitre 2.10 L’éthylisme d’un
-personnage). Chaque brassin nécessite 4 sabliers de simulation de préparation.'
+            'description' => 'Les personnages dotés de cette connaissance savent comment fabriquer des breuvages alcoolisés.
+Ces boissons n’ont pas l’obligation d’être réellement alcoolisées. On peut ainsi créer un chocolat chaud qui aura les effets 
+time-in d’une boisson alcoolisée. Lorsqu’un joueur boit une de ces boissons, il reçoit un certain nombre de points d’éthylisme 
+en fonction du type de breuvage qu’il ingurgite. Chaque brassin nécessite 4 sabliers de simulation de préparation.'
         ],
 
         'cooking' => [
@@ -194,9 +189,8 @@ point de vie. La compétence d’infirmier ne soigne pas du coma.'
         'fisherman' => [
             'name' => 'Pêcheur',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières “poisson” et
-des matières précieuses “graisse de mammifère marin” (cf. chapitre 5.1 Récolte des matières
-premières et précieuses).<br/><br/>
-Un pêcheur peut participer à la manoeuvre sur un navire (cf. chapitre 4 Combat naval).'
+des matières précieuses “graisse de mammifère marin”.<br/><br/>
+Un pêcheur peut participer à la manoeuvre sur un navire.'
         ],
 
         'bonesetters' => [
@@ -209,32 +203,30 @@ sont suspendus.'
 
         'apothecary' => [
             'name' => 'Apothicaire',
-            'description' => 'Cette compétence permet au personnage de fabriquer des drogues et des poisons (cf.
-8 Tableaux des fabrications). Les créations d’apothicaire nécessitent un laboratoire TI avec des
-ustensiles comme des mortiers, des balances, des cornues, des refroidisseurs, etc. afin de pouvoir
-simuler la préparation des drogues et potions.Chaque drogue ou poison nécessite 2 sabliers de
-préparation et un certain nombre de ressources.'
+            'description' => 'Cette compétence permet au personnage de fabriquer des drogues et des poisons. Les créations
+d’apothicaire nécessitent un laboratoire TI avec des ustensiles comme des mortiers, des balances, des cornues, des refroidisseurs, 
+etc. afin de pouvoir simuler la préparation des drogues et potions.Chaque drogue ou poison nécessite 2 sabliers de préparation et 
+un certain nombre de ressources.'
         ],
 
         'gatherer' => [
             'name' => 'Cueilleur',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières “végétal” et
-des matières précieuses “plante rare” (cf. chapitre 5.1 Récolte des matières premières et précieuses) Récolte des matières premières et précieuses).'
+des matières précieuses “plante rare”.'
         ],
 
         'gleaner' => [
             'name' => 'Glaneur',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières “fruit” et des
-matières précieuses “fruit exotique” (cf. chapitre 5.1 Récolte des matières premières et précieuses).'
+matières précieuses “fruit exotique”.'
         ],
 
         'herbalist' => [
             'name' => 'Herboriste',
             'description' => 'Cette compétence permet au personnage de fabriquer des décoctions d’herboristerie
-(consommables) conservables d’année en année (cf. 8 Tableaux des fabrications). Chaque décoction
-nécessite 3 sabliers de préparation et un certain nombre de ressources. Les herboristes ont besoin
-d’ustensiles comme des mortiers, des pilons, des balances, des pots, des chaudrons, etc. afin de
-pouvoir simuler la préparation des décoctions.'
+(consommables) conservables d’année en année. Chaque décoction nécessite 3 sabliers de préparation et un certain 
+nombre de ressources. Les herboristes ont besoin d’ustensiles comme des mortiers, des pilons, des balances, des pots, 
+des chaudrons, etc. afin de pouvoir simuler la préparation des décoctions.'
         ],
 
         'mystique' => [
@@ -247,7 +239,7 @@ doit répondre la vérité mais seulement sans parler, il doit garder en permane
         'sufferint' => [
             'name' => 'Souffreteux',
             'description' => 'Les personnages dotés de cette compétence sont capables de susciter des maux et des maladies
-chez leurs victimes (cf. 8 Tableaux des fabrications).'
+chez leurs victimes.'
         ],
 
         'knockout' => [
@@ -262,8 +254,7 @@ personne par sablier.'
         'hunter' => [
             'name' => 'Chasseur',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières “gibier” et des
-matières précieuses “fourrure” (cf. chapitre 5.1 Récolte des matières premières et précieuses) sur les
-animaux morts.'
+matières précieuses “fourrure” sur les animaux morts.'
         ],
 
         'garbage-collector' => [
@@ -300,8 +291,7 @@ peuvent pas être gardées ni piégées car il s’agit ici de simuler une multi
         'miner' => [
             'name' => 'Mineur',
             'description' => 'Les personnages dotés de cette compétence peuvent récolter des matières premières “minerai” et
-des matières précieuses “minerai d’argent” ou “minerai aurifère” (cf. chapitre 5.1 Récolte des matières
-premières et précieuses).'
+des matières précieuses “minerai d’argent” ou “minerai aurifère”.'
         ],
 
         'sapper' => [
@@ -379,7 +369,7 @@ point de structure par sablier passé à réparer le navire en dépensant 3 mati
 par point. La réparation est possible en étant à bord du bateau.<br/><br/>
 Les charpentiers de marine sont capables de saboter les navires.<br/><br/>
 Un charpentier de marine compte comme un marin pour la manoeuvre d’un navire.<br/><br/>
-Les charpentiers de marine peuvent améliorer les navires (cf. 8 Tableaux des fabrications).<br/><br/>
+Les charpentiers de marine peuvent améliorer les navires.<br/><br/>
 Toutes les améliorations d’un charpentier de marine nécessitent 10 sabliers de simulation de
 fabrication.<br/><br/>
 Toutes les améliorations d’un charpentier de marine sont valables 3 ans (l’année en cours +2).'
@@ -397,7 +387,7 @@ soignée récupère 1 PV (elle passe de 0 à 1). Un chirurgien ne peut pas soign
         'blacksmith' => [
             'name' => 'Forgeron',
             'description' => 'Les personnages dotés de cette connaissance savent comment fabriquer des armes et des armes de
-qualité (cf. 8 Tableaux des fabrications). Ils doivent néanmoins être en possession d’une forge timein pour pouvoir œuvrer (marteau, enclume, tenailles, etc.).<br/><br/>
+qualité. Ils doivent néanmoins être en possession d’une forge timein pour pouvoir œuvrer (marteau, enclume, tenailles, etc.).<br/><br/>
 Toutes les fabrications d’un forgeron nécessitent 5 sabliers de simulation de production. La
 création/réparation d’une arme normale ne nécessite pas de ressources particulières.<br/><br/>
 Toutes les fabrications d’un forgeron sont valables 3 ans (l’année en cours +2).'
@@ -414,7 +404,7 @@ gourmet pour bénéficier de cet effet.'
         'engineer' => [
             'name' => 'Ingénieur',
             'description' => 'Les personnages dotés de cette connaissance savent comment tracer des plans et fabriquer ou
-améliorer des mécanismes (cf. 8 Tableaux des fabrications). Un ingénieur a besoin d’outils time-in
+améliorer des mécanismes. Un ingénieur a besoin d’outils time-in
 comme des marteaux, des pinces, des clefs à molette, etc.<br/><br/>
 Un ingénieur peut également saboter/réparer les engins de siège (mais ne sait pas faire feu avec).<br/><br/>
 Toutes les fabrications d’un ingénieur nécessitent 10 sabliers de simulation de production.<br/><br/>
@@ -424,23 +414,20 @@ Toutes les fabrications d’un ingénieur sont valables 3 ans (l’année en cou
         'liquorist' => [
             'name' => 'Liquoriste',
             'description' => 'Les personnages disposant cette compétence savent ajouter un ou plusieurs effets à une boisson
-alcoolisée qui confère 3 points d\'éthylisme minimum (cf. 8 Tableaux des fabrications). Les effets
-ajoutés durent une heure après la consommation d’un verre de la boisson en question.'
+alcoolisée qui confère 3 points d\'éthylisme minimum. Les effets ajoutés durent une heure après la consommation d’un verre de la boisson en question.'
         ],
 
         'doctor' => [
             'name' => 'Médecin',
             'description' => 'Un personnage doté de la compétence médecin peut diagnostiquer les maladies (bourses vertes) et
-fabriquer des remèdes afin de les soigner (cf. 2.2 Les maladies et 8. Tableaux des fabrications). Les
-médecins doivent porter des gants et un masque afin d’éviter d’être contaminés par leur patient. Un
-médecin sait également préparer les remèdes pour soigner les maladies. Chaque remède nécessite 3
-sabliers de préparation et des ressources.'
+fabriquer des remèdes afin de les soigner. Les médecins doivent porter des gants et un masque afin d’éviter d’être contaminés par 
+leur patient. Un médecin sait également préparer les remèdes pour soigner les maladies. Chaque remède nécessite 3 sabliers de préparation et des ressources.'
         ],
 
         'taillandier' => [
             'name' => 'Taillandier',
             'description' => 'Les personnages dotés de cette compétence savent fabriquer des outils permettant de récolter plus
-rapidement des matières premières et précieuses (cf. 8 Tableaux des fabrications).<br/><br/>
+rapidement des matières premières et précieuses.<br/><br/>
 Toutes les fabrications d’un taillandier nécessitent 5 sabliers de simulation de production.<br/><br/>
 Toutes les fabrications d’un taillandier sont valables 3 ans (l’année en cours +2).'
         ],
@@ -448,9 +435,8 @@ Toutes les fabrications d’un taillandier sont valables 3 ans (l’année en co
         'alchemy' => [
             'name' => 'Alchimie',
             'description' => 'Cette compétence permet au personnage de fabriquer des potions alchimiques
-(consommables) ayant des effets surprenants et conservables d’année en année (cf. 8 Tableaux des
-fabrications). Les créations alchimiques nécessitent un laboratoire TI avec des ustensiles comme
-des mortiers, des balances, des cornues, des refroidisseurs, etc. afin de pouvoir simuler la
+(consommables) ayant des effets surprenants et conservables d’année en année. Les créations alchimiques nécessitent un 
+laboratoire TI avec des ustensiles comme des mortiers, des balances, des cornues, des refroidisseurs, etc. afin de pouvoir simuler la
 préparation des potions. Chaque potion nécessite 4 sabliers durant lesquels la préparation doit être
 simulée et un certain nombre de ressources.'
         ],
@@ -459,16 +445,14 @@ simulée et un certain nombre de ressources.'
             'name' => 'Enchanteur',
             'description' => 'Les personnages possédant la compétence "Enchanteur" sont capables de canaliser l’essence
 magique dans des objets divers et variés. Leurs études de la magie leur permettent d’intégrer des
-sortilèges dans un objet de “bonne facture” afin que tout un chacun puisse les déclencher (cf. chapitre
-6.3 Enchantement des objets magiques).'
+sortilèges dans un objet de “bonne facture” afin que tout un chacun puisse les déclencher.'
         ],
 
         'gri-gri' => [
             'name' => 'Gri-gri',
             'description' => 'Cette compétence permet de recharger un fétiche vide à l’aide de son gri-gri.<br/>
 Le gri-gri du tisseur se recharge chaque jour d’autant de charges que son niveau de compétence
-(maximum 3). Pour recharger un fétiche, il faut consommer autant de charges que le niveau du sort
-lié au fétiche.<br/><br/>
+(maximum 3). Pour recharger un fétiche, il faut consommer autant de charges que le niveau du sort lié au fétiche.<br/><br/>
 Exemple : un personnage avec la compétence gri-gri au niveau 3 pourra :<br/><br/>
 - soit recharger 3 fois un fétiche de niveau 1,<br/>
 - soit 1 fois un fétiche de niveau 1 et 1 fois un fétiche de niveau 2,<br/>
@@ -483,26 +467,24 @@ fétiche à recharger. Un personnage ne peut recharger que ses propres fétiches
         'esotericist' => [
             'name' => 'Ésotériste',
             'description' => 'Les personnages dotés de la compétence "Esotériste" savent déchiffrer et libérer la magie des
-parchemins sur lesquels sont inscrits de puissants rituels (à trouver en jeu) (cf. chapitre 6.2 Les
-rituels). Les ésotéristes gagnent également la compétence “Alphabétisation”.'
+parchemins sur lesquels sont inscrits de puissants rituels (à trouver en jeu). Les ésotéristes gagnent également la compétence “Alphabétisation”.'
         ],
 
         'invocator' => [
             'name' => 'Invocateur',
             'description' => 'Les personnages possédant cette compétence sont des tisseurs : ils peuvent apprendre et jeter des
-sorts (cf. 6.1 Les sortilèges). De plus, ils ont les connaissances nécessaires pour invoquer des
-créatures. Chaque invocateur peut être lié par des pactes avec maximum 3 asservis (cf. race
-Asservis).'
+sorts. De plus, ils ont les connaissances nécessaires pour invoquer des
+créatures. Chaque invocateur peut être lié par des pactes avec maximum 3 asservis.'
         ],
 
         'weaver' => [
             'name' => 'Tisseur',
             'description' => 'Les personnages dotés de cette compétence peuvent dépenser des points d’expérience afin de
-pouvoir lancer des sortilèges choisis parmi la liste des sorts (cf. chapitre 6.1 Les sortilèges). Le tisseur
+pouvoir lancer des sortilèges choisis parmi la liste des sorts. Le tisseur
 doit se fabriquer un fétiche pour chaque sort qu’il maîtrise. Chaque sort peut être lancé une fois par
 jour (entre deux levers de soleil).<br/><br/>
 En outre, un tisseur peut extraire des Pierres de Vie d’une Source de Vie (1 PdV par sablier) et les
-utiliser afin de lancer des sorts (cf. chapitre 6.1 Les sortilèges). Ils peuvent également utiliser des
+utiliser afin de lancer des sorts. Ils peuvent également utiliser des
 Monolithes de Vie s’ils en rencontrent.'
         ],
 
@@ -519,7 +501,7 @@ Certaines créatures spéciales ne sont pas assassinables.'
 
         'pirate-captain' => [
             'name' => 'Capitaine pirate',
-            'description' => 'Un capitaine pirate peut participer à la manoeuvre d’un navire et le diriger (cf. chapitre 4) Batailles
+            'description' => 'Un capitaine pirate peut participer à la manoeuvre d’un navire et le diriger Batailles
 navales). Lorsqu’il participe à la manoeuvre, il ne peut pas utiliser de bouclier.<br/><br/>
 De plus, un capitaine pirate ne compte pas dans le nombre maximum de personnes embarquées sur le navire.'
         ],
@@ -544,7 +526,7 @@ pour symboliser sa difficulté. Le cadenas n’est pas détruit par le crochetag
             'name' => 'Pirate',
             'description' => 'Les personnages dotés de cette compétence peuvent participer à la manoeuvre d’un navire. Lorsqu’il
 participe à la manoeuvre, il ne peut pas utiliser de bouclier.<br/><br/>
-Un pirate ne compte pas dans le nombre maximum de personnes embarquées sur le navire (cf. chapitre 4 Combat naval).'
+Un pirate ne compte pas dans le nombre maximum de personnes embarquées sur le navire.'
         ],
 
         'tormentor' => [

@@ -53,7 +53,11 @@
         'resume' => [
             'edit' => 'Modifier',
             'or' => 'ou',
-            'export' => 'exporter'
+            'export' => 'exporter',
+            'export-title' => 'Exporter mon personnage',
+            'url' => 'URL',
+            'advice' => 'Gardez ce lien en favoris ou partagez le avec des amis',
+            'clipped' => '&check; Lien copié dans votre presse papier',
         ],
 
         'patch-note' => [

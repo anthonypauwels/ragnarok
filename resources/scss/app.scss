@@ -1,6 +1,7 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Della+Respira|Oswald:400,700&display=swap');
 
+@import 'mixins';
 @import 'reset';
 @import 'normalize';
 @import 'fog';
@@ -28,25 +29,39 @@ body {
         content: '';
         position: fixed;
         z-index: 100;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
         pointer-events: none;
         border: 1px solid;
         border-image: linear-gradient(to top, #66583c, #ffd073) 1 100%;
+
+        @include min-md {
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+        }
     }
 
     &:after {
         content: '';
         position: fixed;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
         pointer-events: none;
         border-bottom: 1px solid #66583c;
         border-top: 1px solid #ffd073;
+
+        @include min-md {
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+        }
     }
 }
 
@@ -105,9 +120,13 @@ body {
     margin: 60px 0 40px 0;
     font-family: 'Della Respira', serif;
     font-weight: normal;
-    font-size: 40px;
+    font-size: 28px;
     color: white;
     text-align: center;
+
+    @include min-md {
+        font-size: 40px;
+    }
 
     &:after {
         content: url('/img/underline.png');
@@ -119,7 +138,13 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 0px;
+    height: 0px;
+
+    @include min-md {
+        width: 6px;
+        height: auto;
+    }
 }
 
 ::-webkit-scrollbar-track {
@@ -183,9 +208,19 @@ body {
         text-align: center;
         color: white;
         z-index: 10;
+        width: 125px;
+
+        @include min-md {
+            width: auto;
+        }
 
         .header__logo__official, .header__logo__official img {
             display: block;
+            width: 100%;
+
+            @include min-md {
+                width: auto;
+            }
         }
 
         .header__logo__patch-note {

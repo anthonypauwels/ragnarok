@@ -58,6 +58,10 @@
             }
         }
 
+        &--disabled {
+
+        }
+
         &--block {
             display: block;
         }

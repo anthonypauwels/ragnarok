@@ -1,10 +1,15 @@
 <template>
     <div class="panel panel-skills">
         <div class="container">
+            <div class="character-metas">
+                <span class="character-race" v-if="races[ character.race ] !== undefined">{{ races[ character.race ].name }}</span>
+
+                <span class="character-xp">{{ character.xpSpend }} XP</span>
+            </div>
+
             <div class="inclinations-list">
                 <button v-for="(inclination, key) in inclinations" class="item" @click.prevent="selectInclination( key )"
-                        :class="{'is-active': currentInclination === key }"
-                        >
+                        :class="{'is-active': currentInclination === key }">
                     <span>{{ inclination.name }}</span>
                 </button>
                 <button class="item" :class="{'is-disabled': character.skills[ 'occult_weaver' ] === undefined && character.skills[ 'occult_invocator' ] === undefined, 'is-active': currentInclination === 'spells'}"
@@ -17,64 +22,68 @@
                 <span class="item item--right character-race" v-if="races[ character.race ] !== undefined">{{ races[ character.race ].name }}</span>
             </div>
 
-            <div class="skills" v-show="currentInclination !== 'spells'">
-                <TransitionGroup name="fade-fast">
-                    <ul v-for="(name, key) in inclinations" v-if="key === currentInclination" :key="key">
-                        <li v-for="( skill, name ) in inclinations[ key ].skills" :key="name" v-if="canSeeSkill( skill )">
-                            <span class="skill__name" @click="showSkillDescription( skill )" :class="{'is-active': showedSkill !== false && showedSkill.name === skill.name}">
-                                {{ skill.name }}
+            <transition name="fade-fast">
+                <div class="skills" v-if="currentInclination !== 'spells'">
+                    <TransitionGroup name="fade-fast">
+                        <ul v-for="(name, key) in inclinations" v-if="key === currentInclination" :key="key">
+                            <li v-for="( skill, name ) in inclinations[ key ].skills" :key="name" v-if="canSeeSkill( skill )">
+                                <span class="skill__name" @click="showSkillDescription( skill )" :class="{'is-active': showedSkill !== false && showedSkill.name === skill.name}">
+                                    {{ skill.name }}
 
-                                <span class="skill__xp">
-                                    <span v-for="(level, index) in skill.xp" :key="index"
-                                          :class="{'has-learned-it': character.skills[ skill.inclination + '_' + name ] !== undefined && character.skills[ skill.inclination + '_' + name ] === index || raceCanLearnIt( skill ) }"
-                                    >{{ level }}</span> <strong :class="{'has-learned-it': character.skills[ skill.inclination + '_' + name ] !== undefined || raceCanLearnIt( skill ) }">XP</strong>
+                                    <span class="skill__xp">
+                                        <span v-for="(level, index) in skill.xp" :key="index"
+                                              :class="{'has-learned-it': character.skills[ skill.inclination + '_' + name ] !== undefined && character.skills[ skill.inclination + '_' + name ] === index || raceCanLearnIt( skill ) }"
+                                        >{{ level }}</span> <strong :class="{'has-learned-it': character.skills[ skill.inclination + '_' + name ] !== undefined || raceCanLearnIt( skill ) }">XP</strong>
+                                    </span>
                                 </span>
-                            </span>
 
-                            <div class="skill__checkbox">
-                                <div class="checkbox race-can" v-if="raceCanLearnIt( skill )">
-                                    <span data-c="race can learn it"></span>
+                                <div class="skill__checkbox">
+                                    <div class="checkbox race-can" v-if="raceCanLearnIt( skill )">
+                                        <span></span>
+                                    </div>
+
+                                    <div class="checkbox race-cannot"
+                                         v-if="raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill )">
+                                        <span></span>
+                                    </div>
+
+                                    <div class="checkbox" @click="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] + 1 )"  @contextmenu.prevent="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] - 1 )"
+                                         v-if="character.skills[ skill.inclination + '_' + name ] !== undefined"
+                                         :class="{'is-checked': character.skills[ skill.inclination + '_' + name ] === skill.xp.length - 1 }">
+                                        <span>{{ character.skills[ skill.inclination + '_' + name ] + 1 }}</span>
+                                    </div>
+
+                                    <div class="checkbox" @click="learnSkill( skill, 0 )" @contextmenu.prevent=""
+                                         v-if="!( raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill ) ) &&
+                                         character.skills[ skill.inclination + '_' + name ] === undefined && !( raceCanLearnIt( skill ) || raceCannotLearnIt( skill ) )">
+                                        <span></span>
+                                    </div>
                                 </div>
-
-                                <div class="checkbox race-cannot"
-                                     v-if="raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill )">
-                                    <span data-c="race can not learn it"></span>
-                                </div>
-
-                                <div class="checkbox" @click="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] + 1 )"  @contextmenu.prevent="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] - 1 )"
-                                     v-if="character.skills[ skill.inclination + '_' + name ] !== undefined"
-                                     :class="{'is-checked': character.skills[ skill.inclination + '_' + name ] === skill.xp.length - 1 }">
-                                    <span data-c="already learned">{{ character.skills[ skill.inclination + '_' + name ] + 1 }}</span>
-                                </div>
-
-                                <div class="checkbox" @click="learnSkill( skill, 0 )" @contextmenu.prevent=""
-                                     v-if="!( raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill ) ) &&
-                                     character.skills[ skill.inclination + '_' + name ] === undefined && !( raceCanLearnIt( skill ) || raceCannotLearnIt( skill ) )">
-                                    <span data-c="not already learned"></span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </TransitionGroup>
-            </div>
-
-            <div class="spells" v-show="currentInclination === 'spells'">
-                <div class="spells__rank" v-for="(spells, rank) in spells" :key="rank">
-                    <h3 class="spells__rank__title">{{ 'character.panels.skills.rank' | __ }} {{ rank }}</h3>
-
-                    <ul>
-                        <li v-for="spell in spells">
-                            <span class="spell__name" @click="showSkillDescription( spell )" :class="{'is-active': showedSkill !== false && showedSkill.name === spell.name}">{{ spell.name }}</span>
-
-                            <div class="counter">
-                                <button class="counter__minus" @click.prevent="decrementSpell( spell )"><span>&lt;</span></button>
-                                <div class="counter__number" :class="{'is-active': character.spells[ spell.id ] !== undefined && character.spells[ spell.id ] > 0 }">{{ character.spells[ spell.id ] === undefined || character.spells[ spell.id ] === 0 ? 0 : character.spells[ spell.id ] }}</div>
-                                <button class="counter__plus" @click.prevent="incrementSpell( spell )"><span>&gt;</span></button>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </TransitionGroup>
                 </div>
-            </div>
+            </transition>
+
+            <transition name="fade-fast">
+                <div class="spells" v-if="currentInclination === 'spells'">
+                    <div class="spells__rank" v-for="(spells, rank) in spells" :key="rank">
+                        <h3 class="spells__rank__title">{{ 'character.panels.skills.rank' | __ }} {{ rank }}</h3>
+
+                        <ul>
+                            <li v-for="spell in spells">
+                                <span class="spell__name" @click="showSkillDescription( spell )" :class="{'is-active': showedSkill !== false && showedSkill.name === spell.name}">{{ spell.name }}</span>
+
+                                <div class="counter">
+                                    <button class="counter__minus" @click.prevent="decrementSpell( spell )"><span>&lt;</span></button>
+                                    <div class="counter__number" :class="{'is-active': character.spells[ spell.id ] !== undefined && character.spells[ spell.id ] > 0 }">{{ character.spells[ spell.id ] === undefined || character.spells[ spell.id ] === 0 ? 0 : character.spells[ spell.id ] }}</div>
+                                    <button class="counter__plus" @click.prevent="incrementSpell( spell )"><span>&gt;</span></button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </transition>
 
             <div class="reset-skills-link" @click.prevent="reset">{{ 'character.panels.skills.reset' | __ }}</div>
 
@@ -186,7 +195,7 @@ export default {
 
         learnSkill(skill, level)
         {
-            if ( level === -1 || skill.xp.length <= level ) {
+            if ( level === -1 || skill.xp.length <= level || level >= 2 && this.hasMaxSkillsForOthersInclinations() ) {
                 this.$delete( this.character.skills, skill.inclination + '_' + skill.id );
 
                 if ( skill.inclination + '_' + skill.id === 'occult_weaver' || skill.inclination + '_' + skill.id === 'occult_invocator' ) {
@@ -279,24 +288,88 @@ export default {
 
 <style lang="scss">
     .panel-skills {
+        margin: 0 10px;
+
+        @include min-md {
+            margin: 0;
+        }
+
         .container {
             max-width: 940px;
             width: 100%;
             margin: auto;
 
+            @include min-md {
+
+            }
+
+            .character-xp {
+                font-size: 22px;
+                color: #ffd073;
+            }
+
+            .character-race {
+                font-size: 22px;
+                color: #ffd073;
+                display: inline-block;
+                padding-right: 10px;
+
+                &:after {
+                    content: '-';
+                    display: inline-block;
+                    padding-left: 10px;
+                }
+            }
+
+            .character-metas {
+                display: block;
+                text-align: center;
+                margin-bottom: 20px;
+
+                @include min-md {
+                    display: none;
+                }
+            }
+
             .inclinations-list {
                 border-bottom: 1px solid #66583C;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-evenly;
+
+                @include min-md {
+                    display: block;
+                }
+
+                &:before {
+                    content: '';
+                    border-bottom: 1px solid #66583C;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 49%;
+                    left: 0;
+                    background-color: #66583C;
+
+                    @media (min-width: 566px) {
+                        content: none;
+                    }
+                }
 
                 button.item {
                     margin-right: 12px;
                     cursor: pointer;
-                    padding: 10px 15px;
+                    padding: 15px;
                     background-color: transparent;
                     opacity: 1;
                     color: white;
                     text-transform: uppercase;
                     transition: border .3s ease-in, color .3s ease-in, opacity .3s ease-in;
                     border: 0;
+
+                    @include min-md {
+                        padding: 10px 15px;
+                        margin-right: 12px;
+                    }
 
                     &:before {
                         content: '';
@@ -305,7 +378,7 @@ export default {
                         position: absolute;
                         bottom: -1px;
                         left: 0;
-                        background-image: linear-gradient(to right, #66583c, transparent);
+                        background-image: linear-gradient(to right, #66583c 25%, transparent);
                         transition: background-color .3s ease-in;
                     }
 
@@ -316,7 +389,7 @@ export default {
                         position: absolute;
                         bottom: -1px;
                         right: 0;
-                        background-image: linear-gradient(to left, #66583c, transparent);
+                        background-image: linear-gradient(to left, #66583c 25%, transparent);
                         transition: background-color .3s ease-in;
                     }
 
@@ -326,12 +399,16 @@ export default {
                             height: 6px;
                             width: 6px;
                             position: absolute;
-                            bottom: -13px;
+                            bottom: -18px;
                             left: 50%;
                             transform: translateX(-50%) rotate(45deg);
                             border-left: 1px solid #66583c;
                             border-top: 1px solid #66583c;
                             transition: border-left-color .3s ease-in, border-top-color .3s ease-in;
+
+                            @include min-md {
+                                bottom: -13px;
+                            }
                         }
 
                         &:after {
@@ -339,10 +416,14 @@ export default {
                             height: 1px;
                             width: 6px;
                             position: absolute;
-                            bottom: -12px;
+                            bottom: -17px;
                             left: 50%;
                             transform: translateX(-50%) translateY(-50%);
                             background-color: #3c3c3c;
+
+                            @include min-md {
+                                bottom: -12px;
+                            }
                         }
                     }
 
@@ -376,26 +457,13 @@ export default {
                     }
                 }
 
-                .character-xp {
-                    font-size: 22px;
-                    color: #ffd073;
-                }
-
-                .character-race {
-                    font-size: 22px;
-                    color: #ffd073;
-                    display: inline-block;
-                    padding-right: 10px;
-
-                    &:after {
-                        content: '-';
-                        display: inline-block;
-                        padding-left: 10px;
-                    }
-                }
-
                 .item.item--right {
                     float: right;
+                    display: none;
+
+                    @include min-md {
+                        display: inline-block;
+                    }
                 }
 
                 button:last-of-type, &.item:last-child {
@@ -410,16 +478,24 @@ export default {
                 overflow-y: scroll;
                 overflow-x: hidden;
                 padding: 20px 14px 20px 20px;
-                border: 1px solid #66583C;
-                border-top-color: transparent;
+                border-bottom: 1px solid #66583C;
+
+                @include min-md {
+                    border: 1px solid #66583C;
+                    border-top-color: transparent;
+                }
 
                 ul {
                     display: flex;
                     flex-flow: row wrap;
 
                     li {
-                        width: calc(100% / 3);
+                        width: 100%;
                         padding: 10px;
+
+                        @include min-md {
+                            width: calc(100% / 3);
+                        }
                     }
                 }
 
@@ -495,6 +571,13 @@ export default {
                         flex-flow: row wrap;
 
                         li {
+                            width: 100%;
+                            padding: 10px;
+
+                            @include min-md {
+                                width: calc(50% - 20px);
+                            }
+
                             .spell__name {
                                 font-size: 16px;
                                 transition: all .2s ease-in-out;
@@ -510,15 +593,16 @@ export default {
                                 }
                             }
 
-                            width: calc(50% - 20px);
-                            padding: 10px;
-
                             &:nth-child(odd) {
-                                margin-right: 20px;
+                                @include min-md {
+                                    margin-right: 20px;
+                                }
                             }
 
                             &:nth-child(even) {
-                                margin-left: 20px;
+                                @include min-md {
+                                    margin-left: 20px;
+                                }
                             }
                         }
                     }
@@ -527,7 +611,7 @@ export default {
         }
 
         .modal {
-            position: absolute;
+            position: fixed;
             width: 100%;
             top: 0;
             left: 0;
@@ -550,16 +634,28 @@ export default {
                 background-color: rgba(0, 0, 0, 0.9);
                 color: white;
                 padding: 20px;
-                position: absolute;
-                width: 55%;
+                position: fixed;
+                width: 90%;
                 top: 60%;
                 left: 50%;
                 transform: translate(-50%, -65%);
 
+                @include min-md {
+                    width: 100%;
+                    max-width: 760px;
+                    top: 60%;
+                    left: 50%;
+                    transform: translate(-50%, -65%);
+                }
+
                 &__content {
                     padding: 10px;
-                    line-height: 35px;
+                    line-height: 36px;
                     font-size: 20px;
+
+                    @include min-md {
+                        font-size: 18px;
+                    }
 
                     h3 {
                         font-weight: bold;
@@ -567,6 +663,10 @@ export default {
                         color: #ffd073;
                         text-align: center;
                         font-family: 'Della Respira', serif;
+
+                        @include min-md {
+                            font-size: 20px;
+                        }
                     }
 
                     .skill__xp {
@@ -620,15 +720,27 @@ export default {
             background: none;
             border: none;
             cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 40px;
 
             &:hover {
                 color: white;
+            }
+
+            @include min-md {
+                margin-right: 0;
+                margin-bottom: 0;
             }
         }
 
         .unavailable-skills-toggle {
             margin-top: 10px;
+            margin-left: 10px;
             display: inline-block;
+
+            @include min-md {
+                margin-left: 0;
+            }
 
             &__link {
                 color: #808080;
