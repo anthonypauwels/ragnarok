@@ -1,0 +1,86 @@
+<template>
+    <transition name="fade-fast">
+        <div class="r-modal" v-if="show !== false" @click.self="closeModal">
+            <div class="r-modal__inner">
+                <button class="r-modal__close" @click="closeModal">&times;</button>
+
+                <slot></slot>
+            </div>
+        </div>
+    </transition>
+</template>
+
+<script>
+export default {
+    name: "RModal",
+
+    props: {
+        show: {
+            type: Boolean,
+            required: true,
+        }
+    },
+
+    methods: {
+        closeModal() {
+            this.$emit( 'close' );
+        }
+    },
+}
+</script>
+
+<style lang="scss">
+.r-modal {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &__close {
+        position: absolute;
+        top: 22px;
+        left: 20px;
+        color: #808080;
+        font-size: 26px;
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    &__inner {
+        background-color: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 20px;
+        position: fixed;
+        width: 90%;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -65%);
+        line-height: 36px;
+        font-size: 20px;
+
+        @include min-md {
+            font-size: 18px;
+            width: 100%;
+            max-width: 760px;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -65%);
+        }
+
+        &:before {
+            content: '';
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            pointer-events: none;
+            border: 1px solid #66583c;
+        }
+    }
+}
+</style>

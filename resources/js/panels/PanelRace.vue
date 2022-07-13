@@ -7,6 +7,7 @@
                        class="item" :class="{ 'is-active': currentRace === key }"
                        @click.prevent="selectRace( key )">
                         <div>
+                            <img :src="'/img/' + race.image" :alt="race.name">
                             <span>{{ race.name }}</span>
                         </div>
                     </a>
@@ -156,10 +157,19 @@ export default {
 
                     > div {
                         background-color: rgba(0, 0, 0, 0.5);
-                        line-height: 130px;
                         height: 130px;
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
 
-                        > span {
+                        img {
+                            width: 40%;
+                            display: block;
+                            margin: 0 auto 5px;
+                        }
+
+                        span {
+                            display: block;
                             line-height: 20px;
                         }
                     }

@@ -365,7 +365,7 @@
                     'xp' => [3],
                     'specialized' => true,
                 ],
-                'invocator' => [
+                'summoner' => [
                     'xp' => [6],
                     'specialized' => true,
                 ],

@@ -6,6 +6,7 @@
                    class="item" :class="{ 'is-active': currentInclination === key }"
                    @click.prevent="selectInclination( key )">
                     <div>
+                        <img :src="'/img/' + inclination.image" :alt="inclination.name">
                         <span>{{ inclination.name }}</span>
                     </div>
                 </a>
@@ -87,12 +88,24 @@ export default {
 
                     > div {
                         background-color: rgba(0, 0, 0, 0.5);
-                        line-height: 100px;
                         height: 100px;
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: center;
 
                         @include min-md {
-                            line-height: 130px;
                             height: 130px;
+                        }
+
+                        img {
+                            width: 25%;
+                            display: block;
+                            margin: 0 auto 5px;
+                        }
+
+                        span {
+                            display: block;
+                            line-height: 20px;
                         }
                     }
 

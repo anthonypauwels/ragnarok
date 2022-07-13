@@ -13,6 +13,7 @@
                 <h4 v-if="item.title">{{ item.title }}</h4>
 
                 <div class="skill" v-else @click="e => showSkillDescription( item.skill, e.target )">
+                    <img class="skill__image" :src="'/img/' + item.skill.image" :alt="item.skill.name">
                     <span class="skill__name" :class="{'is-active': showedSkill !== false && showedSkill.name === item.skill.name}">{{ item.label }}</span>
                     <span class="skill__xp" v-if="item.xp">{{ item.xp }} XP</span> <span v-if="item.rank" class="skill__count">({{ item.rank }} * {{ item.count }})</span>
                 </div>
@@ -29,61 +30,49 @@
             </div>
         </div>
 
-        <transition name="fade-fast">
-            <div class="modal" v-if="showedSkill !== false || exportModal" @click.self="closeModal">
-                <div class="modal__description" v-if="showedSkill !== false">
-                    <div class="modal__description__content" v-if="!showedSkill.rank">
-                        <button class="modal__close" @click="closeModal">&times;</button>
+        <r-modal :show="showedSkill !== false" @close="closeModal">
+            <div class="modal__skill" v-if="!showedSkill.rank">
+                <h3>{{ showedSkill.name }}</h3>
 
-                        <h3>{{ showedSkill.name }}</h3>
+                <span class="modal__xp" v-if="showedSkill.xp !== undefined">
+                    <span v-for="(level, index) in showedSkill.xp" :key="index">{{ level }}</span> XP
+                </span>
 
-                        <span class="skill__xp" v-if="showedSkill.xp !== undefined">
-                            <span v-for="(level, index) in showedSkill.xp" :key="index">{{ level }}</span> XP
-                        </span>
-
-                        <div v-html="showedSkill.description"></div>
-                    </div>
-
-                    <div class="modal__description__content" v-else>
-                        <button class="modal__close" @click="closeModal">&times;</button>
-
-                        <h3>{{ showedSkill.name }}</h3>
-
-                        <span class="skill__xp">
-                            {{ 'character.panels.skills.rank' | __ }} {{ showedSkill.rank }}
-                        </span>
-
-                        <dl>
-                            <dt v-if="showedSkill.description">{{ 'character.panels.skills.description' | __ }} :</dt>
-                            <dd v-if="showedSkill.description" v-html="showedSkill.description"></dd>
-
-                            <dt v-if="showedSkill.target">{{ 'character.panels.skills.target' | __ }} :</dt>
-                            <dd v-if="showedSkill.target" v-html="showedSkill.target"></dd>
-
-                            <dt v-if="showedSkill.duration">{{ 'character.panels.skills.duration' | __ }} :</dt>
-                            <dd v-if="showedSkill.duration" v-html="showedSkill.duration"></dd>
-
-                            <dt v-if="showedSkill.injunction">{{ 'character.panels.skills.injunction' | __ }} :</dt>
-                            <dd v-if="showedSkill.injunction" v-html="showedSkill.injunction"></dd>
-                        </dl>
-                    </div>
-                </div>
-
-                <div class="modal__description" v-if="exportModal">
-                    <div class="modal__description__content">
-                        <button class="modal__close" @click="closeModal">&times;</button>
-
-                        <h3>{{ 'resume.export-title' | __ }}</h3>
-
-                        <r-input :value="computeTokenUrl" type="text" name="token" readonly @click="copyToClipboard">{{ 'resume.url' | __ }}</r-input>
-
-                        <div class="clipped" :class="{'show': clipped }" v-html="$options.filters.__( 'resume.clipped' )"></div>
-
-                        <div class="advice">{{ 'resume.advice' | __ }}</div>
-                    </div>
-                </div>
+                <div v-html="showedSkill.description"></div>
             </div>
-        </transition>
+
+            <div class="modal__spell" v-else>
+                <h3>{{ showedSkill.name }}</h3>
+
+                <span class="modal__xp">{{ 'character.panels.skills.rank' | __ }} {{ showedSkill.rank }}</span>
+
+                <dl>
+                    <dt v-if="showedSkill.description">{{ 'character.panels.skills.description' | __ }} :</dt>
+                    <dd v-if="showedSkill.description" v-html="showedSkill.description"></dd>
+
+                    <dt v-if="showedSkill.target">{{ 'character.panels.skills.target' | __ }} :</dt>
+                    <dd v-if="showedSkill.target" v-html="showedSkill.target"></dd>
+
+                    <dt v-if="showedSkill.duration">{{ 'character.panels.skills.duration' | __ }} :</dt>
+                    <dd v-if="showedSkill.duration" v-html="showedSkill.duration"></dd>
+
+                    <dt v-if="showedSkill.injunction">{{ 'character.panels.skills.injunction' | __ }} :</dt>
+                    <dd v-if="showedSkill.injunction" v-html="showedSkill.injunction"></dd>
+                </dl>
+            </div>
+        </r-modal>
+
+        <r-modal :show="exportModal" @close="closeModal">
+            <div class="modal__export">
+                <h3>{{ 'resume.export-title' | __ }}</h3>
+
+                <r-input :value="computeTokenUrl" type="text" name="token" readonly @click="copyToClipboard">{{ 'resume.url' | __ }}</r-input>
+
+                <div class="modal__clipped" :class="{'show': clipped }" v-html="$options.filters.__( 'resume.clipped' )"></div>
+
+                <div class="modal__advice">{{ 'resume.advice' | __ }}</div>
+            </div>
+        </r-modal>
     </div>
 </template>
 
@@ -91,13 +80,15 @@
 import {decodeBase64, encodeBase64} from "../lib/helpers/base64";
 import RButton from "../components/RButton";
 import RInput from "../components/RInput";
+import RModal from "../components/RModal";
 
 export default {
     name: "page-resume",
 
     components: {
         RButton,
-        RInput
+        RInput,
+        RModal,
     },
 
     computed: {
@@ -329,6 +320,12 @@ export default {
                 font-size: 20px;
                 margin-bottom: 15px;
 
+                &__image {
+                    width: 25px;
+                    margin-right: 5px;
+                    top: 5px;
+                }
+
                 &__name {
                     color: white;
                     transition: all .2s ease-in-out;
@@ -386,122 +383,63 @@ export default {
             }
         }
 
-        .modal {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-
-            &__close {
-                position: absolute;
-                top: 12px;
-                left: 10px;
-                color: #808080;
+        .r-modal {
+            h3 {
+                font-weight: bold;
                 font-size: 26px;
-                background-color: transparent;
-                border: 0;
-                cursor: pointer;
-                z-index: 10;
-            }
-
-            &__description {
-                background-color: rgba(0, 0, 0, 0.9);
-                color: white;
-                padding: 20px;
-                position: fixed;
-                width: 90%;
-                top: 60%;
-                left: 50%;
-                transform: translate(-50%, -65%);
+                color: #ffd073;
+                text-align: center;
+                font-family: 'Della Respira', serif;
 
                 @include min-md {
-                    width: 100%;
-                    max-width: 760px;
-                    top: 60%;
-                    left: 50%;
-                    transform: translate(-50%, -65%);
-                }
-
-                &__content {
-                    padding: 10px;
-                    line-height: 36px;
                     font-size: 20px;
+                }
+            }
 
-                    @include min-md {
-                        font-size: 18px;
-                    }
+            .modal__xp {
+                position: absolute;
+                right: 10px;
+                top: 5px;
+                color: #808080;
 
-                    h3 {
-                        font-weight: bold;
-                        font-size: 26px;
-                        color: #ffd073;
-                        text-align: center;
-                        font-family: 'Della Respira', serif;
-
-                        @include min-md {
-                            font-size: 20px;
-                        }
-                    }
-
-                    .skill__xp {
-                        position: absolute;
-                        right: 10px;
-                        top: 5px;
-                        color: #808080;
-
-                        span + span {
-                            &:before {
-                                content: '/';
-                                color: #808080;
-                            }
-                        }
-                    }
-
+                span + span {
                     &:before {
-                        content: '';
-                        position: fixed;
-                        top: 10px;
-                        left: 10px;
-                        right: 10px;
-                        bottom: 10px;
-                        pointer-events: none;
-                        border: 1px solid #66583c;
-                    }
-
-                    dl {
-                        dt {
-                            color: #ffd073;
-                            float: left;
-                            width: 120px;
-                        }
-
-                        dd {
-                            margin-left: 130px;
-                            margin-bottom: 10px;
-                        }
-                    }
-
-                    .clipped {
-                        font-size: 14px;
-                        color: #A6A6A6;
-                        text-align: right;
-                        opacity: 0;
-                        transition: opacity .3s ease-in;
-                        pointer-events: none;
-
-                        &.show {
-                            pointer-events: auto;
-                            opacity: 1;
-                        }
-                    }
-
-                    .advice {
-                        font-size: 18px;
-                        color: white;
+                        content: '/';
+                        color: #808080;
                     }
                 }
+            }
+
+            dl {
+                dt {
+                    color: #ffd073;
+                    float: left;
+                    width: 120px;
+                }
+
+                dd {
+                    margin-left: 130px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .modal__clipped {
+                font-size: 14px;
+                color: #A6A6A6;
+                text-align: right;
+                opacity: 0;
+                transition: opacity .3s ease-in;
+                pointer-events: none;
+
+                &.show {
+                    pointer-events: auto;
+                    opacity: 1;
+                }
+            }
+
+            .modal__advice {
+                font-size: 18px;
+                color: white;
             }
         }
     }

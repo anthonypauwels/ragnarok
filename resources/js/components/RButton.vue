@@ -1,5 +1,5 @@
 <template>
-    <button class="r-button" @click.prevent="onClick">
+    <button class="r-button" @click.prevent="onClick" :disabled="disabled">
         <span>
             <slot></slot>
         </span>
@@ -9,6 +9,15 @@
 <script>
     export default {
         name: "r-button",
+
+        props: {
+            disabled: {
+                type: Boolean,
+                required: false,
+                default: false,
+            }
+        },
+
         methods: {
             onClick(e)
             {
@@ -52,58 +61,8 @@
             }
         }
 
-        &--small {
-            > span {
-                font-size: 16px;
-            }
-        }
-
         &--disabled {
 
-        }
-
-        &--block {
-            display: block;
-        }
-
-        &--link {
-            border: 0;
-            padding: 10px 0;
-
-            > span {
-                color: #808080;
-                background-color: transparent;
-                background-image: none;
-                text-transform: none;
-                padding: 0;
-                display: inline-block;
-                transition: color .3s ease-in-out;
-
-                &:after {
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    height: 2px;
-                    width: 0%;
-                    background-color: white;
-                    bottom: -2px;
-                    left: 0;
-                    transition: width 0.3s ease-in-out;
-                }
-            }
-
-            &:hover {
-                border: 0;
-
-                > span {
-                    color: white;
-                    background-color: transparent;
-
-                    &:after {
-                        width: 100%;
-                    }
-                }
-            }
         }
     }
 </style>

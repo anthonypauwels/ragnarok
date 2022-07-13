@@ -464,6 +464,11 @@ body:after {
   background-image: linear-gradient(to top, #000000, rgba(0, 0, 0, 0));
 }
 
+@media screen and (min-height: 886px) {
+  .body:before, .body:after {
+    content: none;
+  }
+}
 .input-wrapper {
   margin-bottom: 20px;
 }
@@ -478,7 +483,7 @@ body:after {
 }
 
 .title {
-  margin: 60px 0 40px 0;
+  margin: 40px 0;
   font-family: "Della Respira", serif;
   font-weight: normal;
   font-size: 28px;
@@ -754,46 +759,6 @@ body:after {
   color: white;
   background-color: #70603e;
 }
-.r-button--small > span[data-v-9cf444ae] {
-  font-size: 16px;
-}
-.r-button--block[data-v-9cf444ae] {
-  display: block;
-}
-.r-button--link[data-v-9cf444ae] {
-  border: 0;
-  padding: 10px 0;
-}
-.r-button--link > span[data-v-9cf444ae] {
-  color: #808080;
-  background-color: transparent;
-  background-image: none;
-  text-transform: none;
-  padding: 0;
-  display: inline-block;
-  transition: color 0.3s ease-in-out;
-}
-.r-button--link > span[data-v-9cf444ae]:after {
-  content: "";
-  display: block;
-  position: absolute;
-  height: 2px;
-  width: 0%;
-  background-color: white;
-  bottom: -2px;
-  left: 0;
-  transition: width 0.3s ease-in-out;
-}
-.r-button--link[data-v-9cf444ae]:hover {
-  border: 0;
-}
-.r-button--link:hover > span[data-v-9cf444ae] {
-  color: white;
-  background-color: transparent;
-}
-.r-button--link:hover > span[data-v-9cf444ae]:after {
-  width: 100%;
-}
 .page-home {
   overflow: hidden;
   padding-top: 120px;
@@ -936,10 +901,18 @@ body:after {
 }
 .panel-race .container .list .item > div {
   background-color: rgba(0, 0, 0, 0.5);
-  line-height: 130px;
   height: 130px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
-.panel-race .container .list .item > div > span {
+.panel-race .container .list .item > div img {
+  width: 40%;
+  display: block;
+  margin: 0 auto 5px;
+}
+.panel-race .container .list .item > div span {
+  display: block;
   line-height: 20px;
 }
 .panel-race .container .description {
@@ -1011,14 +984,24 @@ body:after {
 }
 .panel-inclination .container .list .item > div {
   background-color: rgba(0, 0, 0, 0.5);
-  line-height: 100px;
   height: 100px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
 @media (min-width: 992px) {
 .panel-inclination .container .list .item > div {
-    line-height: 130px;
     height: 130px;
 }
+}
+.panel-inclination .container .list .item > div img {
+  width: 25%;
+  display: block;
+  margin: 0 auto 5px;
+}
+.panel-inclination .container .list .item > div span {
+  display: block;
+  line-height: 20px;
 }
 .panel-inclination .container .list .item:hover {
   border: 1px solid white;
@@ -1040,6 +1023,57 @@ body:after {
     font-size: 20px;
     margin: 40px auto 20px auto;
 }
+}
+.r-modal {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.r-modal__close {
+  position: absolute;
+  top: 22px;
+  left: 20px;
+  color: #808080;
+  font-size: 26px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+.r-modal__inner {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 20px;
+  position: fixed;
+  width: 90%;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  line-height: 36px;
+  font-size: 20px;
+}
+@media (min-width: 992px) {
+.r-modal__inner {
+    font-size: 18px;
+    width: 100%;
+    max-width: 760px;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -65%);
+}
+}
+.r-modal__inner:before {
+  content: "";
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  pointer-events: none;
+  border: 1px solid #66583c;
 }
 @charset "UTF-8";
 .panel-skills {
@@ -1092,7 +1126,6 @@ body:after {
 }
 }
 .panel-skills .container .inclinations-list:before {
-  content: "";
   border-bottom: 1px solid #66583C;
   width: 100%;
   position: absolute;
@@ -1100,9 +1133,14 @@ body:after {
   left: 0;
   background-color: #66583C;
 }
-@media (min-width: 566px) {
-.panel-skills .container .inclinations-list:before {
-    content: none;
+@media screen and (max-width: 468px) {
+.panel-skills .container .inclinations-list:not(.has-spell-tab):before {
+    content: "";
+}
+}
+@media screen and (max-width: 566px) {
+.panel-skills .container .inclinations-list.has-spell-tab:before {
+    content: "";
 }
 }
 .panel-skills .container .inclinations-list button.item {
@@ -1235,6 +1273,11 @@ body:after {
     width: 33.3333333333%;
 }
 }
+.panel-skills .container .skills .skill__image {
+  width: 25px;
+  margin-right: 5px;
+  top: 5px;
+}
 .panel-skills .container .skills .skill__name {
   color: white;
   transition: all 0.2s ease-in-out;
@@ -1301,6 +1344,11 @@ body:after {
     width: calc(50% - 20px);
 }
 }
+.panel-skills .container .spells .spells__rank ul li .spell__image {
+  width: 25px;
+  margin-right: 5px;
+  top: 5px;
+}
 .panel-skills .container .spells .spells__rank ul li .spell__name {
   font-size: 16px;
   transition: all 0.2s ease-in-out;
@@ -1323,55 +1371,7 @@ body:after {
     margin-left: 20px;
 }
 }
-.panel-skills .modal {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.panel-skills .modal__close {
-  position: absolute;
-  top: 12px;
-  left: 10px;
-  color: #808080;
-  font-size: 26px;
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-  z-index: 10;
-}
-.panel-skills .modal__description {
-  background-color: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 20px;
-  position: fixed;
-  width: 90%;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -65%);
-}
-@media (min-width: 992px) {
-.panel-skills .modal__description {
-    width: 100%;
-    max-width: 760px;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -65%);
-}
-}
-.panel-skills .modal__description__content {
-  padding: 10px;
-  line-height: 36px;
-  font-size: 20px;
-}
-@media (min-width: 992px) {
-.panel-skills .modal__description__content {
-    font-size: 18px;
-}
-}
-.panel-skills .modal__description__content h3 {
+.panel-skills .r-modal h3 {
   font-weight: bold;
   font-size: 26px;
   color: #ffd073;
@@ -1379,36 +1379,26 @@ body:after {
   font-family: "Della Respira", serif;
 }
 @media (min-width: 992px) {
-.panel-skills .modal__description__content h3 {
+.panel-skills .r-modal h3 {
     font-size: 20px;
 }
 }
-.panel-skills .modal__description__content .skill__xp {
+.panel-skills .r-modal .modal__xp {
   position: absolute;
   right: 10px;
   top: 5px;
   color: #808080;
 }
-.panel-skills .modal__description__content .skill__xp span + span:before {
+.panel-skills .r-modal .modal__xp span + span:before {
   content: "/";
   color: #808080;
 }
-.panel-skills .modal__description__content:before {
-  content: "";
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  pointer-events: none;
-  border: 1px solid #66583c;
-}
-.panel-skills .modal__description__content dl dt {
+.panel-skills .r-modal dl dt {
   color: #ffd073;
   float: left;
   width: 120px;
 }
-.panel-skills .modal__description__content dl dd {
+.panel-skills .r-modal dl dd {
   margin-left: 130px;
   margin-bottom: 10px;
 }
@@ -1727,6 +1717,11 @@ body:after {
   font-size: 20px;
   margin-bottom: 15px;
 }
+.page-resume__character .skill__image {
+  width: 25px;
+  margin-right: 5px;
+  top: 5px;
+}
 .page-resume__character .skill__name {
   color: white;
   transition: all 0.2s ease-in-out;
@@ -1771,55 +1766,7 @@ body:after {
 .page-resume .button-container__link a:hover {
   color: white;
 }
-.page-resume .modal {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.page-resume .modal__close {
-  position: absolute;
-  top: 12px;
-  left: 10px;
-  color: #808080;
-  font-size: 26px;
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-  z-index: 10;
-}
-.page-resume .modal__description {
-  background-color: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 20px;
-  position: fixed;
-  width: 90%;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -65%);
-}
-@media (min-width: 992px) {
-.page-resume .modal__description {
-    width: 100%;
-    max-width: 760px;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -65%);
-}
-}
-.page-resume .modal__description__content {
-  padding: 10px;
-  line-height: 36px;
-  font-size: 20px;
-}
-@media (min-width: 992px) {
-.page-resume .modal__description__content {
-    font-size: 18px;
-}
-}
-.page-resume .modal__description__content h3 {
+.page-resume .r-modal h3 {
   font-weight: bold;
   font-size: 26px;
   color: #ffd073;
@@ -1827,40 +1774,30 @@ body:after {
   font-family: "Della Respira", serif;
 }
 @media (min-width: 992px) {
-.page-resume .modal__description__content h3 {
+.page-resume .r-modal h3 {
     font-size: 20px;
 }
 }
-.page-resume .modal__description__content .skill__xp {
+.page-resume .r-modal .modal__xp {
   position: absolute;
   right: 10px;
   top: 5px;
   color: #808080;
 }
-.page-resume .modal__description__content .skill__xp span + span:before {
+.page-resume .r-modal .modal__xp span + span:before {
   content: "/";
   color: #808080;
 }
-.page-resume .modal__description__content:before {
-  content: "";
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  pointer-events: none;
-  border: 1px solid #66583c;
-}
-.page-resume .modal__description__content dl dt {
+.page-resume .r-modal dl dt {
   color: #ffd073;
   float: left;
   width: 120px;
 }
-.page-resume .modal__description__content dl dd {
+.page-resume .r-modal dl dd {
   margin-left: 130px;
   margin-bottom: 10px;
 }
-.page-resume .modal__description__content .clipped {
+.page-resume .r-modal .modal__clipped {
   font-size: 14px;
   color: #A6A6A6;
   text-align: right;
@@ -1868,11 +1805,11 @@ body:after {
   transition: opacity 0.3s ease-in;
   pointer-events: none;
 }
-.page-resume .modal__description__content .clipped.show {
+.page-resume .r-modal .modal__clipped.show {
   pointer-events: auto;
   opacity: 1;
 }
-.page-resume .modal__description__content .advice {
+.page-resume .r-modal .modal__advice {
   font-size: 18px;
   color: white;
 }

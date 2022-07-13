@@ -56,7 +56,6 @@ export default {
                 'inclination',
                 'skills',
             ],
-            tab: 'name',
             tabs: {
                 name: {
                     label: __('character.panels.name.title'),
@@ -83,6 +82,7 @@ export default {
                     }
                 },
             },
+            tab: 'name',
             character: {
                 name: '',
                 race: '',

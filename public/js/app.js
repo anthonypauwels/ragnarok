@@ -2176,6 +2176,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "r-button",
+  props: {
+    disabled: {
+      type: Boolean,
+      required: false,
+      "default": false
+    }
+  },
   methods: {
     onClick: function onClick(e) {
       this.$emit('click', e);
@@ -2324,6 +2331,46 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "RModal",
+  props: {
+    show: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    closeModal: function closeModal() {
+      this.$emit('close');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=script&lang=js& ***!
@@ -2432,6 +2479,45 @@ var localStorage = (0,_lib_core__WEBPACK_IMPORTED_MODULE_1__.useLocalStorage)();
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SpriteIcon.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SpriteIcon.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'sprite-icon',
+  props: {
+    icon: {
+      type: String,
+      required: true
+    },
+    width: {
+      type: Number,
+      required: false,
+      "default": 32
+    },
+    height: {
+      type: Number,
+      required: false,
+      "default": 32
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/PageCharacter.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/PageCharacter.vue?vue&type=script&lang=js& ***!
@@ -2514,7 +2600,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       edit: false,
       inclinations: {},
       tabsList: ['name', 'race', 'inclination', 'skills'],
-      tab: 'name',
       tabs: {
         name: {
           label: (0,_helpers__WEBPACK_IMPORTED_MODULE_7__.__)('character.panels.name.title'),
@@ -2541,6 +2626,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           }
         }
       },
+      tab: 'name',
       character: {
         name: '',
         race: '',
@@ -2796,6 +2882,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_helpers_base64__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/helpers/base64 */ "./resources/js/lib/helpers/base64.js");
 /* harmony import */ var _components_RButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/RButton */ "./resources/js/components/RButton.vue");
 /* harmony import */ var _components_RInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/RInput */ "./resources/js/components/RInput.vue");
+/* harmony import */ var _components_RModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/RModal */ "./resources/js/components/RModal.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2886,17 +2973,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -2904,7 +2981,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   name: "page-resume",
   components: {
     RButton: _components_RButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    RInput: _components_RInput__WEBPACK_IMPORTED_MODULE_2__["default"]
+    RInput: _components_RInput__WEBPACK_IMPORTED_MODULE_2__["default"],
+    RModal: _components_RModal__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   computed: {
     computeTokenUrl: function computeTokenUrl() {
@@ -3110,6 +3188,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "panel-inclination",
   props: {
@@ -3243,6 +3322,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "panel-race",
   props: {
@@ -3282,6 +3362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _components_RModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/RModal */ "./resources/js/components/RModal.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3428,14 +3509,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "panel-skills",
+  components: {
+    RModal: _components_RModal__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: {
     character: {
       type: Object,
@@ -3487,7 +3566,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       if (level === -1 || skill.xp.length <= level || level >= 2 && this.hasMaxSkillsForOthersInclinations()) {
         this.$delete(this.character.skills, skill.inclination + '_' + skill.id);
 
-        if (skill.inclination + '_' + skill.id === 'occult_weaver' || skill.inclination + '_' + skill.id === 'occult_invocator') {
+        if (skill.inclination + '_' + skill.id === 'occult_weaver' || skill.inclination + '_' + skill.id === 'occult_summoner') {
           this.character.spells = {};
         }
       } else if (skill.inclination !== this.character.inclination && !this.hasMaxSkillsForOthersInclinations() || skill.inclination === this.character.inclination) {
@@ -3810,6 +3889,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var UrlGenerator = /*#__PURE__*/function () {
+  /** @type {string} */
+
+  /** @type {{}} */
+
+  /**
+   *
+   * @param base_url
+   */
   function UrlGenerator() {
     var base_url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
@@ -3825,6 +3912,12 @@ var UrlGenerator = /*#__PURE__*/function () {
 
     this.baseUrl = base_url;
   }
+  /**
+   *
+   * @param routes
+   * @returns {UrlGenerator}
+   */
+
 
   _createClass(UrlGenerator, [{
     key: "setRoutes",
@@ -3832,6 +3925,14 @@ var UrlGenerator = /*#__PURE__*/function () {
       this.routes = routes;
       return this;
     }
+    /**
+     *
+     * @param name
+     * @param parameters
+     * @param absolute
+     * @returns {string|*}
+     */
+
   }, {
     key: "route",
     value: function route(name) {
@@ -3853,6 +3954,14 @@ var UrlGenerator = /*#__PURE__*/function () {
 
       return route;
     }
+    /**
+     *
+     * @param path
+     * @param query_parameters
+     * @param secure
+     * @returns {string}
+     */
+
   }, {
     key: "url",
     value: function url(path) {
@@ -3878,23 +3987,52 @@ var UrlGenerator = /*#__PURE__*/function () {
 
       return url;
     }
+    /**
+     *
+     * @param name
+     * @param parameters
+     * @returns {string}
+     */
+
   }, {
     key: "secure",
     value: function secure(name) {
       var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.secureUrl(this.route(name, parameters, false), true);
     }
+    /**
+     *
+     * @param path
+     * @param query_parameters
+     * @returns {string}
+     */
+
   }, {
     key: "secureUrl",
     value: function secureUrl(path) {
       var query_parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.url(path, query_parameters, true);
     }
+    /**
+     *
+     * @param route
+     * @returns {boolean}
+     * @private
+     */
+
   }, {
     key: "_hasParameters",
     value: function _hasParameters(route) {
       return route.match(/{(.*?)(\?)?}/) !== null;
     }
+    /**
+     *
+     * @param route
+     * @param parameters
+     * @returns {*}
+     * @private
+     */
+
   }, {
     key: "_replaceParameters",
     value: function _replaceParameters(route) {
@@ -11111,6 +11249,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=style&index=0&lang=scss&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=style&index=0&lang=scss& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=style&index=0&lang=scss&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=style&index=0&lang=scss& ***!
@@ -11640,6 +11791,47 @@ component.options.__file = "resources/js/components/RInput.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/RModal.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/RModal.vue ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RModal_vue_vue_type_template_id_3bfb0a06___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RModal.vue?vue&type=template&id=3bfb0a06& */ "./resources/js/components/RModal.vue?vue&type=template&id=3bfb0a06&");
+/* harmony import */ var _RModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RModal.vue?vue&type=script&lang=js& */ "./resources/js/components/RModal.vue?vue&type=script&lang=js&");
+/* harmony import */ var _RModal_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RModal.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/RModal.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _RModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RModal_vue_vue_type_template_id_3bfb0a06___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RModal_vue_vue_type_template_id_3bfb0a06___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/RModal.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/RMusicPlayer.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/RMusicPlayer.vue ***!
@@ -11677,6 +11869,45 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/RMusicPlayer.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SpriteIcon.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/SpriteIcon.vue ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SpriteIcon_vue_vue_type_template_id_3ab652ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpriteIcon.vue?vue&type=template&id=3ab652ee& */ "./resources/js/components/SpriteIcon.vue?vue&type=template&id=3ab652ee&");
+/* harmony import */ var _SpriteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SpriteIcon.vue?vue&type=script&lang=js& */ "./resources/js/components/SpriteIcon.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SpriteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SpriteIcon_vue_vue_type_template_id_3ab652ee___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SpriteIcon_vue_vue_type_template_id_3ab652ee___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SpriteIcon.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -12089,6 +12320,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/RModal.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/RModal.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/RMusicPlayer.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/RMusicPlayer.vue?vue&type=script&lang=js& ***!
@@ -12102,6 +12349,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RMusicPlayer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RMusicPlayer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RMusicPlayer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SpriteIcon.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/SpriteIcon.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpriteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SpriteIcon.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SpriteIcon.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpriteIcon_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -12294,6 +12557,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_clonedRuleSet_12_0_rules_0_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_22_0_rules_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RInput_vue_vue_type_style_index_0_id_206490a3_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RInput.vue?vue&type=style&index=0&id=206490a3&scoped=true&lang=scss& */ "./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RInput.vue?vue&type=style&index=0&id=206490a3&scoped=true&lang=scss&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RModal.vue?vue&type=style&index=0&lang=scss&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/RModal.vue?vue&type=style&index=0&lang=scss& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_clonedRuleSet_12_0_rules_0_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_22_0_rules_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RModal_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RModal.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12[0].rules[0].use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22[0].rules[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=style&index=0&lang=scss&");
 
 
 /***/ }),
@@ -12500,6 +12776,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/RModal.vue?vue&type=template&id=3bfb0a06&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/RModal.vue?vue&type=template&id=3bfb0a06& ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RModal_vue_vue_type_template_id_3bfb0a06___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RModal_vue_vue_type_template_id_3bfb0a06___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RModal_vue_vue_type_template_id_3bfb0a06___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RModal.vue?vue&type=template&id=3bfb0a06& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=template&id=3bfb0a06&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/RMusicPlayer.vue?vue&type=template&id=17f74902&":
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/RMusicPlayer.vue?vue&type=template&id=17f74902& ***!
@@ -12513,6 +12806,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RMusicPlayer_vue_vue_type_template_id_17f74902___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RMusicPlayer_vue_vue_type_template_id_17f74902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RMusicPlayer.vue?vue&type=template&id=17f74902& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=template&id=17f74902&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SpriteIcon.vue?vue&type=template&id=3ab652ee&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/SpriteIcon.vue?vue&type=template&id=3ab652ee& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpriteIcon_vue_vue_type_template_id_3ab652ee___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpriteIcon_vue_vue_type_template_id_3ab652ee___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpriteIcon_vue_vue_type_template_id_3ab652ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SpriteIcon.vue?vue&type=template&id=3ab652ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SpriteIcon.vue?vue&type=template&id=3ab652ee&");
 
 
 /***/ }),
@@ -12770,6 +13080,7 @@ var render = function () {
     "button",
     {
       staticClass: "r-button",
+      attrs: { disabled: _vm.disabled },
       on: {
         click: function ($event) {
           $event.preventDefault()
@@ -12986,6 +13297,67 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=template&id=3bfb0a06&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RModal.vue?vue&type=template&id=3bfb0a06& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "fade-fast" } }, [
+    _vm.show !== false
+      ? _c(
+          "div",
+          {
+            staticClass: "r-modal",
+            on: {
+              click: function ($event) {
+                if ($event.target !== $event.currentTarget) {
+                  return null
+                }
+                return _vm.closeModal.apply(null, arguments)
+              },
+            },
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "r-modal__inner" },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "r-modal__close",
+                    on: { click: _vm.closeModal },
+                  },
+                  [_vm._v("×")]
+                ),
+                _vm._v(" "),
+                _vm._t("default"),
+              ],
+              2
+            ),
+          ]
+        )
+      : _vm._e(),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=template&id=17f74902&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RMusicPlayer.vue?vue&type=template&id=17f74902& ***!
@@ -13030,6 +13402,42 @@ var render = function () {
       ]),
     ],
     1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SpriteIcon.vue?vue&type=template&id=3ab652ee&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SpriteIcon.vue?vue&type=template&id=3ab652ee& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      staticClass: "sprite-icon",
+      attrs: {
+        viewBox: "0 0 " + _vm.width + " " + _vm.height,
+        width: _vm.width,
+        height: _vm.height,
+      },
+    },
+    [_c("use", { attrs: { "xlink:href": "/img/sprites.svg#" + _vm.icon } })]
   )
 }
 var staticRenderFns = []
@@ -13268,6 +13676,14 @@ var render = function () {
                     },
                   },
                   [
+                    _c("img", {
+                      staticClass: "skill__image",
+                      attrs: {
+                        src: "/img/" + item.skill.image,
+                        alt: item.skill.name,
+                      },
+                    }),
+                    _vm._v(" "),
                     _c(
                       "span",
                       {
@@ -13344,246 +13760,163 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _c("transition", { attrs: { name: "fade-fast" } }, [
-        _vm.showedSkill !== false || _vm.exportModal
-          ? _c(
-              "div",
-              {
-                staticClass: "modal",
-                on: {
-                  click: function ($event) {
-                    if ($event.target !== $event.currentTarget) {
-                      return null
-                    }
-                    return _vm.closeModal.apply(null, arguments)
-                  },
-                },
-              },
-              [
-                _vm.showedSkill !== false
-                  ? _c("div", { staticClass: "modal__description" }, [
-                      !_vm.showedSkill.rank
-                        ? _c(
-                            "div",
-                            { staticClass: "modal__description__content" },
-                            [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "modal__close",
-                                  on: { click: _vm.closeModal },
-                                },
-                                [_vm._v("×")]
-                              ),
-                              _vm._v(" "),
-                              _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
-                              _vm._v(" "),
-                              _vm.showedSkill.xp !== undefined
-                                ? _c(
-                                    "span",
-                                    { staticClass: "skill__xp" },
-                                    [
-                                      _vm._l(
-                                        _vm.showedSkill.xp,
-                                        function (level, index) {
-                                          return _c("span", { key: index }, [
-                                            _vm._v(_vm._s(level)),
-                                          ])
-                                        }
-                                      ),
-                                      _vm._v(" XP\n                    "),
-                                    ],
-                                    2
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c("div", {
-                                domProps: {
-                                  innerHTML: _vm._s(
-                                    _vm.showedSkill.description
-                                  ),
-                                },
-                              }),
-                            ]
-                          )
-                        : _c(
-                            "div",
-                            { staticClass: "modal__description__content" },
-                            [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "modal__close",
-                                  on: { click: _vm.closeModal },
-                                },
-                                [_vm._v("×")]
-                              ),
-                              _vm._v(" "),
-                              _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "skill__xp" }, [
-                                _vm._v(
-                                  "\n                        " +
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.rank"
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(_vm.showedSkill.rank) +
-                                    "\n                    "
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("dl", [
-                                _vm.showedSkill.description
-                                  ? _c("dt", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("__")(
-                                            "character.panels.skills.description"
-                                          )
-                                        ) + " :"
-                                      ),
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.showedSkill.description
-                                  ? _c("dd", {
-                                      domProps: {
-                                        innerHTML: _vm._s(
-                                          _vm.showedSkill.description
-                                        ),
-                                      },
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.showedSkill.target
-                                  ? _c("dt", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("__")(
-                                            "character.panels.skills.target"
-                                          )
-                                        ) + " :"
-                                      ),
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.showedSkill.target
-                                  ? _c("dd", {
-                                      domProps: {
-                                        innerHTML: _vm._s(
-                                          _vm.showedSkill.target
-                                        ),
-                                      },
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.showedSkill.duration
-                                  ? _c("dt", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("__")(
-                                            "character.panels.skills.duration"
-                                          )
-                                        ) + " :"
-                                      ),
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.showedSkill.duration
-                                  ? _c("dd", {
-                                      domProps: {
-                                        innerHTML: _vm._s(
-                                          _vm.showedSkill.duration
-                                        ),
-                                      },
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.showedSkill.injunction
-                                  ? _c("dt", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("__")(
-                                            "character.panels.skills.injunction"
-                                          )
-                                        ) + " :"
-                                      ),
-                                    ])
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.showedSkill.injunction
-                                  ? _c("dd", {
-                                      domProps: {
-                                        innerHTML: _vm._s(
-                                          _vm.showedSkill.injunction
-                                        ),
-                                      },
-                                    })
-                                  : _vm._e(),
-                              ]),
-                            ]
-                          ),
-                    ])
+      _c(
+        "r-modal",
+        {
+          attrs: { show: _vm.showedSkill !== false },
+          on: { close: _vm.closeModal },
+        },
+        [
+          !_vm.showedSkill.rank
+            ? _c("div", { staticClass: "modal__skill" }, [
+                _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
+                _vm._v(" "),
+                _vm.showedSkill.xp !== undefined
+                  ? _c(
+                      "span",
+                      { staticClass: "modal__xp" },
+                      [
+                        _vm._l(_vm.showedSkill.xp, function (level, index) {
+                          return _c("span", { key: index }, [
+                            _vm._v(_vm._s(level)),
+                          ])
+                        }),
+                        _vm._v(" XP\n            "),
+                      ],
+                      2
+                    )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.exportModal
-                  ? _c("div", { staticClass: "modal__description" }, [
-                      _c(
-                        "div",
-                        { staticClass: "modal__description__content" },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "modal__close",
-                              on: { click: _vm.closeModal },
-                            },
-                            [_vm._v("×")]
-                          ),
-                          _vm._v(" "),
-                          _c("h3", [
-                            _vm._v(_vm._s(_vm._f("__")("resume.export-title"))),
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "r-input",
-                            {
-                              attrs: {
-                                value: _vm.computeTokenUrl,
-                                type: "text",
-                                name: "token",
-                                readonly: "",
-                              },
-                              on: { click: _vm.copyToClipboard },
-                            },
-                            [_vm._v(_vm._s(_vm._f("__")("resume.url")))]
-                          ),
-                          _vm._v(" "),
-                          _c("div", {
-                            staticClass: "clipped",
-                            class: { show: _vm.clipped },
-                            domProps: {
-                              innerHTML: _vm._s(
-                                _vm.$options.filters.__("resume.clipped")
-                              ),
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "advice" }, [
-                            _vm._v(_vm._s(_vm._f("__")("resume.advice"))),
-                          ]),
-                        ],
-                        1
-                      ),
-                    ])
-                  : _vm._e(),
-              ]
-            )
-          : _vm._e(),
-      ]),
+                _c("div", {
+                  domProps: { innerHTML: _vm._s(_vm.showedSkill.description) },
+                }),
+              ])
+            : _c("div", { staticClass: "modal__spell" }, [
+                _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
+                _vm._v(" "),
+                _c("span", { staticClass: "modal__xp" }, [
+                  _vm._v(
+                    _vm._s(_vm._f("__")("character.panels.skills.rank")) +
+                      " " +
+                      _vm._s(_vm.showedSkill.rank)
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("dl", [
+                  _vm.showedSkill.description
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.description")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.description
+                    ? _c("dd", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.showedSkill.description),
+                        },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.target
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.target")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.target
+                    ? _c("dd", {
+                        domProps: { innerHTML: _vm._s(_vm.showedSkill.target) },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.duration
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.duration")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.duration
+                    ? _c("dd", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.showedSkill.duration),
+                        },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.injunction
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.injunction")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.injunction
+                    ? _c("dd", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.showedSkill.injunction),
+                        },
+                      })
+                    : _vm._e(),
+                ]),
+              ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "r-modal",
+        { attrs: { show: _vm.exportModal }, on: { close: _vm.closeModal } },
+        [
+          _c(
+            "div",
+            { staticClass: "modal__export" },
+            [
+              _c("h3", [_vm._v(_vm._s(_vm._f("__")("resume.export-title")))]),
+              _vm._v(" "),
+              _c(
+                "r-input",
+                {
+                  attrs: {
+                    value: _vm.computeTokenUrl,
+                    type: "text",
+                    name: "token",
+                    readonly: "",
+                  },
+                  on: { click: _vm.copyToClipboard },
+                },
+                [_vm._v(_vm._s(_vm._f("__")("resume.url")))]
+              ),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "modal__clipped",
+                class: { show: _vm.clipped },
+                domProps: {
+                  innerHTML: _vm._s(_vm.$options.filters.__("resume.clipped")),
+                },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal__advice" }, [
+                _vm._v(_vm._s(_vm._f("__")("resume.advice"))),
+              ]),
+            ],
+            1
+          ),
+        ]
+      ),
     ],
     1
   )
@@ -13631,7 +13964,18 @@ var render = function () {
                 },
               },
             },
-            [_c("div", [_c("span", [_vm._v(_vm._s(inclination.name))])])]
+            [
+              _c("div", [
+                _c("img", {
+                  attrs: {
+                    src: "/img/" + inclination.image,
+                    alt: inclination.name,
+                  },
+                }),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(inclination.name))]),
+              ]),
+            ]
           )
         }),
         0
@@ -13741,7 +14085,15 @@ var render = function () {
                   },
                 },
               },
-              [_c("div", [_c("span", [_vm._v(_vm._s(race.name))])])]
+              [
+                _c("div", [
+                  _c("img", {
+                    attrs: { src: "/img/" + race.image, alt: race.name },
+                  }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(race.name))]),
+                ]),
+              ]
             )
           }),
           0
@@ -13874,7 +14226,12 @@ var render = function () {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "inclinations-list" },
+            {
+              staticClass: "inclinations-list",
+              class: {
+                "has-spell-tab": _vm.character.inclination === "occult",
+              },
+            },
             [
               _vm._l(_vm.inclinations, function (inclination, key) {
                 return _c(
@@ -13901,8 +14258,7 @@ var render = function () {
                       class: {
                         "is-disabled":
                           _vm.character.skills["occult_weaver"] === undefined &&
-                          _vm.character.skills["occult_invocator"] ===
-                            undefined,
+                          _vm.character.skills["occult_summoner"] === undefined,
                         "is-active": _vm.currentInclination === "spells",
                       },
                       on: {
@@ -13937,354 +14293,356 @@ var render = function () {
             2
           ),
           _vm._v(" "),
-          _c("transition", { attrs: { name: "fade-fast" } }, [
-            _vm.currentInclination !== "spells"
-              ? _c(
-                  "div",
-                  { staticClass: "skills" },
-                  [
-                    _c(
-                      "TransitionGroup",
-                      { attrs: { name: "fade-fast" } },
-                      _vm._l(_vm.inclinations, function (name, key) {
-                        return key === _vm.currentInclination
-                          ? _c(
-                              "ul",
-                              { key: key },
-                              _vm._l(
-                                _vm.inclinations[key].skills,
-                                function (skill, name) {
-                                  return _vm.canSeeSkill(skill)
-                                    ? _c("li", { key: name }, [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "skill__name",
-                                            class: {
-                                              "is-active":
-                                                _vm.showedSkill !== false &&
-                                                _vm.showedSkill.name ===
-                                                  skill.name,
-                                            },
-                                            on: {
-                                              click: function ($event) {
-                                                return _vm.showSkillDescription(
-                                                  skill
-                                                )
-                                              },
+          _vm.currentInclination !== "spells"
+            ? _c(
+                "div",
+                { staticClass: "skills" },
+                [
+                  _c(
+                    "TransitionGroup",
+                    { attrs: { name: "fade-fast" } },
+                    _vm._l(_vm.inclinations, function (name, key) {
+                      return key === _vm.currentInclination
+                        ? _c(
+                            "ul",
+                            { key: key },
+                            _vm._l(
+                              _vm.inclinations[key].skills,
+                              function (skill, name) {
+                                return _vm.canSeeSkill(skill)
+                                  ? _c("li", { key: name }, [
+                                      _c("img", {
+                                        staticClass: "skill__image",
+                                        attrs: {
+                                          src: "/img/" + skill.image,
+                                          alt: skill.name,
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass: "skill__name",
+                                          class: {
+                                            "is-active":
+                                              _vm.showedSkill !== false &&
+                                              _vm.showedSkill.name ===
+                                                skill.name,
+                                          },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.showSkillDescription(
+                                                skill
+                                              )
                                             },
                                           },
-                                          [
-                                            _vm._v(
-                                              "\n                                " +
-                                                _vm._s(skill.name) +
-                                                "\n\n                                "
-                                            ),
-                                            _c(
-                                              "span",
-                                              { staticClass: "skill__xp" },
-                                              [
-                                                _vm._l(
-                                                  skill.xp,
-                                                  function (level, index) {
-                                                    return _c(
-                                                      "span",
-                                                      {
-                                                        key: index,
-                                                        class: {
-                                                          "has-learned-it":
-                                                            (_vm.character
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(skill.name) +
+                                              "\n\n                                    "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "skill__xp" },
+                                            [
+                                              _vm._l(
+                                                skill.xp,
+                                                function (level, index) {
+                                                  return _c(
+                                                    "span",
+                                                    {
+                                                      key: index,
+                                                      class: {
+                                                        "has-learned-it":
+                                                          (_vm.character.skills[
+                                                            skill.inclination +
+                                                              "_" +
+                                                              name
+                                                          ] !== undefined &&
+                                                            _vm.character
                                                               .skills[
                                                               skill.inclination +
                                                                 "_" +
                                                                 name
-                                                            ] !== undefined &&
-                                                              _vm.character
-                                                                .skills[
-                                                                skill.inclination +
-                                                                  "_" +
-                                                                  name
-                                                              ] === index) ||
-                                                            _vm.raceCanLearnIt(
-                                                              skill
-                                                            ),
-                                                        },
+                                                            ] === index) ||
+                                                          _vm.raceCanLearnIt(
+                                                            skill
+                                                          ),
                                                       },
-                                                      [_vm._v(_vm._s(level))]
-                                                    )
-                                                  }
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "strong",
-                                                  {
-                                                    class: {
-                                                      "has-learned-it":
+                                                    },
+                                                    [_vm._v(_vm._s(level))]
+                                                  )
+                                                }
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "strong",
+                                                {
+                                                  class: {
+                                                    "has-learned-it":
+                                                      _vm.character.skills[
+                                                        skill.inclination +
+                                                          "_" +
+                                                          name
+                                                      ] !== undefined ||
+                                                      _vm.raceCanLearnIt(skill),
+                                                  },
+                                                },
+                                                [_vm._v("XP")]
+                                              ),
+                                            ],
+                                            2
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "skill__checkbox" },
+                                        [
+                                          _vm.raceCanLearnIt(skill)
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "checkbox race-can",
+                                                },
+                                                [_c("span")]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.raceCannotLearnIt(skill) ||
+                                          (skill.specialized &&
+                                            key !== _vm.character.inclination &&
+                                            !_vm.raceCanLearnIt(skill))
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "checkbox race-cannot",
+                                                },
+                                                [_c("span")]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.character.skills[
+                                            skill.inclination + "_" + name
+                                          ] !== undefined
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass: "checkbox",
+                                                  class: {
+                                                    "is-checked":
+                                                      _vm.character.skills[
+                                                        skill.inclination +
+                                                          "_" +
+                                                          name
+                                                      ] ===
+                                                      skill.xp.length - 1,
+                                                  },
+                                                  on: {
+                                                    click: function ($event) {
+                                                      return _vm.learnSkill(
+                                                        skill,
                                                         _vm.character.skills[
                                                           skill.inclination +
                                                             "_" +
                                                             name
-                                                        ] !== undefined ||
-                                                        _vm.raceCanLearnIt(
-                                                          skill
-                                                        ),
+                                                        ] + 1
+                                                      )
+                                                    },
+                                                    contextmenu: function (
+                                                      $event
+                                                    ) {
+                                                      $event.preventDefault()
+                                                      return _vm.learnSkill(
+                                                        skill,
+                                                        _vm.character.skills[
+                                                          skill.inclination +
+                                                            "_" +
+                                                            name
+                                                        ] - 1
+                                                      )
                                                     },
                                                   },
-                                                  [_vm._v("XP")]
-                                                ),
-                                              ],
-                                              2
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "skill__checkbox" },
-                                          [
-                                            _vm.raceCanLearnIt(skill)
-                                              ? _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "checkbox race-can",
-                                                  },
-                                                  [_c("span")]
-                                                )
-                                              : _vm._e(),
-                                            _vm._v(" "),
+                                                },
+                                                [
+                                                  _c("span", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.character.skills[
+                                                          skill.inclination +
+                                                            "_" +
+                                                            name
+                                                        ] + 1
+                                                      )
+                                                    ),
+                                                  ]),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          !(
                                             _vm.raceCannotLearnIt(skill) ||
                                             (skill.specialized &&
                                               key !==
                                                 _vm.character.inclination &&
                                               !_vm.raceCanLearnIt(skill))
-                                              ? _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "checkbox race-cannot",
-                                                  },
-                                                  [_c("span")]
-                                                )
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            _vm.character.skills[
-                                              skill.inclination + "_" + name
-                                            ] !== undefined
-                                              ? _c(
-                                                  "div",
-                                                  {
-                                                    staticClass: "checkbox",
-                                                    class: {
-                                                      "is-checked":
-                                                        _vm.character.skills[
-                                                          skill.inclination +
-                                                            "_" +
-                                                            name
-                                                        ] ===
-                                                        skill.xp.length - 1,
+                                          ) &&
+                                          _vm.character.skills[
+                                            skill.inclination + "_" + name
+                                          ] === undefined &&
+                                          !(
+                                            _vm.raceCanLearnIt(skill) ||
+                                            _vm.raceCannotLearnIt(skill)
+                                          )
+                                            ? _c(
+                                                "div",
+                                                {
+                                                  staticClass: "checkbox",
+                                                  on: {
+                                                    click: function ($event) {
+                                                      return _vm.learnSkill(
+                                                        skill,
+                                                        0
+                                                      )
                                                     },
-                                                    on: {
-                                                      click: function ($event) {
-                                                        return _vm.learnSkill(
-                                                          skill,
-                                                          _vm.character.skills[
-                                                            skill.inclination +
-                                                              "_" +
-                                                              name
-                                                          ] + 1
-                                                        )
-                                                      },
-                                                      contextmenu: function (
-                                                        $event
-                                                      ) {
-                                                        $event.preventDefault()
-                                                        return _vm.learnSkill(
-                                                          skill,
-                                                          _vm.character.skills[
-                                                            skill.inclination +
-                                                              "_" +
-                                                              name
-                                                          ] - 1
-                                                        )
-                                                      },
+                                                    contextmenu: function (
+                                                      $event
+                                                    ) {
+                                                      $event.preventDefault()
                                                     },
                                                   },
-                                                  [
-                                                    _c("span", [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          _vm.character.skills[
-                                                            skill.inclination +
-                                                              "_" +
-                                                              name
-                                                          ] + 1
-                                                        )
-                                                      ),
-                                                    ]),
-                                                  ]
-                                                )
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            !(
-                                              _vm.raceCannotLearnIt(skill) ||
-                                              (skill.specialized &&
-                                                key !==
-                                                  _vm.character.inclination &&
-                                                !_vm.raceCanLearnIt(skill))
-                                            ) &&
-                                            _vm.character.skills[
-                                              skill.inclination + "_" + name
-                                            ] === undefined &&
-                                            !(
-                                              _vm.raceCanLearnIt(skill) ||
-                                              _vm.raceCannotLearnIt(skill)
-                                            )
-                                              ? _c(
-                                                  "div",
-                                                  {
-                                                    staticClass: "checkbox",
-                                                    on: {
-                                                      click: function ($event) {
-                                                        return _vm.learnSkill(
-                                                          skill,
-                                                          0
-                                                        )
-                                                      },
-                                                      contextmenu: function (
-                                                        $event
-                                                      ) {
-                                                        $event.preventDefault()
-                                                      },
-                                                    },
-                                                  },
-                                                  [_c("span")]
-                                                )
-                                              : _vm._e(),
-                                          ]
-                                        ),
-                                      ])
-                                    : _vm._e()
-                                }
-                              ),
-                              0
-                            )
-                          : _vm._e()
+                                                },
+                                                [_c("span")]
+                                              )
+                                            : _vm._e(),
+                                        ]
+                                      ),
+                                    ])
+                                  : _vm._e()
+                              }
+                            ),
+                            0
+                          )
+                        : _vm._e()
+                    }),
+                    0
+                  ),
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.currentInclination === "spells"
+            ? _c(
+                "div",
+                { staticClass: "spells" },
+                _vm._l(_vm.spells, function (spells, rank) {
+                  return _c("div", { key: rank, staticClass: "spells__rank" }, [
+                    _c("h3", { staticClass: "spells__rank__title" }, [
+                      _vm._v(
+                        _vm._s(_vm._f("__")("character.panels.skills.rank")) +
+                          " " +
+                          _vm._s(rank)
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      _vm._l(spells, function (spell) {
+                        return _c("li", [
+                          _c("img", {
+                            staticClass: "spell__image",
+                            attrs: {
+                              src: "/img/" + spell.image,
+                              alt: spell.name,
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "spell__name",
+                              class: {
+                                "is-active":
+                                  _vm.showedSkill !== false &&
+                                  _vm.showedSkill.name === spell.name,
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.showSkillDescription(spell)
+                                },
+                              },
+                            },
+                            [_vm._v(_vm._s(spell.name))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "counter" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "counter__minus",
+                                on: {
+                                  click: function ($event) {
+                                    $event.preventDefault()
+                                    return _vm.decrementSpell(spell)
+                                  },
+                                },
+                              },
+                              [_c("span", [_vm._v("<")])]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "counter__number",
+                                class: {
+                                  "is-active":
+                                    _vm.character.spells[spell.id] !==
+                                      undefined &&
+                                    _vm.character.spells[spell.id] > 0,
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.character.spells[spell.id] ===
+                                      undefined ||
+                                      _vm.character.spells[spell.id] === 0
+                                      ? 0
+                                      : _vm.character.spells[spell.id]
+                                  )
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "counter__plus",
+                                on: {
+                                  click: function ($event) {
+                                    $event.preventDefault()
+                                    return _vm.incrementSpell(spell)
+                                  },
+                                },
+                              },
+                              [_c("span", [_vm._v(">")])]
+                            ),
+                          ]),
+                        ])
                       }),
                       0
                     ),
-                  ],
-                  1
-                )
-              : _vm._e(),
-          ]),
-          _vm._v(" "),
-          _c("transition", { attrs: { name: "fade-fast" } }, [
-            _vm.currentInclination === "spells"
-              ? _c(
-                  "div",
-                  { staticClass: "spells" },
-                  _vm._l(_vm.spells, function (spells, rank) {
-                    return _c(
-                      "div",
-                      { key: rank, staticClass: "spells__rank" },
-                      [
-                        _c("h3", { staticClass: "spells__rank__title" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("__")("character.panels.skills.rank")
-                            ) +
-                              " " +
-                              _vm._s(rank)
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "ul",
-                          _vm._l(spells, function (spell) {
-                            return _c("li", [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "spell__name",
-                                  class: {
-                                    "is-active":
-                                      _vm.showedSkill !== false &&
-                                      _vm.showedSkill.name === spell.name,
-                                  },
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.showSkillDescription(spell)
-                                    },
-                                  },
-                                },
-                                [_vm._v(_vm._s(spell.name))]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "counter" }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "counter__minus",
-                                    on: {
-                                      click: function ($event) {
-                                        $event.preventDefault()
-                                        return _vm.decrementSpell(spell)
-                                      },
-                                    },
-                                  },
-                                  [_c("span", [_vm._v("<")])]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "counter__number",
-                                    class: {
-                                      "is-active":
-                                        _vm.character.spells[spell.id] !==
-                                          undefined &&
-                                        _vm.character.spells[spell.id] > 0,
-                                    },
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.character.spells[spell.id] ===
-                                          undefined ||
-                                          _vm.character.spells[spell.id] === 0
-                                          ? 0
-                                          : _vm.character.spells[spell.id]
-                                      )
-                                    ),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "counter__plus",
-                                    on: {
-                                      click: function ($event) {
-                                        $event.preventDefault()
-                                        return _vm.incrementSpell(spell)
-                                      },
-                                    },
-                                  },
-                                  [_c("span", [_vm._v(">")])]
-                                ),
-                              ]),
-                            ])
-                          }),
-                          0
-                        ),
-                      ]
-                    )
-                  }),
-                  0
-                )
-              : _vm._e(),
-          ]),
+                  ])
+                }),
+                0
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "div",
@@ -14337,184 +14695,122 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _c("transition", { attrs: { name: "fade-fast" } }, [
-        _vm.showedSkill !== false
-          ? _c(
-              "div",
-              {
-                staticClass: "modal",
-                on: {
-                  click: function ($event) {
-                    if ($event.target !== $event.currentTarget) {
-                      return null
-                    }
-                    return _vm.closeModal.apply(null, arguments)
-                  },
-                },
-              },
-              [
-                _c("div", { staticClass: "modal__description" }, [
-                  !_vm.showedSkill.rank
-                    ? _c(
-                        "div",
-                        { staticClass: "modal__description__content" },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "modal__close",
-                              on: { click: _vm.closeModal },
-                            },
-                            [_vm._v("×")]
-                          ),
-                          _vm._v(" "),
-                          _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
-                          _vm._v(" "),
-                          _vm.showedSkill.xp !== undefined
-                            ? _c(
-                                "span",
-                                { staticClass: "skill__xp" },
-                                [
-                                  _vm._l(
-                                    _vm.showedSkill.xp,
-                                    function (level, index) {
-                                      return _c("span", { key: index }, [
-                                        _vm._v(_vm._s(level)),
-                                      ])
-                                    }
-                                  ),
-                                  _vm._v(" XP\n                    "),
-                                ],
-                                2
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("div", {
-                            domProps: {
-                              innerHTML: _vm._s(_vm.showedSkill.description),
-                            },
-                          }),
-                        ]
-                      )
-                    : _c(
-                        "div",
-                        { staticClass: "modal__description__content" },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "modal__close",
-                              on: { click: _vm.closeModal },
-                            },
-                            [_vm._v("×")]
-                          ),
-                          _vm._v(" "),
-                          _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "skill__xp" }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(
-                                  _vm._f("__")("character.panels.skills.rank")
-                                ) +
-                                " " +
-                                _vm._s(_vm.showedSkill.rank) +
-                                "\n                    "
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("dl", [
-                            _vm.showedSkill.description
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.description"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.description
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      _vm.showedSkill.description
-                                    ),
-                                  },
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.target
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.target"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.target
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(_vm.showedSkill.target),
-                                  },
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.duration
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.duration"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.duration
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(_vm.showedSkill.duration),
-                                  },
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.injunction
-                              ? _c("dt", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("__")(
-                                        "character.panels.skills.injunction"
-                                      )
-                                    ) + " :"
-                                  ),
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.showedSkill.injunction
-                              ? _c("dd", {
-                                  domProps: {
-                                    innerHTML: _vm._s(
-                                      _vm.showedSkill.injunction
-                                    ),
-                                  },
-                                })
-                              : _vm._e(),
-                          ]),
-                        ]
-                      ),
+      _c(
+        "r-modal",
+        {
+          attrs: { show: _vm.showedSkill !== false },
+          on: { close: _vm.closeModal },
+        },
+        [
+          !_vm.showedSkill.rank
+            ? _c("div", { staticClass: "modal__skill" }, [
+                _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
+                _vm._v(" "),
+                _vm.showedSkill.xp !== undefined
+                  ? _c(
+                      "span",
+                      { staticClass: "modal__xp" },
+                      [
+                        _vm._l(_vm.showedSkill.xp, function (level, index) {
+                          return _c("span", { key: index }, [
+                            _vm._v(_vm._s(level)),
+                          ])
+                        }),
+                        _vm._v(" XP\n                "),
+                      ],
+                      2
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", {
+                  domProps: { innerHTML: _vm._s(_vm.showedSkill.description) },
+                }),
+              ])
+            : _c("div", { staticClass: "modal__spell" }, [
+                _c("h3", [_vm._v(_vm._s(_vm.showedSkill.name))]),
+                _vm._v(" "),
+                _c("span", { staticClass: "modal__xp" }, [
+                  _vm._v(
+                    _vm._s(_vm._f("__")("character.panels.skills.rank")) +
+                      " " +
+                      _vm._s(_vm.showedSkill.rank)
+                  ),
                 ]),
-              ]
-            )
-          : _vm._e(),
-      ]),
+                _vm._v(" "),
+                _c("dl", [
+                  _vm.showedSkill.description
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.description")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.description
+                    ? _c("dd", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.showedSkill.description),
+                        },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.target
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.target")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.target
+                    ? _c("dd", {
+                        domProps: { innerHTML: _vm._s(_vm.showedSkill.target) },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.duration
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.duration")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.duration
+                    ? _c("dd", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.showedSkill.duration),
+                        },
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.injunction
+                    ? _c("dt", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("__")("character.panels.skills.injunction")
+                          ) + " :"
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.showedSkill.injunction
+                    ? _c("dd", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.showedSkill.injunction),
+                        },
+                      })
+                    : _vm._e(),
+                ]),
+              ]),
+        ]
+      ),
     ],
     1
   )
@@ -29628,7 +29924,9 @@ var map = {
 	"./components/RButton.vue": "./resources/js/components/RButton.vue",
 	"./components/RCookieBar.vue": "./resources/js/components/RCookieBar.vue",
 	"./components/RInput.vue": "./resources/js/components/RInput.vue",
-	"./components/RMusicPlayer.vue": "./resources/js/components/RMusicPlayer.vue"
+	"./components/RModal.vue": "./resources/js/components/RModal.vue",
+	"./components/RMusicPlayer.vue": "./resources/js/components/RMusicPlayer.vue",
+	"./components/SpriteIcon.vue": "./resources/js/components/SpriteIcon.vue"
 };
 
 

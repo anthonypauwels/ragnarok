@@ -1,9 +1,15 @@
 export default class UrlGenerator
 {
+    /** @type {string} */
     baseUrl = '';
 
+    /** @type {{}} */
     routes = {};
 
+    /**
+     *
+     * @param base_url
+     */
     constructor(base_url = '')
     {
         if ( base_url.charAt( base_url.length - 1 ) === '/' ) {
@@ -13,6 +19,11 @@ export default class UrlGenerator
         this.baseUrl = base_url;
     }
 
+    /**
+     *
+     * @param routes
+     * @returns {UrlGenerator}
+     */
     setRoutes(routes)
     {
         this.routes = routes;
@@ -20,6 +31,13 @@ export default class UrlGenerator
         return this;
     }
 
+    /**
+     *
+     * @param name
+     * @param parameters
+     * @param absolute
+     * @returns {string|*}
+     */
     route(name, parameters = {}, absolute = false)
     {
         let route = this.routes[ name ];
@@ -39,6 +57,13 @@ export default class UrlGenerator
         return route;
     }
 
+    /**
+     *
+     * @param path
+     * @param query_parameters
+     * @param secure
+     * @returns {string}
+     */
     url(path, query_parameters = {}, secure = false)
     {
         if ( path.charAt( 0 ) === '/' ) {
@@ -62,21 +87,46 @@ export default class UrlGenerator
         return url;
     }
 
+    /**
+     *
+     * @param name
+     * @param parameters
+     * @returns {string}
+     */
     secure(name, parameters = {})
     {
         return this.secureUrl( this.route( name, parameters, false ), true );
     }
 
+    /**
+     *
+     * @param path
+     * @param query_parameters
+     * @returns {string}
+     */
     secureUrl(path, query_parameters = {})
     {
         return this.url( path, query_parameters, true );
     }
 
+    /**
+     *
+     * @param route
+     * @returns {boolean}
+     * @private
+     */
     _hasParameters(route)
     {
         return route.match(/{(.*?)(\?)?}/) !== null;
     }
 
+    /**
+     *
+     * @param route
+     * @param parameters
+     * @returns {*}
+     * @private
+     */
     _replaceParameters(route, parameters = {})
     {
         route = route.replace(/{(.*?)(\?)?}/, function ( m, p, o ) {

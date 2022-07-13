@@ -10,7 +10,8 @@ use Pangu\Common\JavaScript\JavaScript;
  * @param array $which
  * @return array
  */
-if ( !function_exists( 'export_routes' ) ) {
+if ( !function_exists( 'export_routes' ) )
+{
     function export_routes(array $which = []): array
     {
         $routes = collect( Router::getRoutes()->getRoutesByName() );
@@ -33,11 +34,14 @@ if ( !function_exists( 'export_routes' ) ) {
  * @param string|null $namespace
  * @return JavaScript
  */
-function javascript(mixed $key = null, mixed $value = null, ?string $namespace = null):JavaScript
+if ( !function_exists( 'javascript' ) )
 {
-    if ( $key ) {
-        return JavaScript::getInstance()->put( $key, $value, $namespace );
-    }
+    function javascript(mixed $key = null, mixed $value = null, ?string $namespace = null):JavaScript
+    {
+        if ( $key ) {
+            return JavaScript::getInstance()->put( $key, $value, $namespace );
+        }
 
-    return JavaScript::getInstance();
+        return JavaScript::getInstance();
+    }
 }

@@ -7,12 +7,12 @@
                 <span class="character-xp">{{ character.xpSpend }} XP</span>
             </div>
 
-            <div class="inclinations-list">
+            <div class="inclinations-list" :class="{'has-spell-tab': character.inclination === 'occult'}">
                 <button v-for="(inclination, key) in inclinations" class="item" @click.prevent="selectInclination( key )"
                         :class="{'is-active': currentInclination === key }">
                     <span>{{ inclination.name }}</span>
                 </button>
-                <button class="item" :class="{'is-disabled': character.skills[ 'occult_weaver' ] === undefined && character.skills[ 'occult_invocator' ] === undefined, 'is-active': currentInclination === 'spells'}"
+                <button class="item" :class="{'is-disabled': character.skills[ 'occult_weaver' ] === undefined && character.skills[ 'occult_summoner' ] === undefined, 'is-active': currentInclination === 'spells'}"
                         @click.prevent="selectInclination('spells')" v-if="character.inclination === 'occult'">
                     <span>{{ 'character.panels.skills.spells' | __ }}</span>
                 </button>
@@ -22,11 +22,13 @@
                 <span class="item item--right character-race" v-if="races[ character.race ] !== undefined">{{ races[ character.race ].name }}</span>
             </div>
 
-            <transition name="fade-fast">
+<!--            <transition name="fade-fast">-->
                 <div class="skills" v-if="currentInclination !== 'spells'">
                     <TransitionGroup name="fade-fast">
                         <ul v-for="(name, key) in inclinations" v-if="key === currentInclination" :key="key">
                             <li v-for="( skill, name ) in inclinations[ key ].skills" :key="name" v-if="canSeeSkill( skill )">
+                                <img class="skill__image" :src="'/img/' + skill.image" :alt="skill.name">
+
                                 <span class="skill__name" @click="showSkillDescription( skill )" :class="{'is-active': showedSkill !== false && showedSkill.name === skill.name}">
                                     {{ skill.name }}
 
@@ -63,15 +65,17 @@
                         </ul>
                     </TransitionGroup>
                 </div>
-            </transition>
+<!--            </transition>-->
 
-            <transition name="fade-fast">
+<!--            <transition name="fade-fast">-->
                 <div class="spells" v-if="currentInclination === 'spells'">
                     <div class="spells__rank" v-for="(spells, rank) in spells" :key="rank">
                         <h3 class="spells__rank__title">{{ 'character.panels.skills.rank' | __ }} {{ rank }}</h3>
 
                         <ul>
                             <li v-for="spell in spells">
+                                <img class="spell__image" :src="'/img/' + spell.image" :alt="spell.name">
+
                                 <span class="spell__name" @click="showSkillDescription( spell )" :class="{'is-active': showedSkill !== false && showedSkill.name === spell.name}">{{ spell.name }}</span>
 
                                 <div class="counter">
@@ -83,7 +87,7 @@
                         </ul>
                     </div>
                 </div>
-            </transition>
+<!--            </transition>-->
 
             <div class="reset-skills-link" @click.prevent="reset">{{ 'character.panels.skills.reset' | __ }}</div>
 
@@ -94,62 +98,60 @@
             </transition>
         </div>
 
-        <transition name="fade-fast">
-            <div class="modal" v-if="showedSkill !== false" @click.self="closeModal">
-                <div class="modal__description">
-                    <div class="modal__description__content" v-if="!showedSkill.rank">
-                        <button class="modal__close" @click="closeModal">&times;</button>
+        <r-modal :show="showedSkill !== false" @close="closeModal">
+            <div class="modal__skill" v-if="!showedSkill.rank">
+                <h3>{{ showedSkill.name }}</h3>
 
-                        <h3>{{ showedSkill.name }}</h3>
+                <span class="modal__xp" v-if="showedSkill.xp !== undefined">
+                    <span v-for="(level, index) in showedSkill.xp" :key="index">{{ level }}</span> XP
+                </span>
 
-                        <span class="skill__xp" v-if="showedSkill.xp !== undefined">
-                            <span v-for="(level, index) in showedSkill.xp" :key="index">{{ level }}</span> XP
-                        </span>
-
-                        <div v-html="showedSkill.description"></div>
-                    </div>
-
-                    <div class="modal__description__content" v-else>
-                        <button class="modal__close" @click="closeModal">&times;</button>
-
-                        <h3>{{ showedSkill.name }}</h3>
-
-                        <span class="skill__xp">
-                            {{ 'character.panels.skills.rank' | __ }} {{ showedSkill.rank }}
-                        </span>
-
-                        <dl>
-                            <dt v-if="showedSkill.description">{{ 'character.panels.skills.description' | __ }} :</dt>
-                            <dd v-if="showedSkill.description" v-html="showedSkill.description"></dd>
-
-                            <dt v-if="showedSkill.target">{{ 'character.panels.skills.target' | __ }} :</dt>
-                            <dd v-if="showedSkill.target" v-html="showedSkill.target"></dd>
-
-                            <dt v-if="showedSkill.duration">{{ 'character.panels.skills.duration' | __ }} :</dt>
-                            <dd v-if="showedSkill.duration" v-html="showedSkill.duration"></dd>
-
-                            <dt v-if="showedSkill.injunction">{{ 'character.panels.skills.injunction' | __ }} :</dt>
-                            <dd v-if="showedSkill.injunction" v-html="showedSkill.injunction"></dd>
-                        </dl>
-                    </div>
-                </div>
+                <div v-html="showedSkill.description"></div>
             </div>
-        </transition>
+
+            <div class="modal__spell" v-else>
+                <h3>{{ showedSkill.name }}</h3>
+
+                <span class="modal__xp">{{ 'character.panels.skills.rank' | __ }} {{ showedSkill.rank }}</span>
+
+                <dl>
+                    <dt v-if="showedSkill.description">{{ 'character.panels.skills.description' | __ }} :</dt>
+                    <dd v-if="showedSkill.description" v-html="showedSkill.description"></dd>
+
+                    <dt v-if="showedSkill.target">{{ 'character.panels.skills.target' | __ }} :</dt>
+                    <dd v-if="showedSkill.target" v-html="showedSkill.target"></dd>
+
+                    <dt v-if="showedSkill.duration">{{ 'character.panels.skills.duration' | __ }} :</dt>
+                    <dd v-if="showedSkill.duration" v-html="showedSkill.duration"></dd>
+
+                    <dt v-if="showedSkill.injunction">{{ 'character.panels.skills.injunction' | __ }} :</dt>
+                    <dd v-if="showedSkill.injunction" v-html="showedSkill.injunction"></dd>
+                </dl>
+            </div>
+        </r-modal>
     </div>
 </template>
 
 <script>
+import RModal from "../components/RModal";
+
 export default {
     name: "panel-skills",
 
-    props: {
+    components: {
+        RModal,
+    },
+
+    props:
+    {
         character: {
             type: Object,
             required: true,
         }
     },
 
-    data: () => {
+    data()
+    {
         return {
             showUnavailableSkills: false,
             showedSkill: false,
@@ -160,7 +162,8 @@ export default {
         }
     },
 
-    methods: {
+    methods:
+    {
         selectInclination(name)
         {
             this.currentInclination = name;
@@ -198,7 +201,7 @@ export default {
             if ( level === -1 || skill.xp.length <= level || level >= 2 && this.hasMaxSkillsForOthersInclinations() ) {
                 this.$delete( this.character.skills, skill.inclination + '_' + skill.id );
 
-                if ( skill.inclination + '_' + skill.id === 'occult_weaver' || skill.inclination + '_' + skill.id === 'occult_invocator' ) {
+                if ( skill.inclination + '_' + skill.id === 'occult_weaver' || skill.inclination + '_' + skill.id === 'occult_summoner' ) {
                     this.character.spells = {};
                 }
             } else if ( skill.inclination !== this.character.inclination && !this.hasMaxSkillsForOthersInclinations() || skill.inclination === this.character.inclination ) {
@@ -277,7 +280,8 @@ export default {
         }
     },
 
-    created() {
+    created()
+    {
         this.inclinations = window.__app.inclinations;
         this.spells = window.__app.spells;
         this.races = window.__app.races;
@@ -298,10 +302,6 @@ export default {
             max-width: 940px;
             width: 100%;
             margin: auto;
-
-            @include min-md {
-
-            }
 
             .character-xp {
                 font-size: 22px;
@@ -342,16 +342,27 @@ export default {
                 }
 
                 &:before {
-                    content: '';
                     border-bottom: 1px solid #66583C;
                     width: 100%;
                     position: absolute;
                     bottom: 49%;
                     left: 0;
                     background-color: #66583C;
+                }
 
-                    @media (min-width: 566px) {
-                        content: none;
+                &:not(.has-spell-tab) {
+                    &:before {
+                        @media screen and (max-width: 468px) {
+                            content: '';
+                        }
+                    }
+                }
+
+                &.has-spell-tab {
+                    &:before {
+                        @media screen and (max-width: 566px) {
+                            content: '';
+                        }
                     }
                 }
 
@@ -499,6 +510,12 @@ export default {
                     }
                 }
 
+                .skill__image {
+                    width: 25px;
+                    margin-right: 5px;
+                    top: 5px;
+                }
+
                 .skill__name {
                     color: white;
                     transition: all .2s ease-in-out;
@@ -578,6 +595,12 @@ export default {
                                 width: calc(50% - 20px);
                             }
 
+                            .spell__image {
+                                width: 25px;
+                                margin-right: 5px;
+                                top: 5px;
+                            }
+
                             .spell__name {
                                 font-size: 16px;
                                 transition: all .2s ease-in-out;
@@ -610,102 +633,43 @@ export default {
             }
         }
 
-        .modal {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-
-            &__close {
-                position: absolute;
-                top: 12px;
-                left: 10px;
-                color: #808080;
+        .r-modal {
+            h3 {
+                font-weight: bold;
                 font-size: 26px;
-                background-color: transparent;
-                border: 0;
-                cursor: pointer;
-                z-index: 10;
-            }
-
-            &__description {
-                background-color: rgba(0, 0, 0, 0.9);
-                color: white;
-                padding: 20px;
-                position: fixed;
-                width: 90%;
-                top: 60%;
-                left: 50%;
-                transform: translate(-50%, -65%);
+                color: #ffd073;
+                text-align: center;
+                font-family: 'Della Respira', serif;
 
                 @include min-md {
-                    width: 100%;
-                    max-width: 760px;
-                    top: 60%;
-                    left: 50%;
-                    transform: translate(-50%, -65%);
+                    font-size: 20px;
+                }
+            }
+
+            .modal__xp {
+                position: absolute;
+                right: 10px;
+                top: 5px;
+                color: #808080;
+
+                span + span {
+                    &:before {
+                        content: '/';
+                        color: #808080;
+                    }
+                }
+            }
+
+            dl {
+                dt {
+                    color: #ffd073;
+                    float: left;
+                    width: 120px;
                 }
 
-                &__content {
-                    padding: 10px;
-                    line-height: 36px;
-                    font-size: 20px;
-
-                    @include min-md {
-                        font-size: 18px;
-                    }
-
-                    h3 {
-                        font-weight: bold;
-                        font-size: 26px;
-                        color: #ffd073;
-                        text-align: center;
-                        font-family: 'Della Respira', serif;
-
-                        @include min-md {
-                            font-size: 20px;
-                        }
-                    }
-
-                    .skill__xp {
-                        position: absolute;
-                        right: 10px;
-                        top: 5px;
-                        color: #808080;
-
-                        span + span {
-                            &:before {
-                                content: '/';
-                                color: #808080;
-                            }
-                        }
-                    }
-
-                    &:before {
-                        content: '';
-                        position: fixed;
-                        top: 10px;
-                        left: 10px;
-                        right: 10px;
-                        bottom: 10px;
-                        pointer-events: none;
-                        border: 1px solid #66583c;
-                    }
-
-                    dl {
-                        dt {
-                            color: #ffd073;
-                            float: left;
-                            width: 120px;
-                        }
-
-                        dd {
-                            margin-left: 130px;
-                            margin-bottom: 10px;
-                        }
-                    }
+                dd {
+                    margin-left: 130px;
+                    margin-bottom: 10px;
                 }
             }
         }
