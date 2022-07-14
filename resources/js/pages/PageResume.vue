@@ -15,7 +15,7 @@
                 <div class="skill" v-else @click="e => showSkillDescription( item.skill, e.target )">
                     <img class="skill__image" :src="'/img/' + item.skill.image" :alt="item.skill.name">
                     <span class="skill__name" :class="{'is-active': showedSkill !== false && showedSkill.name === item.skill.name}">{{ item.label }}</span>
-                    <span class="skill__xp" v-if="item.xp">{{ item.xp }} XP</span> <span v-if="item.rank" class="skill__count">({{ item.rank }} * {{ item.count }})</span>
+                    <span class="skill__xp">{{ item.xp }} XP</span> <span v-if="item.count" class="skill__count">x {{ item.count }}</span>
                 </div>
             </li>
         </ul>
@@ -181,8 +181,10 @@ export default {
                 skills_by_inclinations[ inclination ] = [];
             }
 
+            const skill = this.inclinations[ inclination ].skills[ skill_name ];
+
             skills_by_inclinations[ inclination ].push( skill_name );
-            skills_map[ skill_name ] = xp_index;
+            skills_map[ skill_name ] = skill.xp[ xp_index ];
         }
 
         const skillsNameByRace = Object.keys( this.races[ this.character.race ].can );
@@ -197,7 +199,7 @@ export default {
                             }
 
                             skills_by_inclinations[ inclination_name ].push( skill_name );
-                            skills_map[ skill_name ] = -1;
+                            skills_map[ skill_name ] = 0;
 
                             continue loop;
                         }
@@ -214,8 +216,7 @@ export default {
             } );
 
             skills.forEach( skill_name => {
-                const xp_index = skills_map[ skill_name ];
-                const xp = xp_index === -1 ? 0 : this.inclinations[ inclination_name ].skills[ skill_name ].xp[ xp_index ]
+                const xp = skills_map[ skill_name ];
 
                 const skill = this.inclinations[ inclination_name ].skills[ skill_name ];
 
@@ -243,15 +244,13 @@ export default {
 
             Object.entries( this.character.spells ).forEach( ( [ spell_name, count ] ) => {
                 const spell = spells[ spell_name ];
-                const xp = count * spell.rank;
 
-                if ( xp ) {
+                if ( count ) {
                     table.push( {
                         skill: spell,
                         name: spell_name,
                         label: spell.name,
-                        xp,
-                        rank: spell.rank,
+                        xp: spell.rank,
                         count,
                     } );
                 }
@@ -348,7 +347,7 @@ export default {
                 &__count {
                     font-size: 16px;
                     color: #808080;
-                    top: -2px;
+                    top: -6px;
                 }
             }
         }

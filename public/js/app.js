@@ -3083,8 +3083,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         skills_by_inclinations[inclination] = [];
       }
 
+      var skill = this.inclinations[inclination].skills[skill_name];
       skills_by_inclinations[inclination].push(skill_name);
-      skills_map[skill_name] = xp_index;
+      skills_map[skill_name] = skill.xp[xp_index];
     }
 
     var skillsNameByRace = Object.keys(this.races[this.character.race].can);
@@ -3099,7 +3100,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           for (var _i3 = 0, _Object$entries3 = Object.entries(_inclination.skills); _i3 < _Object$entries3.length; _i3++) {
             var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
                 _key = _Object$entries3$_i[0],
-                skill = _Object$entries3$_i[1];
+                _skill = _Object$entries3$_i[1];
 
             if (_key === skill_name && skills_map[skill_name] === undefined) {
               if (skills_by_inclinations[inclination_name] === undefined) {
@@ -3107,7 +3108,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
               }
 
               skills_by_inclinations[inclination_name].push(skill_name);
-              skills_map[skill_name] = -1;
+              skills_map[skill_name] = 0;
               continue loop;
             }
           }
@@ -3125,8 +3126,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         title: _this2.inclinations[inclination_name].name_long
       });
       skills.forEach(function (skill_name) {
-        var xp_index = skills_map[skill_name];
-        var xp = xp_index === -1 ? 0 : _this2.inclinations[inclination_name].skills[skill_name].xp[xp_index];
+        var xp = skills_map[skill_name];
         var skill = _this2.inclinations[inclination_name].skills[skill_name];
         table.push({
           skill: skill,
@@ -3153,15 +3153,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             count = _ref4[1];
 
         var spell = spells[spell_name];
-        var xp = count * spell.rank;
 
-        if (xp) {
+        if (count) {
           table.push({
             skill: spell,
             name: spell_name,
             label: spell.name,
-            xp: xp,
-            rank: spell.rank,
+            xp: spell.rank,
             count: count
           });
         }
@@ -13757,21 +13755,13 @@ var render = function () {
                       [_vm._v(_vm._s(item.label))]
                     ),
                     _vm._v(" "),
-                    item.xp
-                      ? _c("span", { staticClass: "skill__xp" }, [
-                          _vm._v(_vm._s(item.xp) + " XP"),
-                        ])
-                      : _vm._e(),
+                    _c("span", { staticClass: "skill__xp" }, [
+                      _vm._v(_vm._s(item.xp) + " XP"),
+                    ]),
                     _vm._v(" "),
-                    item.rank
+                    item.count
                       ? _c("span", { staticClass: "skill__count" }, [
-                          _vm._v(
-                            "(" +
-                              _vm._s(item.rank) +
-                              " * " +
-                              _vm._s(item.count) +
-                              ")"
-                          ),
+                          _vm._v("x " + _vm._s(item.count)),
                         ])
                       : _vm._e(),
                   ]
