@@ -21,7 +21,7 @@
             'name_long' => "Penchant pour l'Occulte",
             'name_abr' => "Occulte",
             'description' => "Les personnages ayant un penchant pour l'Occulte pratique l'art de la magie et de l'alchimie, pouvant invoquer des créatures d'une autre dimension et lancer de puissants rituels.",
-            'image' => 'icons/magic-palm.svg',
+            'image' => 'icons/sheikah-eye.svg',
         ],
 
         'shadow' => [

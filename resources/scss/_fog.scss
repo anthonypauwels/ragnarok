@@ -3,17 +3,17 @@
         background-position-x: 0;
     }
     100% {
-        background-position-x: 400px;
+        background-position-x: 375px;
     }
 }
 
 @keyframes fog_two {
-  0% {
-      background-position-x: 0;
-  }
-  100% {
-      background-position-x: -400px;
-  }
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: -375px;
+    }
 }
 
 .fog {
@@ -26,12 +26,12 @@
     height: 1500px;
     transition: top 1.5s ease-in;
 
-    &.fog--one {
+    &--one {
         background-image: url('../img/fog-one.png');
-        opacity: 0.15;
+        opacity: .15;
     }
 
-    &.fog--two {
+    &--two {
         background-image: url('../img/fog-two.png');
         opacity: .20;
     }
@@ -39,12 +39,25 @@
 
 body.with-animation {
     .fog {
-        &.fog--one {
-            animation: fog_one 20s linear infinite alternate;
+        &--one {
+            animation: fog_one 10s linear infinite alternate;
         }
 
-        &.fog--two {
-            animation: fog_two 20s linear infinite alternate;
+        &--two {
+            animation: fog_two 7s linear infinite alternate;
+        }
+    }
+
+    @include min-md {
+
+        .fog {
+            &--one {
+                animation: fog_one 20s linear infinite alternate;
+            }
+
+            &--two {
+                animation: fog_two 15s linear infinite alternate;
+            }
         }
     }
 }

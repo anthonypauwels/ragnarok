@@ -36,7 +36,7 @@
                     <img src="/img/logo.png" alt="Ragnarok" title="Ragnarok">
                 </router-link>
 
-                <router-link to="/patch-note" class="header__logo__patch-note"  active-class="active" exact>{{ __('common.app.version', [ 'version' => '0.2', 'rules' => '3.0' ] ) }}</router-link>
+                <span class="header__logo__version" >{{ __('common.app.version', [ 'rules' => '3.0' ] ) }}</span>
             </div>
         </header>
 
@@ -67,6 +67,10 @@
 
 
             <div class="footer__right">
+                <router-link to="/credits">{{ __('common.app.credits') }}</router-link>
+
+                <span>-</span>
+
                 <a href="https://github.com/anthonypauwels/ragnarok" target="_blank" rel="noreferrer nofollow">Github</a>
 
                 <span>-</span>

@@ -103,11 +103,6 @@ export default {
         return {
             token: '',
 
-            clipped: false,
-
-            showedSkill: false,
-            exportModal: false,
-
             races: {},
             inclinations: {},
             spells: {},
@@ -122,6 +117,11 @@ export default {
             },
 
             table: [],
+
+            clipped: false,
+
+            showedSkill: false,
+            exportModal: false,
         }
     },
     methods: {

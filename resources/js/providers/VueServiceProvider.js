@@ -5,7 +5,7 @@ import mapRequiredFiles from '../lib/core/helpers/mapRequiredFiles';
 import PageHome from "../pages/PageHome";
 import PageCharacter from "../pages/PageCharacter";
 import PageResume from "../pages/PageResume";
-import PagePatchNote from "../pages/PagePatchNote";
+import PageCredits from "../pages/PageCredits";
 import {__} from "../helpers";
 
 export default class VueServiceProvider extends ServiceProvider {
@@ -15,7 +15,7 @@ export default class VueServiceProvider extends ServiceProvider {
             { path: '/new', component: PageCharacter, name: 'new' },
             { path: '/edit/:token', component: PageCharacter, name: 'edit' },
             { path: '/character/:token', component: PageResume, name: 'resume' },
-            { path: '/patch-note', component: PagePatchNote, name: 'patch-note' },
+            { path: '/credits', component: PageCredits, name: 'credits' },
         ];
 
         const router = new VueRouter({

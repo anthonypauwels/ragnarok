@@ -33,7 +33,8 @@
         border: 1px solid #99855c;
         background: none;
         text-decoration: none;
-        width: 300px;
+        max-width: 300px;
+        width: 100%;
         padding: 4px;
         cursor: pointer;
         transition: border .3s ease-in-out;
@@ -59,10 +60,6 @@
                 color: white;
                 background-color: #70603e;
             }
-        }
-
-        &--disabled {
-
         }
     }
 </style>

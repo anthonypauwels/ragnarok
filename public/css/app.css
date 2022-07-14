@@ -299,7 +299,7 @@ a, button, [type=submit] {
     background-position-x: 0;
   }
   100% {
-    background-position-x: 400px;
+    background-position-x: 375px;
   }
 }
 
@@ -308,7 +308,7 @@ a, button, [type=submit] {
     background-position-x: 0;
   }
   100% {
-    background-position-x: 400px;
+    background-position-x: 375px;
   }
 }
 @-webkit-keyframes fog_two {
@@ -316,7 +316,7 @@ a, button, [type=submit] {
     background-position-x: 0;
   }
   100% {
-    background-position-x: -400px;
+    background-position-x: -375px;
   }
 }
 @keyframes fog_two {
@@ -324,7 +324,7 @@ a, button, [type=submit] {
     background-position-x: 0;
   }
   100% {
-    background-position-x: -400px;
+    background-position-x: -375px;
   }
 }
 .fog {
@@ -338,30 +338,40 @@ a, button, [type=submit] {
   transition: top 1.5s ease-in;
 }
 
-.fog.fog--one {
+.fog--one {
   background-image: url("../img/fog-one.png");
   opacity: 0.15;
 }
 
-.fog.fog--two {
+.fog--two {
   background-image: url("../img/fog-two.png");
   opacity: 0.2;
 }
 
-body.with-animation .fog.fog--one {
-  -webkit-animation: fog_one 20s linear infinite alternate;
-          animation: fog_one 20s linear infinite alternate;
+body.with-animation .fog--one {
+  -webkit-animation: fog_one 10s linear infinite alternate;
+          animation: fog_one 10s linear infinite alternate;
 }
 
-body.with-animation .fog.fog--two {
-  -webkit-animation: fog_two 20s linear infinite alternate;
-          animation: fog_two 20s linear infinite alternate;
+body.with-animation .fog--two {
+  -webkit-animation: fog_two 7s linear infinite alternate;
+          animation: fog_two 7s linear infinite alternate;
 }
 
+@media (min-width: 992px) {
+  body.with-animation .fog--one {
+    -webkit-animation: fog_one 20s linear infinite alternate;
+            animation: fog_one 20s linear infinite alternate;
+  }
+
+  body.with-animation .fog--two {
+    -webkit-animation: fog_two 15s linear infinite alternate;
+            animation: fog_two 15s linear infinite alternate;
+  }
+}
 *::-moz-selection {
   background: rgba(102, 88, 60, 0.3);
 }
-
 *::selection {
   background: rgba(102, 88, 60, 0.3);
 }
@@ -450,6 +460,7 @@ body:after {
   z-index: 100;
   left: 0;
   right: 0;
+  pointer-events: none;
 }
 
 .body:before {
@@ -469,10 +480,6 @@ body:after {
     content: none;
   }
 }
-.input-wrapper {
-  margin-bottom: 20px;
-}
-
 .button-container {
   text-align: center;
   width: 100%;
@@ -505,8 +512,8 @@ body:after {
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
 }
 
 @media (min-width: 992px) {
@@ -575,36 +582,40 @@ body:after {
   position: absolute;
   left: 40px;
   top: 40px;
-  text-align: center;
   color: white;
   z-index: 10;
-  width: 125px;
+  width: 65px;
+  text-align: center;
 }
 
+@media (min-width: 768px) {
+  .header .header__logo {
+    width: 125px;
+  }
+}
 @media (min-width: 992px) {
   .header .header__logo {
     width: auto;
   }
 }
-.header .header__logo .header__logo__official, .header .header__logo .header__logo__official img {
+.header .header__logo .header__logo__official img {
   display: block;
-  width: 100%;
+  width: 65px;
 }
 
+@media (min-width: 768px) {
+  .header .header__logo .header__logo__official img {
+    width: 125px;
+  }
+}
 @media (min-width: 992px) {
-  .header .header__logo .header__logo__official, .header .header__logo .header__logo__official img {
+  .header .header__logo .header__logo__official img {
     width: auto;
   }
 }
-.header .header__logo .header__logo__patch-note {
+.header .header__logo .header__logo__version {
   font-size: 14px;
   color: #808080;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
-
-.header .header__logo .header__logo__patch-note:hover, .header .header__logo .header__logo__patch-note.active {
-  color: white;
 }
 
 .nav {
@@ -734,7 +745,8 @@ body:after {
   border: 1px solid #99855c;
   background: none;
   text-decoration: none;
-  width: 300px;
+  max-width: 300px;
+  width: 100%;
   padding: 4px;
   cursor: pointer;
   transition: border 0.3s ease-in-out;
@@ -770,7 +782,7 @@ body:after {
     padding-bottom: 0;
 }
 }
-.page-home .intro {
+.page-home .text {
   max-width: 520px;
   width: 100%;
   color: white;
@@ -781,10 +793,19 @@ body:after {
   padding: 0 40px;
 }
 @media (min-width: 992px) {
-.page-home .intro {
+.page-home .text {
     font-size: 18px;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 270px);
 }
+}
+.page-home .text a {
+  color: #808080;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+.page-home .text a:hover {
+  color: white;
 }
 .page-home .button-container {
   margin-top: 20px;
@@ -1813,8 +1834,47 @@ body:after {
   font-size: 18px;
   color: white;
 }
-.page-patch-note {
+.page-credits {
   overflow: hidden;
+  padding-top: 120px;
+  padding-bottom: 100px;
+}
+@media (min-width: 992px) {
+.page-credits {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+}
+.page-credits .text {
+  max-width: 520px;
+  width: 100%;
+  color: white;
+  line-height: 36px;
+  font-size: 18px;
+  margin: auto;
+  overflow: auto;
+  padding: 0 40px;
+}
+@media (min-width: 992px) {
+.page-credits .text {
+    font-size: 18px;
+    height: calc(100vh - 270px);
+}
+}
+.page-credits .text ul li {
+  margin-top: 20px;
+}
+.page-credits .text ul li a {
+  color: #808080;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+.page-credits .text ul li a:hover {
+  color: white;
+}
+.page-credits .button-container {
+  margin-top: 20px;
 }
 .r-animation-link {
   font-size: 14px;
