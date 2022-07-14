@@ -28,7 +28,7 @@
             'name' => "L'Ombre",
             'name_long' => "Penchant pour l'Ombre",
             'name_abr' => "Ombre",
-            'description' => "Les personnages ayant un penchant pour l'Ombre sont des hors-la-loie et des bandits. Leurs méthodes sont souvent peu orthodoxes.",
+            'description' => "Les personnages ayant un penchant pour l'Ombre sont des hors-la-loi et des bandits. Leurs méthodes sont souvent peu orthodoxes.",
             'image' => 'icons/hood.svg',
         ],
     ];
