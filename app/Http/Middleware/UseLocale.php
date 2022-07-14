@@ -11,13 +11,8 @@ class UseLocale
 {
     public function handle(Request $request, Closure $next)
     {
-        if ( Session::has('locale') ) {
-            $locale = Session::get('locale');
-        } else {
-            $locale = Str::before( $request->getPreferredLanguage( ['fr', 'nl', 'en'] ), '_') ;
-        }
-
-        App::setLocale( $locale );
+        /** Force locale to Fr */
+        App::setLocale( 'fr' );
 
         return $next( $request );
     }
