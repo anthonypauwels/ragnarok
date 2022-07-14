@@ -3,6 +3,7 @@
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route as Router;
 use Pangu\Common\JavaScript\JavaScript;
+use Pangu\Metadata\MetadataGenerator;
 
 /**
  * Export application routes url by name
@@ -43,5 +44,34 @@ if ( !function_exists( 'javascript' ) )
         }
 
         return JavaScript::getInstance();
+    }
+}
+
+/**
+ * @param mixed|null $key
+ * @param mixed|null $value
+ * @param string|null $namespace
+ * @return JavaScript
+ */
+if ( !function_exists( 'javascript' ) )
+{
+    function javascript(mixed $key = null, mixed $value = null, ?string $namespace = null):JavaScript
+    {
+        if ( $key ) {
+            return JavaScript::getInstance()->put( $key, $value, $namespace );
+        }
+
+        return JavaScript::getInstance();
+    }
+}
+
+/**
+ * @return MetadataGenerator
+ */
+if ( !function_exists( 'metadata' ) )
+{
+    function metadata(): MetadataGenerator
+    {
+        return MetadataGenerator::getInstance();
     }
 }

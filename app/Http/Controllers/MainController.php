@@ -2,10 +2,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Pangu\Metadata\MetaProtocol;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
 
 class MainController extends Controller
 {
@@ -32,6 +33,16 @@ class MainController extends Controller
         javascript('inclinations', $this->getInclinations() );
         javascript('spells', $this->getSpells() );
         javascript('baseUrl', Str::finish( config('app.url'), '/' ) );
+
+        metadata()->title( __('common.title') );
+        metadata()->description( __('common.description') );
+        metadata()->setPrefixUrl( config('app.url') );
+        metadata()->url('/#/');
+        metadata()->author('Anthony Pauwels');
+        metadata()->image('/img/facebook_meta.jpg', ['width' => 1200, 'height' => 600, 'type' => 'JPEG'], MetaProtocol::OPENGRAPH );
+        metadata()->image('/img/twitter_meta.jpg', ['width' => 600, 'height' => 400, 'type' => 'JPEG'], MetaProtocol::TWITTER );
+        metadata()->twitterCard('app');
+        metadata()->type('website');
 
         return view('app' );
     }

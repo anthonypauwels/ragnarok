@@ -7,6 +7,8 @@
                 <li v-html="$options.filters.__('credits.list.ragnarok')"></li>
 
                 <li v-html="$options.filters.__('credits.list.game-icons-net')"></li>
+
+                <li v-html="$options.filters.__('credits.list.two-steps-from-hell')"></li>
             </ul>
         </div>
 

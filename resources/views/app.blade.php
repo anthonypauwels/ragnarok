@@ -24,6 +24,8 @@
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="msapplication-TileImage" content="/img/favicon/favicon-144x144.png">
     <meta name="theme-color" content="#000000">
+
+    {!! metadata() !!}
 </head>
 <body>
     <div class="fog fog--one"></div>

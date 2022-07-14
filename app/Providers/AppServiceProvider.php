@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Pangu\Common\JavaScript\JavaScript;
+use Pangu\Metadata\MetadataGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         JavaScript::init();
+        MetadataGenerator::init();
     }
 }

@@ -1,5 +1,9 @@
 <?php
     return [
+        'title' => 'Ragnarok',
+
+        'description' => 'Entrez dans la légende',
+
         'app' => [
             'version' => 'Règles :rules',
             'animation' => 'Animation',
@@ -77,6 +81,7 @@ Aujourd’hui l’Empire d’Or veille sur Tanak, de son oeil le prophète voit 
             'list' => [
                 'ragnarok' => 'Univers, règles, compétences : <a href="https://www.ragnaroklarp.be/fr" target="_blank">Ragnarok</a>',
                 'game-icons-net' => 'Icônes : <a href="https://game-icons.net/" target="_blank">Game-icons.net</a>',
+                'two-steps-from-hell' => 'Musiques : <a href="https://www.twostepsfromhell.com/" target="_blank">Two Steps From Hell</a>',
             ],
             'back' => 'Retour à l’accueil'
         ],
