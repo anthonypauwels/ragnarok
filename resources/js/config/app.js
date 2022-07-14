@@ -4,10 +4,10 @@ import UrlGeneratorServiceProvider from "../providers/UrlGeneratorServiceProvide
 import StorageServiceProvider from "../lib/core/Providers/StorageServiceProvider";
 
 export default {
-    providers: [
+    providers: {
         AxiosServiceProvider,
         VueServiceProvider,
         UrlGeneratorServiceProvider,
         StorageServiceProvider
-    ],
+    },
 };

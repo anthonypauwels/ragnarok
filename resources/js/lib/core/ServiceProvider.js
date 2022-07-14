@@ -1,7 +1,7 @@
 export default class ServiceProvider {
     #app = null;
 
-    providers = [];
+    providers = {};
 
     constructor(application) {
         this.#app = application;
@@ -24,8 +24,8 @@ export default class ServiceProvider {
 
     registerProvider()
     {
-        this.providers.forEach( ( provider ) => {
-            this.app().register( provider );
+        Object.entries( this.providers ).forEach( ( [ name, provider ] ) => {
+            this.app().register( name, provider );
         } );
 
         this.register();

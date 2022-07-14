@@ -6,13 +6,13 @@ import ExceptionServiceProvider from './ExceptionServiceProvider';
 import ControllersServiceProvider from './ControllersServiceProvider';
 
 export default class CoreServiceProvider extends ServiceProvider {
-    providers = [
+    providers = {
         ConfigServiceProvider,
         EventsServiceProvider,
         LogServiceProvider,
         ExceptionServiceProvider,
         ControllersServiceProvider,
-    ];
+    };
 
     register()
     {
@@ -25,8 +25,8 @@ export default class CoreServiceProvider extends ServiceProvider {
         const config = this.app().get('config');
 
         // register providers from config
-        config.getThrough( 'app.providers', [] ).forEach( provider => {
-            this.app().register( provider );
+        Object.entries( config.getThrough( 'app.providers', {} ) ).forEach( ( [ name, provider ] ) => {
+            this.app().register( name, provider );
         } );
     }
 }

@@ -37,7 +37,7 @@ export default class Application extends Container
 
     #registerBaseServiceProviders()
     {
-        this.register( new CoreServiceProvider( this ) );
+        this.register( 'CoreServiceProvider', new CoreServiceProvider( this ) );
     }
 
     #registerBaseDirectives()
@@ -81,13 +81,11 @@ export default class Application extends Container
         return this;
     }
 
-    register(provider, options = [], force = false)
+    register(provider_name, provider, options = [], force = false)
     {
         if ( typeof provider === 'function' ) {
             provider = new provider( this );
         }
-
-        const provider_name = getObjName( provider );
 
         const registered = this.#isRegistered( provider_name );
 
