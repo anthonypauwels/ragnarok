@@ -73,31 +73,24 @@ export default {
         background-color: rgba(0, 0, 0, 0.9);
         color: white;
         line-height: 36px;
-        font-size: 20px;
+        font-size: 18px;
         padding: 40px 20px 40px 20px;
         min-height: 100vh;
 
         @include min-sm {
-            background-color: rgba(0, 0, 0, 0.9);
-            color: white;
             padding: 20px;
             position: fixed;
             width: 90%;
             top: 60%;
             left: 50%;
             transform: translate(-50%, -65%);
-            line-height: 36px;
-            font-size: 20px;
             min-height: auto;
         }
 
         @include min-md {
-            font-size: 18px;
+            font-size: 20px;
             width: 100%;
             max-width: 760px;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -65%);
         }
 
         &:before {
