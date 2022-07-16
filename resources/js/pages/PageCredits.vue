@@ -12,7 +12,7 @@
             </ul>
         </div>
 
-        <div class="button-container">
+        <div class="btn-wrapper">
             <r-button @click="$router.push('/')">
                 <span>{{ 'credits.back' | __ }}</span>
             </r-button>
@@ -76,7 +76,7 @@ export default {
             }
         }
 
-        .button-container {
+        .btn-wrapper {
             margin-top: 20px;
         }
     }

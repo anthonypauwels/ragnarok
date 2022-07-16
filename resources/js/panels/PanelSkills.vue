@@ -22,14 +22,14 @@
                 <span class="item item--right character-race" v-if="races[ character.race ] !== undefined">{{ races[ character.race ].name }}</span>
             </div>
 
-<!--            <transition name="fade-fast">-->
-                <div class="skills" v-if="currentInclination !== 'spells'">
-                    <TransitionGroup name="fade-fast">
-                        <ul v-for="(name, key) in inclinations" v-if="key === currentInclination" :key="key">
-                            <li v-for="( skill, name ) in inclinations[ key ].skills" :key="name" v-if="canSeeSkill( skill )">
+            <div class="skills" v-if="currentInclination !== 'spells'">
+                <TransitionGroup name="fade-fast">
+                    <ul v-for="(name, key) in inclinations" v-if="key === currentInclination" :key="key">
+                        <li v-for="( skill, name ) in inclinations[ key ].skills" :key="name" v-if="canSeeSkill( skill )">
+                            <span class="skill__name" @click="showSkillDescription( skill )" :class="{'is-active': showedSkill !== false && showedSkill.name === skill.name}">
                                 <img class="skill__image" :src="'/img/' + skill.image" :alt="skill.name">
+                                <img class="skill__image skill__image--hover" :src="'/img/' + skill.image" :alt="skill.name">
 
-                                <span class="skill__name" @click="showSkillDescription( skill )" :class="{'is-active': showedSkill !== false && showedSkill.name === skill.name}">
                                     {{ skill.name }}
 
                                     <span class="skill__xp">
@@ -39,55 +39,55 @@
                                     </span>
                                 </span>
 
-                                <div class="skill__checkbox">
-                                    <div class="checkbox race-can" v-if="raceCanLearnIt( skill )">
-                                        <span></span>
-                                    </div>
+                            <div class="skill__checkbox">
+                                <div class="checkbox race-can" v-if="raceCanLearnIt( skill )">
+                                    <span></span>
+                                </div>
 
-                                    <div class="checkbox race-cannot"
-                                         v-if="raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill )">
-                                        <span></span>
-                                    </div>
+                                <div class="checkbox race-cannot"
+                                     v-if="raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill )">
+                                    <span></span>
+                                </div>
 
-                                    <div class="checkbox" @click="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] + 1 )"  @contextmenu.prevent="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] - 1 )"
-                                         v-if="character.skills[ skill.inclination + '_' + name ] !== undefined"
-                                         :class="{'is-checked': character.skills[ skill.inclination + '_' + name ] === skill.xp.length - 1 }">
-                                        <span>{{ character.skills[ skill.inclination + '_' + name ] + 1 }}</span>
-                                    </div>
+                                <div class="checkbox" @click="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] + 1 )"  @contextmenu.prevent="learnSkill( skill, character.skills[ skill.inclination + '_' + name ] - 1 )"
+                                     v-if="character.skills[ skill.inclination + '_' + name ] !== undefined"
+                                     :class="{'is-checked': character.skills[ skill.inclination + '_' + name ] === skill.xp.length - 1 }">
+                                    <span>{{ character.skills[ skill.inclination + '_' + name ] + 1 }}</span>
+                                </div>
 
-                                    <div class="checkbox" @click="learnSkill( skill, 0 )" @contextmenu.prevent=""
-                                         v-if="!( raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill ) ) &&
+                                <div class="checkbox" @click="learnSkill( skill, 0 )" @contextmenu.prevent=""
+                                     v-if="!( raceCannotLearnIt( skill ) || skill.specialized && key !== character.inclination && !raceCanLearnIt( skill ) ) &&
                                          character.skills[ skill.inclination + '_' + name ] === undefined && !( raceCanLearnIt( skill ) || raceCannotLearnIt( skill ) )">
-                                        <span></span>
-                                    </div>
+                                    <span></span>
                                 </div>
-                            </li>
-                        </ul>
-                    </TransitionGroup>
-                </div>
-<!--            </transition>-->
+                            </div>
+                        </li>
+                    </ul>
+                </TransitionGroup>
+            </div>
 
-<!--            <transition name="fade-fast">-->
-                <div class="spells" v-if="currentInclination === 'spells'">
-                    <div class="spells__rank" v-for="(spells, rank) in spells" :key="rank">
-                        <h3 class="spells__rank__title">{{ 'character.panels.skills.rank' | __ }} {{ rank }}</h3>
+            <div class="spells" v-if="currentInclination === 'spells'">
+                <div class="spells__rank" v-for="(spells, rank) in spells" :key="rank">
+                    <h3 class="spells__rank__title">{{ 'character.panels.skills.rank' | __ }} {{ rank }}</h3>
 
-                        <ul>
-                            <li v-for="spell in spells">
+                    <ul>
+                        <li v-for="spell in spells">
+                            <span class="spell__name" @click="showSkillDescription( spell )" :class="{'is-active': showedSkill !== false && showedSkill.name === spell.name}">
                                 <img class="spell__image" :src="'/img/' + spell.image" :alt="spell.name">
+                                <img class="spell__image spell__image--hover" :src="'/img/' + spell.image" :alt="spell.name">
 
-                                <span class="spell__name" @click="showSkillDescription( spell )" :class="{'is-active': showedSkill !== false && showedSkill.name === spell.name}">{{ spell.name }}</span>
+                                {{ spell.name }}
+                            </span>
 
-                                <div class="counter">
-                                    <button class="counter__minus" @click.prevent="decrementSpell( spell )"><span>&lt;</span></button>
-                                    <div class="counter__number" :class="{'is-active': character.spells[ spell.id ] !== undefined && character.spells[ spell.id ] > 0 }">{{ character.spells[ spell.id ] === undefined || character.spells[ spell.id ] === 0 ? 0 : character.spells[ spell.id ] }}</div>
-                                    <button class="counter__plus" @click.prevent="incrementSpell( spell )"><span>&gt;</span></button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                            <div class="counter">
+                                <button class="counter__minus" @click.prevent="decrementSpell( spell )"><span>&lt;</span></button>
+                                <div class="counter__number" :class="{'is-active': character.spells[ spell.id ] !== undefined && character.spells[ spell.id ] > 0 }">{{ character.spells[ spell.id ] === undefined || character.spells[ spell.id ] === 0 ? 0 : character.spells[ spell.id ] }}</div>
+                                <button class="counter__plus" @click.prevent="incrementSpell( spell )"><span>&gt;</span></button>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-<!--            </transition>-->
+            </div>
 
             <div class="reset-skills-link" @click.prevent="reset">{{ 'character.panels.skills.reset' | __ }}</div>
 
@@ -347,6 +347,7 @@ export default {
                     position: absolute;
                     bottom: 49%;
                     left: 0;
+                    pointer-events: none;
                     background-color: #66583C;
                 }
 
@@ -382,26 +383,24 @@ export default {
                         margin-right: 12px;
                     }
 
-                    &:before {
+                    &:before, &:after {
                         content: '';
                         height: 1px;
                         width: calc(50% - 3.49px);
                         position: absolute;
                         bottom: -1px;
-                        left: 0;
-                        background-image: linear-gradient(to right, #66583c 25%, transparent);
+                        pointer-events: none;
                         transition: background-color .3s ease-in;
                     }
 
+                    &:before {
+                        left: 0;
+                        background-image: linear-gradient(to right, #66583c 25%, transparent);
+                    }
+
                     &:after {
-                        content: '';
-                        height: 1px;
-                        width: calc(50% - 3.49px);
-                        position: absolute;
-                        bottom: -1px;
                         right: 0;
                         background-image: linear-gradient(to left, #66583c 25%, transparent);
-                        transition: background-color .3s ease-in;
                     }
 
                     span {
@@ -409,6 +408,7 @@ export default {
                             content: '';
                             height: 6px;
                             width: 6px;
+                            pointer-events: none;
                             position: absolute;
                             bottom: -18px;
                             left: 50%;
@@ -426,6 +426,7 @@ export default {
                             content: '';
                             height: 1px;
                             width: 6px;
+                            pointer-events: none;
                             position: absolute;
                             bottom: -17px;
                             left: 50%;
@@ -510,16 +511,25 @@ export default {
                     }
                 }
 
-                .skill__image {
-                    width: 25px;
-                    margin-right: 5px;
-                    top: 5px;
-                }
-
                 .skill__name {
                     color: white;
                     transition: all .2s ease-in-out;
                     cursor: help;
+
+                    .skill__image {
+                        width: 25px;
+                        margin-right: 5px;
+                        top: 5px;
+
+                        &--hover {
+                            position: absolute;
+                            top: -1px;
+                            left: 0;
+                            opacity: 0;
+                            transition: opacity .2s ease-in-out;
+                            filter: invert(4%) sepia(49%) saturate(4121%) hue-rotate(308deg) brightness(107%) contrast(102%);
+                        }
+                    }
 
                     .skill__xp {
                         color: #808080;
@@ -550,8 +560,14 @@ export default {
                         }
                     }
 
-                    &.is-active {
+                    &:hover, &.is-active {
                         color: #ffd073;
+
+                        .skill__image {
+                            &--hover {
+                                opacity: 1;
+                            }
+                        }
                     }
                 }
 
@@ -595,12 +611,6 @@ export default {
                                 width: calc(50% - 20px);
                             }
 
-                            .spell__image {
-                                width: 25px;
-                                margin-right: 5px;
-                                top: 5px;
-                            }
-
                             .spell__name {
                                 font-size: 16px;
                                 transition: all .2s ease-in-out;
@@ -611,8 +621,29 @@ export default {
                                     color: #ffd073;
                                 }
 
-                                &.is-active {
+                                .spell__image {
+                                    width: 25px;
+                                    margin-right: 5px;
+                                    top: 5px;
+
+                                    &--hover {
+                                        position: absolute;
+                                        top: -1px;
+                                        left: 0;
+                                        opacity: 0;
+                                        transition: opacity .2s ease-in-out;
+                                        filter: invert(4%) sepia(49%) saturate(4121%) hue-rotate(308deg) brightness(107%) contrast(102%);
+                                    }
+                                }
+
+                                &:hover, &.is-active {
                                     color: #ffd073;
+
+                                    .spell__image {
+                                        &--hover {
+                                            opacity: 1;
+                                        }
+                                    }
                                 }
                             }
 

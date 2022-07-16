@@ -265,6 +265,8 @@ export default {
         }
 
         .panel-wrapper {
+            z-index: 2;
+
             @include min-md {
                 height: 32rem;
 

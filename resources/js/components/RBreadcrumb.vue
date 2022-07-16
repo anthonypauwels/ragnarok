@@ -70,9 +70,13 @@ export default {
             text-decoration: none;
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 36px;
             transition: all .3s ease-in-out;
+
+            @include min-sm {
+                font-size: 18px;
+            }
 
             @include min-md {
                 font-size: 26px;
@@ -100,8 +104,12 @@ export default {
                 display: inline-block;
                 width: 22px;
                 height: 30px;
-                margin: 0 10px;
+                margin: 0 6px;
                 top: 8px;
+
+                @include min-sm {
+                    margin: 0 10px;
+                }
 
                 @include min-md {
                     top: 4px;

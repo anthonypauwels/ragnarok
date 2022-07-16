@@ -47,7 +47,6 @@ export default {
     .animation-link__link {
         color: #808080;
         display: inline-block;
-        margin-right: 20px;
         text-decoration: none;
         transition: color .3s ease-out;
         background: none;

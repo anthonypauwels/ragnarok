@@ -14,18 +14,19 @@
 
                 <div class="skill" v-else @click="e => showSkillDescription( item.skill, e.target )">
                     <img class="skill__image" :src="'/img/' + item.skill.image" :alt="item.skill.name">
+                    <img class="skill__image skill__image--hover" :src="'/img/' + item.skill.image" :alt="item.skill.name">
                     <span class="skill__name" :class="{'is-active': showedSkill !== false && showedSkill.name === item.skill.name}">{{ item.label }}</span>
                     <span class="skill__xp">{{ item.xp }} XP</span> <span v-if="item.count" class="skill__count">x {{ item.count }}</span>
                 </div>
             </li>
         </ul>
 
-        <div class="button-container">
+        <div class="btn-wrapper">
             <r-button @click="$router.push( { name: 'edit', params: { token } } )">
                 <span>{{ 'resume.edit' | __ }}</span>
             </r-button>
 
-            <div class="button-container__link">
+            <div class="btn-wrapper__link">
                 {{ 'resume.or' | __ }} <a href="" @click.prevent="showExportModal">{{ 'resume.export' | __ }}</a>
             </div>
         </div>
@@ -266,7 +267,7 @@ export default {
     .page-resume {
         overflow: hidden;
         margin: auto;
-        padding: 120px 20px 100px;
+        padding: 100px 20px 100px;
 
         @include min-md {
             padding: 0;
@@ -319,15 +320,36 @@ export default {
                 font-size: 20px;
                 margin-bottom: 15px;
 
+                &:hover {
+                    .skill__name {
+                        color: #ffd073;
+                    }
+
+                    .skill__image {
+                        &--hover {
+                            opacity: 1;
+                        }
+                    }
+                }
+
                 &__image {
                     width: 25px;
                     margin-right: 5px;
                     top: 5px;
+
+                    &--hover {
+                        position: absolute;
+                        top: 5px;
+                        left: 0;
+                        opacity: 0;
+                        transition: opacity .2s ease-in-out;
+                        filter: invert(4%) sepia(49%) saturate(4121%) hue-rotate(308deg) brightness(107%) contrast(102%);
+                    }
                 }
 
                 &__name {
                     color: white;
-                    transition: all .2s ease-in-out;
+                    transition: color .2s ease-in-out;
 
                     &.is-active {
                         color: #ffd073;
@@ -364,7 +386,7 @@ export default {
             width: 100%;
         }
 
-        .button-container {
+        .btn-wrapper {
             &__link {
                 margin-top: 20px;
                 color: white;

@@ -6,7 +6,7 @@
             <p v-html="$options.filters.__('home.text')"></p>
         </div>
 
-        <div class="button-container">
+        <div class="btn-wrapper">
             <r-button @click="$router.push('/new')">
                 <span>{{ 'home.button' | __ }}</span>
             </r-button>
@@ -63,7 +63,7 @@ export default {
             }
         }
 
-        .button-container {
+        .btn-wrapper {
             margin-top: 20px;
         }
     }

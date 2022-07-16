@@ -108,8 +108,10 @@ export default {
                 display: flex;
                 flex-flow: row nowrap;
                 width: 1420px;
+                padding-bottom: 20px;
 
                 @include min-md {
+                    padding-bottom: 0;
                     flex-flow: row wrap;
                     justify-content: space-between;
                     width: auto;

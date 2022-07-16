@@ -64,6 +64,8 @@
             <div class="footer__left">
                 <r-animation-link class="footer__animation-link">{{ __('common.app.animation') }}</r-animation-link>
 
+                <span>-</span>
+
                 <r-music-player class="footer__music-player">{{ __('common.app.music') }}</r-music-player>
             </div>
 
@@ -78,7 +80,7 @@
                 <span>-</span>
 
                 <a href="https://anthonypauwels.be/" class="footer__copyright" target="_blank" rel="noreferrer nofollow" title="{{ __('common.app.copyright') }} Anthony Pauwels">
-                    {{ __('common.app.copyright') }} <span>Anthony Pauwels</span>
+                    <span class="footer__copyright__text">{{ __('common.app.copyright') }}</span> <span class="footer__copyright__logo">Anthony Pauwels</span>
                 </a>
             </div>
         </footer>

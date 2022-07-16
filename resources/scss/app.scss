@@ -25,17 +25,14 @@ body {
         pointer-events: none;
     }
 
-    &:before {
+    &:before, &:after {
         content: '';
         position: fixed;
-        z-index: 100;
         top: 10px;
         left: 10px;
         right: 10px;
         bottom: 10px;
         pointer-events: none;
-        border: 1px solid;
-        border-image: linear-gradient(to top, #66583c, #ffd073) 1 100%;
 
         @include min-md {
             top: 20px;
@@ -45,23 +42,15 @@ body {
         }
     }
 
+    &:before {
+        z-index: 100;
+        border: 1px solid;
+        border-image: linear-gradient(to top, #66583c, #ffd073) 1 100%;
+    }
+
     &:after {
-        content: '';
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        pointer-events: none;
         border-bottom: 1px solid #66583c;
         border-top: 1px solid #ffd073;
-
-        @include min-md {
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-        }
     }
 }
 
@@ -73,6 +62,24 @@ body {
 
     &.show {
         opacity: 1;
+    }
+
+    .header, .nav, .footer {
+        transition: opacity .3s ease-in-out;
+    }
+
+    &.modal-is-open {
+        .header, .nav, .footer {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @include min-md {
+            .header, .nav, .footer {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
     }
 }
 
@@ -110,7 +117,7 @@ body {
     }
 }
 
-.button-container {
+.btn-wrapper {
     text-align: center;
     width: 100%;
 
@@ -120,7 +127,7 @@ body {
 }
 
 .title {
-    margin: 40px 0;
+    margin: 0 0 40px 0;
     font-family: 'Della Respira', serif;
     font-weight: normal;
     font-size: 28px;
@@ -128,6 +135,7 @@ body {
     text-align: center;
 
     @include min-md {
+        margin: 40px 0;
         font-size: 40px;
     }
 
@@ -142,7 +150,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 0;
-    height: 0;
+    height: 6px;
 
     @include min-md {
         width: 6px;
@@ -320,12 +328,22 @@ body {
         .footer__animation-link, .footer__music-player {
             display: inline-block;
         }
+
+        > span {
+            color: #808080;
+            margin: 0 3px;
+
+            @include min-sm {
+                margin: 0 5px;
+            }
+        }
     }
 
     .footer__right {
         position: absolute;
         right: 40px;
-        bottom: 30px;
+        bottom: 28px;
+        line-height: 1;
 
         a {
             color: #808080;
@@ -340,6 +358,11 @@ body {
 
         > span {
             color: #808080;
+            margin: 0 3px;
+
+            @include min-sm {
+                margin: 0 5px;
+            }
         }
 
         .footer__copyright {
@@ -351,12 +374,24 @@ body {
                 }
             }
 
-            span {
+            &__text {
+                display: none;
+
+                @include min-sm {
+                    display: inline;
+                }
+            }
+
+            &__logo {
                 display: block;
                 font-size: 0;
                 float: right;
-                margin-left: 10px;
                 line-height: 0;
+                margin-left: 5px;
+
+                @include min-sm {
+                    margin-left: 10px;
+                }
 
                 &:before {
                     content: url('/img/copyright.svg');

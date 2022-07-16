@@ -21,6 +21,16 @@ export default {
         }
     },
 
+    watch: {
+        show(value) {
+            if ( value ) {
+                document.querySelector('.wrapper').classList.add('modal-is-open');
+            } else {
+                document.querySelector('.wrapper').classList.remove('modal-is-open');
+            }
+        }
+    },
+
     methods: {
         closeModal() {
             this.$emit( 'close' );
@@ -37,10 +47,15 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: scroll;
+
+    @include min-md {
+        overflow: auto;
+    }
 
     &__close {
         position: absolute;
-        top: 22px;
+        top: 42px;
         left: 20px;
         color: #808080;
         font-size: 26px;
@@ -48,19 +63,33 @@ export default {
         border: 0;
         cursor: pointer;
         z-index: 10;
+
+        @include min-md {
+            top: 22px;
+        }
     }
 
     &__inner {
         background-color: rgba(0, 0, 0, 0.9);
         color: white;
-        padding: 20px;
-        position: fixed;
-        width: 90%;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -65%);
         line-height: 36px;
         font-size: 20px;
+        padding: 40px 20px 40px 20px;
+        min-height: 100vh;
+
+        @include min-sm {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            width: 90%;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -65%);
+            line-height: 36px;
+            font-size: 20px;
+            min-height: auto;
+        }
 
         @include min-md {
             font-size: 18px;
