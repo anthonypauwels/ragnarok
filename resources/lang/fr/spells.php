@@ -28,7 +28,6 @@
         'celerity' => [
             'name' => 'Célérité',
             'target' => 'le tisseur',
-            'injunction' => 'instantané',
             'description' => 'le tisseur peut se joindre à un groupe se rendant à un champ de récolte ou une zone scénar sans payer de Main d’Oeuvre.',
             'image' => 'icons/wind-hole.svg',
         ],
@@ -55,7 +54,6 @@
             'name' => 'Maladresse',
             'target' => 'une personne à moins de 10 mètres',
             'injunction' => '« disarm »',
-            'duration' => 'instantanée',
             'description' => 'La cible lâche ce qu’il a dans ses deux mains.',
             'image' => 'icons/drop-weapon.svg',
         ],
@@ -71,7 +69,6 @@
         'magic-healing' => [
             'name' => 'Soin magique',
             'target' => 'le patient touché par le tisseur',
-            'duration' => 'instantanée',
             'description' => 'le guérisseur soigne 1 PV à une localisation (qu’il s’agisse d’une blessure légère ou grave) OU son action compte comme un remède commun pour le traitement d’une maladie.',
             'image' => 'icons/healing.svg',
         ],
@@ -152,7 +149,6 @@ cadavre. Après l’heure d’effet du sortilège ou si ses points de vie retomb
         'repair' => [
             'name' => 'Réparation',
             'target' => 'un objet touché par le tisseur',
-            'duration' => 'instantanée',
             'description' => 'l’objet touché est immédiatement réparé. S’il s’agit d’une armure, celle-ci recouvre tous ses points de protection. Ce sort ne fonctionne que sur des objets transportables, donc pas sur les portes, les coques de navire ou autres...',
             'image' => 'icons/lightning-spanner.svg',
         ],
@@ -179,7 +175,6 @@ même si elle y est obligée par un autre sort. Un même personnage ne peut êtr
             'name' => 'Dissipation magique',
             'target' => 'une cible (personnage ou objet) visible et à moins de 10 mètres',
             'injunction' => '« dispel »',
-            'duration' => 'instantanée',
             'description' => 'tous les sorts et effets de potions qui affectent la cible ou son équipement sont automatiquement dissipés.',
             'image' => 'icons/rolling-energy.svg',
         ],
@@ -206,7 +201,6 @@ cumulés). De plus, s’il se bat avec une arme à deux mains (pas une arme d’
             'name' => 'Lacérations',
             'target' => 'un personnage touché par le projectile magique (rouge)',
             'injunction' => '« blast »',
-            'duration' => 'instantané',
             'description' => 'la cible subit 1 point de dégât à chacune de ses localisations (les armures peuvent donc encaisser ces dégâts).',
             'image' => 'icons/fire-spell-cast.svg',
         ],
@@ -283,7 +277,6 @@ parvenir. Par conséquent les règles de combat prennent le pas sur les règles 
             'name' => 'Mass « strike down »',
             'target' => 'tous les personnages devant le tisseur et à moins de 10 mètres',
             'injunction' => '« mass Strike down »',
-            'duration' => 'instantanée',
             'description' => 'ne peut être lancé qu’avec des Pierres de Vie !<br/> La cible est repoussée de 3 pas et doit s’asseoir les fesses contre le sol avant de pouvoir
 se relever (même si l’attaque est parée par un bouclier ou une arme). Attention au risque de piétinement.',
             'image' => 'icons/falling.svg',
@@ -341,7 +334,6 @@ Un même personnage ne peut donner des points de vie qu’une seule fois dans un
         'regenerate' => [
             'name' => 'Régénération',
             'target' => 'le patient touché par le tisseur',
-            'duration' => 'instantanée',
             'description' => 'le guérisseur soigne instantanément son patient (rend tous les points de vie à toutes les localisations que les blessures soient légères ou graves). Ne fonctionne pas sur les maladies.',
             'image' => 'icons/regeneration.svg',
         ],
