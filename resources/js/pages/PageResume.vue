@@ -12,10 +12,11 @@
             <li v-for="item in table">
                 <h4 v-if="item.title">{{ item.title }}</h4>
 
-                <div class="skill" v-else @click="e => showSkillDescription( item.skill, e.target )">
+                <div class="skill" v-else @click="e => showSkillDescription( item.skill, e.target )"
+                     :class="{'is-active': showedSkill !== false && showedSkill.name === item.skill.name}">
                     <img class="skill__image" :src="'/img/' + item.skill.image" :alt="item.skill.name">
                     <img class="skill__image skill__image--hover" :src="'/img/' + item.skill.image" :alt="item.skill.name">
-                    <span class="skill__name" :class="{'is-active': showedSkill !== false && showedSkill.name === item.skill.name}">{{ item.label }}</span>
+                    <span class="skill__name">{{ item.label }}</span>
                     <span class="skill__xp">{{ item.xp }} XP</span> <span v-if="item.count" class="skill__count">x {{ item.count }}</span>
                 </div>
             </li>
@@ -320,7 +321,7 @@ export default {
                 font-size: 20px;
                 margin-bottom: 15px;
 
-                &:hover {
+                &:hover, &.is-active {
                     .skill__name {
                         color: #ffd073;
                     }
@@ -350,10 +351,6 @@ export default {
                 &__name {
                     color: white;
                     transition: color .2s ease-in-out;
-
-                    &.is-active {
-                        color: #ffd073;
-                    }
                 }
 
                 &__xp {

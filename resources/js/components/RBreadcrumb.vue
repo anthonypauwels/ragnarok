@@ -51,7 +51,6 @@ export default {
     text-align: center;
     margin-bottom: 40px;
     display: flex;
-    //width: 200%;
     justify-content: center;
 
     li {
@@ -75,7 +74,7 @@ export default {
             transition: all .3s ease-in-out;
 
             @include min-sm {
-                font-size: 18px;
+                font-size: 20px;
             }
 
             @include min-md {

@@ -88,19 +88,27 @@ export default {
 
                     > div {
                         background-color: rgba(0, 0, 0, 0.5);
-                        height: 100px;
                         display: flex;
                         flex-flow: column;
                         justify-content: center;
+                        padding: 20px 0;
 
                         @include min-md {
                             height: 130px;
                         }
 
                         img {
-                            width: 25%;
                             display: block;
                             margin: 0 auto 5px;
+                            width: 25%;
+
+                            @include min-sm {
+                                width: 15%;
+                            }
+
+                            @include min-md {
+                                width: 25%;
+                            }
                         }
 
                         span {

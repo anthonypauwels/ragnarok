@@ -42,3 +42,5 @@ mix.webpackConfig({
         },
     },
 } );
+
+mix.version();
