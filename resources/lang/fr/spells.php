@@ -14,7 +14,7 @@
             'target' => 'un personnage visible et à moins de 10 mètres',
             'injunction' => '« friend »',
             'duration' => '1 heure ou jusqu’à ce que le tisseur commette un acte hostile envers la cible',
-            'description' => 'Le tisseur est immunisé au premier sort dont il est la cible, même si celui-ci est bénéfique.',
+            'description' => 'La cible considère le tisseur comme un ami, ce qui ne l’empêche pas de garder son libre arbitre. Ne marche pas sur les animaux.',
             'image' => 'icons/heart-inside.svg',
         ],
 
