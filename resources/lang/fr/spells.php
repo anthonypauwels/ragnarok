@@ -11,16 +11,16 @@
 
         'kindness' => [
             'name' => 'Bienveillance',
-            'target' => 'le gardien responsable du déplacement naval',
+            'target' => 'un personnage visible et à moins de 10 mètres',
             'injunction' => '« friend »',
             'duration' => '1 heure ou jusqu’à ce que le tisseur commette un acte hostile envers la cible',
-            'description' => 'Le tisseur peut déterminer le sens du vent.',
+            'description' => 'Le tisseur est immunisé au premier sort dont il est la cible, même si celui-ci est bénéfique.',
             'image' => 'icons/heart-inside.svg',
         ],
 
         'squall' => [
             'name' => 'Bourrasque',
-            'target' => 'un personnage visible et à moins de 10 mètres',
+            'target' => 'le gardien responsable du déplacement naval',
             'description' => 'Le tisseur peut déterminer le sens du vent.',
             'image' => 'icons/wind-slap.svg',
         ],
