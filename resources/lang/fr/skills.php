@@ -285,7 +285,7 @@ affectent la quasi-totalité des créatures de Ragnarok.',
             'name' => 'Coupe-jarret',
             'description' => 'Les personnages dotés de cette compétence sont capables de trouver la faille dans les meilleures
 armures. Les coupe-jarrets peuvent, x fois par jour (x = niveau) (entre deux levers de soleil),
-annoncer «TROUGH» lorsqu’ils frappent leur victime dans le dos avec une arme courte de 60 cm au maximum.',
+annoncer «THROUGH» lorsqu’ils frappent leur victime dans le dos avec une arme courte de 60 cm au maximum.',
             'image' => 'icons/curvy-knife.svg',
         ],
 
