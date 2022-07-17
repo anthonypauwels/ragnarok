@@ -29,9 +29,9 @@ import PanelInclination from "../panels/PanelInclination";
 import PanelSkills from "../panels/PanelSkills";
 import RBreadcrumb from "../components/RBreadcrumb";
 import RButton from "../components/RButton";
-import {decodeBase64, encodeBase64} from "../lib/helpers/base64";
-import {__} from "../helpers";
-import logging from "../lib/core/config/logging";
+import {decodeBase64, encodeBase64} from "../../lib/helpers/base64";
+import {__} from "../../helpers";
+import logging from "../../lib/core/config/logging";
 
 export default {
     name: "page-character",

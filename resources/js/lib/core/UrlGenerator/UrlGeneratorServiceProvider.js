@@ -1,10 +1,10 @@
-import ServiceProvider from '../lib/core/ServiceProvider';
-import UrlGenerator from "../lib/UrlGenerator";
+import ServiceProvider from '../ServiceProvider';
+import UrlGenerator from './UrlGenerator';
 
 export default class UrlGeneratorServiceProvider extends ServiceProvider {
     register()
     {
-        this.app().bind('url-generator', app => {
+        this.app().bind('url', app => {
             const config = app.get('config');
 
             const generator = new UrlGenerator( config.get('url.baseUrl') );

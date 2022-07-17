@@ -38,7 +38,7 @@ export default class UrlGenerator
      * @param absolute
      * @returns {string|*}
      */
-    route(name, parameters = {}, absolute = false)
+    route(name, parameters = {}, absolute = true)
     {
         let route = this.routes[ name ];
 
@@ -54,7 +54,7 @@ export default class UrlGenerator
             return this.url( route );
         }
 
-        return route;
+        return '/' + route;
     }
 
     /**
@@ -70,7 +70,7 @@ export default class UrlGenerator
             path = path.slice( -1, path.length );
         }
 
-        let url = this.baseUrl + path;
+        let url = this.baseUrl + '/' + path;
 
         if ( secure && url.includes('http') ) {
             url = url.replace('http', 'https')

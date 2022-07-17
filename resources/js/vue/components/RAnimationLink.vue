@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { useLocalStorage } from "../lib/core";
+import { useLocalStorage } from "../../lib/core";
 
 const localStorage = useLocalStorage();
 

@@ -41,16 +41,28 @@ export function use(namespace)
     return app.get( namespace );
 }
 
+/**
+ *
+ * @returns {*}
+ */
 export function useCookies()
 {
     return use('cookies');
 }
 
+/**
+ *
+ * @returns {*}
+ */
 export function useLocalStorage()
 {
     return use('storage.local');
 }
 
+/**
+ *
+ * @returns {*}
+ */
 export function useSessionStorage()
 {
     return use('storage.session');

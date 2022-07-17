@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import {decodeBase64, encodeBase64} from "../lib/helpers/base64";
+import {decodeBase64, encodeBase64} from "../../lib/helpers/base64";
 import RButton from "../components/RButton";
 import RInput from "../components/RInput";
 import RModal from "../components/RModal";
