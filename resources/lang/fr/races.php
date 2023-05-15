@@ -54,7 +54,7 @@
 
         'undead' => [
             'name' => 'Mort-vivant',
-            'description' => 'La non-vie est un mal qui se répand en touchant toutes les races. En effet, tout un chacun peut être transformé en mort-vivant (après son décès) par un puissant tisseur, bien que cela arrive parfois spontanément. Les rumeurs disent que ce mal est originaire des Terres de Feu de l’Empire d’Or mais personne n’en sait rien. Quoi qu’il en soit, aujourd’hui, goules, vivants sur le déclin et autres squelettes pullulent sur le continent et chacun sait qu’il est sage de fermer soigneusement sa porte et commencer à faire fondre les objets en argent pour en faire des armes lorsque ces choses mortes se mettent à rôder',
+            'description' => 'La non-vie est un mal qui se répand en touchant toutes les races. En effet, tout un chacun peut être transformé en mort-vivant (après son décès) par un puissant tisseur, bien que cela arrive parfois spontanément. Les rumeurs disent que ce mal est originaire des Terres de Feu de l’Empire d’Or mais personne n’en sait rien. Quoi qu’il en soit, aujourd’hui, goules, vivants sur le déclin et autres squelettes pullulent sur le continent et chacun sait qu’il est sage de fermer soigneusement sa porte et commencer à faire fondre les objets en argent pour en faire des armes lorsque ces choses mortes se mettent à rôder.',
             'bonus' => [
                 'immunité aux poisons.',
                 'immunité aux maladies.',

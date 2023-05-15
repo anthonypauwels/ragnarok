@@ -530,7 +530,7 @@ Un pêcheur peut participer à la manoeuvre sur un navire.',
             'image' => 'icons/lucky-fisherman.svg',
         ],
 
-        'line-punch' => [
+        'strike-down' => [
             'name' => 'Perce-ligne',
             'description' => 'Les personnages dotés de ce talent savent canaliser leur force dans des coups dévastateurs. Ils
 peuvent, x fois par jour (x = niveau) (entre deux levers de soleil), annoncer «STRIKE DOWN» lors

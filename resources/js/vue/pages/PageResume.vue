@@ -241,7 +241,7 @@ export default {
             } );
 
             table.push( {
-                title: 'Sorts',
+                title: window.__app.translations.resume.spells,
             } );
 
             Object.entries( this.character.spells ).forEach( ( [ spell_name, count ] ) => {

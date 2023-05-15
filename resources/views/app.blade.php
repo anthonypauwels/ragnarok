@@ -48,7 +48,7 @@
                     @if ( App::getLocale() === $locale )
                         <li><span>{{ ucfirst( $locale ) }}</span></li>
                     @else
-                        <li><a href="{{ route('get.index', [ $locale ]) }}" @if ( $locale !== 'fr' ) class="is-disabled" @endif>{{ ucfirst( $locale ) }}</a></li>
+                        <li><a href="{{ route('get.index', [ $locale ]) }}" @if ( $locale === 'nl' ) class="is-disabled" @endif>{{ ucfirst( $locale ) }}</a></li>
                     @endif
                 @endforeach
             </ul>

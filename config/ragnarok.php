@@ -16,7 +16,7 @@
                     'weaver', 'archery'
                 ],
                 'cannot' => [
-                    'increased-stamina', 'line-punch'
+                    'increased-stamina', 'strike-down'
                 ],
             ],
 
@@ -171,7 +171,7 @@
                     'xp' => [5],
                     'specialized' => true,
                 ],
-                'line-punch' => [
+                'strike-down' => [
                     'xp' => [4,8,12],
                     'specialized' => true,
                 ],

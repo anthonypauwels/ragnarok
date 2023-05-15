@@ -89,7 +89,6 @@ class MainController extends Controller
             foreach ( $skills as $skill => $items ) {
                 $items['id'] = $skill;
                 $items['inclination'] = $name;
-
                 $skills[ $skill ] = array_merge( __('skills.' . $skill ), $items);
             }
 

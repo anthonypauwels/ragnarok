@@ -164,9 +164,9 @@ cadavre. Après l’heure d’effet du sortilège ou si ses points de vie retomb
 
         'berserk' => [
             'name' => 'Berserk',
-            'target' => 'une personne ( sans armure) tatouée sur le front par le tisseur',
+            'target' => 'une personne (sans armure) tatouée sur le front par le tisseur',
             'duration' => '1 heure',
-            'description' => ' la cible tatouée par le sort voit ses points de vie multipliés par 2, celle-ci attaque ses ennemis les plus proches et ne peut plus fuir le combat
+            'description' => 'la cible tatouée par le sort voit ses points de vie multipliés par 2, celle-ci attaque ses ennemis les plus proches et ne peut plus fuir le combat
 même si elle y est obligée par un autre sort. Un même personnage ne peut être la cible de plus d’un tatouage à la fois. Cependant ce sort peut être lancé plusieurs fois sur une même personne.',
             'image' => 'icons/enrage.svg',
         ],
@@ -248,7 +248,7 @@ cumulés). De plus, s’il se bat avec une arme à deux mains (pas une arme d’
             'duration' => '1 heure',
             'description' => 'ne peut être lancé qu’avec des Pierres de Vie ! le nécromancien peut transformer tous les cadavre qu’il touche en zombie, ceux-ci suivent ses directives pendant 1 heure. Les zombies gardent les capacités physiques qu’ils avaient de leur vivant (y compris les
 points de vie de base) mais ne peuvent pas courir ou utiliser la magie. Il est impossible de réanimer deux fois le même cadavre. Après l’heure d’effet du
-sortilège ou si ses points de vie retombent à 0, le personnage tomba à nouveau raide mort ( il redevient esprit).',
+sortilège ou si ses points de vie retombent à 0, le personnage tomba à nouveau raide mort (il redevient esprit).',
             'image' => 'icons/shambling-zombie.svg',
         ],
 

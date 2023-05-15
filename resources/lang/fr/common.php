@@ -74,6 +74,7 @@ Aujourd’hui l’Empire d’Or veille sur Tanak, de son oeil le prophète voit 
             'url' => 'URL',
             'advice' => 'Gardez ce lien en favoris ou partagez le avec des amis',
             'clipped' => '&check; Lien copié dans votre presse papier',
+            'spells' => 'Sorts',
         ],
 
         'credits' => [
