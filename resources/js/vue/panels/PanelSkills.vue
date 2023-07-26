@@ -12,8 +12,8 @@
                         :class="{'is-active': currentInclination === key }">
                     <span>{{ inclination.name }}</span>
                 </button>
-                <button class="item" :class="{'is-disabled': character.skills[ 'occult_weaver' ] === undefined && character.skills[ 'occult_summoner' ] === undefined, 'is-active': currentInclination === 'spells'}"
-                        @click.prevent="selectInclination('spells')" v-if="character.inclination === 'occult'">
+                <button class="item" :class="{'is-disabled': character.race !== 'elf' && (character.skills[ 'occult_weaver' ] === undefined && character.skills[ 'occult_summoner' ] === undefined), 'is-active': currentInclination === 'spells'}"
+                        @click.prevent="selectInclination('spells')" v-if="character.race === 'elf' || character.inclination === 'occult'">
                     <span>{{ 'character.panels.skills.spells' | __ }}</span>
                 </button>
 
