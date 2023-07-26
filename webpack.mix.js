@@ -17,8 +17,7 @@ mix.js('resources/js/app.js', 'public/js').vue({
         extractStyles: true
     } )
     .sass('resources/scss/app.scss', 'public/css' )
-    .copyDirectory("resources/img", "public/img")
-    .copyDirectory("resources/sounds", "public/sounds");
+    .copyDirectory("resources/img", "public/img");
 
 mix.options( {
     processCssUrls: false
